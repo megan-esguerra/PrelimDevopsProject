@@ -61,14 +61,14 @@
                             <div style="color:red"><?php if (session()->getFlashdata('error'))?></div>
                         <?php endif;?>
 
-                        <form action="<?= site_url('../auth/login')?>" >
+                        <form action="<?= site_url('auth/login')?>" >
                             <div class="mb-3">
                                 <label class="form-label">Email*</label>
                                 <input type="email" class="form-control"  name="email" id="email" placeholder="Enter your email" required>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Password*</label>
-                                <input type="password" class="form-control" name="email" id="email" placeholder="Minimum 8 characters" required>
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Minimum 8 characters" required>
                             </div>
                             <div class="mb-3 d-flex justify-content-between">
                                 <div>
