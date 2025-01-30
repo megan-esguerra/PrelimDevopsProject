@@ -73,7 +73,7 @@
                             </div>
                             <button class="btn login-btn">Login</button>
                         </form>
-                        <p class="mt-3">Not registered yet? <a href="#">Create a new account</a></p>
+                        <p class="mt-3">Not registered yet? <a href="<?= site_url('/register') ?>">Create a new account</a></p>
                     </div>
                     <div class="col-md-6 text-center">
                         <img src="<?= base_url('img/bgimg.png'); ?>" class="cat-image" alt="Cat Illustration">
