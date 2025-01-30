@@ -13,59 +13,35 @@ class Auth extends Controller
 
     public function process()
     {
-        // Load helper functions for form and URL
-        helper(['form', 'url']);
-        
-        // Get the session instance
-        $session = session();
+         $validation = \Config\Services::validation();
 
-        // If the request method is POST (form submission)
-        if ($this->request->getMethod() === 'post') {
+        $validation->setRules([
+            'email' => 'required|valid_email',
+            'password_hash' => 'required'
+        ]);
 
-            // Validation rules
-            $rules = [
-                'email'    => 'required|valid_email',
-                'password' => 'required|min_length[8]',
-            ];
-
-            // If validation fails, return to login view with validation errors
-            if (!$this->validate($rules)) {
-                return view('LogIn', ['validation' => $this->validator]);
-            }
-
-            // Check the user credentials in the database
-            $userModel = new UserModel();
-            $user = $userModel->where('email', $this->request->getVar('email'))->first();
-
-            // If user exists and password is correct
-            if ($user && password_verify($this->request->getVar('password'), $user['password_hash'])) {
-
-                // Set session data after successful login
-                $session->set([
-                    'user_id'   => $user['user_id'],
-                    'name'      => $user['name'],
-                    'email'     => $user['email'],
-                    'role'      => $user['role'],
-                    'logged_in' => true,
-                ]);
-
-                // Redirect user based on their role
-                if ($user['role'] === 'admin') {
-                    return redirect()->to('/Pages/Dashboard');  // Correct path for admin dashboard
-                } elseif ($user['role'] === 'staff') {
-                    return redirect()->to('/staff/dashboard');  // Redirect staff dashboard
-                } else {
-                    return redirect()->to('/user/dashboard');  // Redirect normal user
-                }
-
-            } else {
-                // If credentials don't match, return to login with an error message
-                return redirect()->back()->with('error', 'Invalid email or password.');
-            }
+        if (!$validation->withRequest($this->request)->run()) {
+            return view('LogIn', [
+                'validation' => $validation
+            ]);
         }
 
-        // If it's not a POST request, show the login page
-        return view('LogIn');
+        $userModel = new UserModel();
+        $user = $userModel->where('email', $this->request->getVar('email'))->first();
+
+        if ($user && password_verify($this->request->getVar('password_hash'), $user['password_hash'])) {
+            $session = session();
+            $session->set([
+                'id' => $user['user_id'],
+                'email' => $user['email'],
+                'isLoggedIn' => true
+            ]);
+            return redirect()->to('/dashboard');
+        } else {
+            return view('LogIn', [
+                'validation' => $validation->setError('password_hash', 'Invalid email or password')
+            ]);
+        }
     }
 
     // public function process()
