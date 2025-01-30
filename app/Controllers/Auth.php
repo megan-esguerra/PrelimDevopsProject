@@ -83,13 +83,13 @@ class Auth extends Controller
         }
     }
 
-    return view('login'); // Make sure this matches the correct file path
+    return view('LogIn'); // Make sure this matches the correct file path
 }
 
 
     public function logout()
     {
         session()->destroy();
-        return redirect()->to('/login');
+        return redirect()->to('/LogIn');
     }
 }
