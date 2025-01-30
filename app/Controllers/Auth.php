@@ -45,7 +45,7 @@ class Auth extends Controller
                 ]);
 
                 // Redirect to the dashboard
-                return redirect()->to('Pages/dashboard');
+                return redirect()->to('/dashboard');
             } else {
                 // If credentials don't match, show error message
                 return redirect()->back()->with('error', 'Invalid email or password.');
