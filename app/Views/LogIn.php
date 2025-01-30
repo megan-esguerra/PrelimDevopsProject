@@ -53,7 +53,7 @@
                         <h4>Login</h4>
                         <p>See your growth and get support</p>
                         <div class="google-btn mb-3">
-                        <img src="<?= base_url('img/google.svg'); ?>" alt="Logo" width="100">
+                            <img src="<?= base_url('img/google.svg'); ?>" alt="Logo" width="100">
                             Sign in with Google
                         </div>
                         <form>
