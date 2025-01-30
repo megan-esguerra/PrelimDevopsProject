@@ -6,13 +6,108 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Orders</title>
     <style>
-        .active {
-            font-weight: bold;
-            color: #007bff; /* Bootstrap primary color or any color of your choice */
-            text-decoration: underline;
-        }
+        body {
+    display: flex;
+    background: #d4ccb6;
+    font-family: Arial, sans-serif;
+}
+
+.sidebar {
+    width: 200px;
+    height: 100vh;
+    position: fixed;
+    background: #D7D3BF;
+    padding: 20px;
+    color: white;
+    border-right: 1px solid rgb(162, 160, 150);
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 10px;
+    cursor: pointer;
+}
+.sidebar ul li a.active {
+    background-color: #A59D84;
+    height: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+}
+.form-control{
+    border-radius: 10px;
+    background: transparent;
+}
+.main-content {
+    flex: 1;
+    padding: 20px 40px 20px 240px;
+}
+.dropdown-item{
+    position: relative;
+    z-index: 9999;
+}
+.dropdown-toggle::after {
+    display: none; 
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    position: sticky;
+    align-items: center;
+    background: #A59D84;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.search-bar {
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.user-profile img {
+    border-radius: 50%;
+}
+.Linechart  {
+    background: #D7D3BF;
+    width: 60%;
+}
+.RadarC {
+    background: #D7D3BF;
+    width: 30%;
+}
+
+.card {
+    z-index: -1;
+    background: #f2ede0;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.table {
+    background: white;
+}
+.active {
+    font-weight: bold;
+    color: #007bff; /* Bootstrap primary color or any color of your choice */
+    text-decoration: underline;
+}
+
 
     </style>
+    
 </head>
 <body>
     <!-- Sidebar -->
