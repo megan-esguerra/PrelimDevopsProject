@@ -13,49 +13,60 @@ class Auth extends Controller
 
     public function process()
     {
-        // Load helpers for form and URL
+        // Load helper functions for form and URL
         helper(['form', 'url']);
+        
+        // Get the session instance
         $session = session();
 
         // If the request method is POST (form submission)
         if ($this->request->getMethod() === 'post') {
+
             // Validation rules
             $rules = [
                 'email'    => 'required|valid_email',
                 'password' => 'required|min_length[8]',
             ];
 
-            // If validation fails, return with errors
+            // If validation fails, return to login view with validation errors
             if (!$this->validate($rules)) {
-                return view('login', ['validation' => $this->validator]);
+                return view('LogIn', ['validation' => $this->validator]);
             }
 
-            // Get user data from the database
+            // Check the user credentials in the database
             $userModel = new UserModel();
             $user = $userModel->where('email', $this->request->getVar('email'))->first();
 
-            // Verify user and password
+            // If user exists and password is correct
             if ($user && password_verify($this->request->getVar('password'), $user['password_hash'])) {
+
                 // Set session data after successful login
                 $session->set([
-                    'user_id'   => $user['id'],
+                    'user_id'   => $user['user_id'],
+                    'name'      => $user['name'],
                     'email'     => $user['email'],
-                    'password_hash'     => $user['password_hash'],
+                    'role'      => $user['role'],
                     'logged_in' => true,
                 ]);
 
-                // Redirect to the dashboard
-                return redirect()->to('/dashboard');
+                // Redirect user based on their role
+                if ($user['role'] === 'admin') {
+                    return redirect()->to('/Pages/Dashboard');  // Correct path for admin dashboard
+                } elseif ($user['role'] === 'staff') {
+                    return redirect()->to('/staff/dashboard');  // Redirect staff dashboard
+                } else {
+                    return redirect()->to('/user/dashboard');  // Redirect normal user
+                }
+
             } else {
-                // If credentials don't match, show error message
+                // If credentials don't match, return to login with an error message
                 return redirect()->back()->with('error', 'Invalid email or password.');
             }
         }
 
-        // Show login page for GET request
+        // If it's not a POST request, show the login page
         return view('LogIn');
     }
-
 
     // public function process()
     // {
@@ -108,6 +119,6 @@ class Auth extends Controller
     public function logout()
     {
         session()->destroy();
-        return redirect()->to('/auth/login');
+        return redirect()->to('/LogIn');
     }
 }
