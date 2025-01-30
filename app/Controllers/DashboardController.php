@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use App\Models\RevenueModel;
 use App\Models\SalesModel;
+use App\Models\SalesItemsModel;
 use App\Models\PurchaseOrdersModel;
 
 class DashboardController extends BaseController
