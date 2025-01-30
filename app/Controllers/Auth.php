@@ -7,100 +7,107 @@ use CodeIgniter\Controller;
 
 class Auth extends Controller
 {
-    public function login()
-    {
-        // Show the login form
-        return view('login');
+    public function login(){
+        return view('LogIn');
     }
 
-    public function verification()
+    public function process()
     {
-        // Load helper functions for form and URL
+        // Load helpers for form and URL
         helper(['form', 'url']);
-        
-        // Get the session instance
         $session = session();
-
-        // Log the incoming POST data (email and password - but not the password for security reasons)
-        log_message('debug', 'Login attempt with email: ' . $this->request->getVar('email'));
 
         // If the request method is POST (form submission)
         if ($this->request->getMethod() === 'post') {
-
             // Validation rules
             $rules = [
                 'email'    => 'required|valid_email',
                 'password' => 'required|min_length[8]',
             ];
 
-            // If validation fails, return to login view with validation errors
+            // If validation fails, return with errors
             if (!$this->validate($rules)) {
-                // Log the validation errors
-                log_message('debug', 'Login validation failed: ' . json_encode($this->validator->getErrors()));
-                return view('LogIn', ['validation' => $this->validator]);
+                return view('login', ['validation' => $this->validator]);
             }
 
-            // Check the user credentials in the database
+            // Get user data from the database
             $userModel = new UserModel();
             $user = $userModel->where('email', $this->request->getVar('email'))->first();
 
-            // Log the result of the user lookup
-            if ($user) {
-                log_message('debug', 'User found: ' . print_r($user, true));
-            } else {
-                log_message('debug', 'User not found for email: ' . $this->request->getVar('email'));
-            }
-
-            // If user exists and password is correct
+            // Verify user and password
             if ($user && password_verify($this->request->getVar('password'), $user['password_hash'])) {
-                // Log that the password was verified successfully
-                log_message('debug', 'Password verified for user: ' . $user['email']);
-
                 // Set session data after successful login
                 $session->set([
-                    'user_id'   => $user['user_id'],
-                    'name'      => $user['name'],
+                    'user_id'   => $user['id'],
                     'email'     => $user['email'],
-                    'role'      => $user['role'],
+                    'password_hash'     => $user['password_hash'],
                     'logged_in' => true,
                 ]);
 
-                // Log session data
-                log_message('debug', 'Session data set: ' . print_r($session->get(), true));
-
-                // Redirect user based on their role
-                switch ($user['role']) {
-                    case 'admin':
-                        log_message('debug', 'Redirecting admin to /admin/dashboard');
-                        return redirect()->to('/admin/dashboard');
-                    case 'staff':
-                        log_message('debug', 'Redirecting staff to /staff/dashboard');
-                        return redirect()->to('/staff/dashboard');
-                    default:
-                        log_message('debug', 'Redirecting user to /user/dashboard');
-                        return redirect()->to('/user/dashboard');
-                }
-
+                // Redirect to the dashboard
+                return redirect()->to('Pages/dashboard');
             } else {
-                // If credentials don't match, return to login with an error message
-                log_message('debug', 'Invalid email or password for user: ' . $this->request->getVar('email'));
+                // If credentials don't match, show error message
                 return redirect()->back()->with('error', 'Invalid email or password.');
             }
         }
 
-        // If it's not a POST request, show the login page
+        // Show login page for GET request
         return view('LogIn');
     }
 
+
+    // public function process()
+    // {
+    //     helper(['form', 'url']);
+    //     $session = session();
+
+    //     // If it's a POST request, validate the login form
+    //     if ($this->request->getMethod() === 'post') {
+    //         $rules = [
+    //             'email'    => 'required|valid_email',
+    //             'password' => 'required|min_length[8]',
+    //         ];
+
+    //         // If validation fails, return with errors
+    //         if (!$this->validate($rules)) {
+    //             return view('login', ['validation' => $this->validator]);
+    //         }
+
+    //         // Get user data from the database
+    //         $userModel = new UserModel();
+    //         $user = $userModel->where('email', $this->request->getVar('email'))->first();
+
+    //         // Verify user and password
+    //         if ($user && password_verify($this->request->getVar('password'), $user['password_hash'])) {
+    //             // Set session data after successful login
+    //             $session->set([
+    //                 'user_id'   => $user['user_id'],
+    //                 'name'      => $user['email'],  // You could store a name here if you want
+    //                 'role'      => $user['role'],
+    //                 'logged_in' => true,
+    //             ]);
+
+    //             // Redirect user based on role
+    //             if ($user['role'] === 'admin') {
+    //                 return redirect()->to('/admin/dashboard');
+    //             } elseif ($user['role'] === 'user') {
+    //                 return redirect()->to('/user/dashboard');
+    //             }
+    //         } else {
+    //             // If credentials don't match, show error message
+    //             return redirect()->back()->with('error', 'Invalid email or password.');
+    //         }
+    //     }
+
+    //     // Show login page for GET request
+    //     return view('login');
+    // }
+
+    // Logout function
     public function logout()
     {
-        // Log out the user and destroy the session
-        log_message('debug', 'Logging out user: ' . session()->get('email'));
-
-        // Destroy the session
         session()->destroy();
-
-        // Redirect to the login page
-        return redirect()->to('/login');
+        return redirect()->to('/auth/login');
     }
 }
