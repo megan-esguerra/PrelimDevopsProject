@@ -9,7 +9,7 @@ class DashboardController extends BaseController
 {
     public function index()
     {
-        return view('Pages/Dashboard');
+       
         $revenueModel = new RevenueModel();
         $salesModel = new SalesModel();
         $purchaseModel = new PurchaseOrdersModel();
@@ -26,7 +26,7 @@ class DashboardController extends BaseController
         // Calculate Income (Revenue - Purchases)
         $totalIncome = $totalRevenue - $totalPurchases;
 
-        // Pass Data to View
+        // Pass data to the view (ensure the variable names match those in your view)
         return view('Pages/Dashboard', [
             'revenue' => $totalRevenue,
             'sales' => $totalSales,
