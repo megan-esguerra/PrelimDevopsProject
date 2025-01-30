@@ -128,12 +128,13 @@ a{
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card">
-            <div class="card-body">
-                <h6>Sales</h6>
-                <h4>+ <?= number_format($sales, 2) ?></h4>
-            </div>
-        </div>
+    <div class="card">
+    <div class="card-body">
+        <h6>Products Sold</h6>
+        <h4><?= number_format($soldProductsCount) ?> Products</h4> 
+    </div>
+</div>
+
     </div>
     <div class="col-md-3">
         <div class="card">
@@ -152,8 +153,6 @@ a{
         </div>
     </div>
 </div>
-
-
 
             <!-- Charts -->
             <div class="row w-full p-5 gap-1 ">
