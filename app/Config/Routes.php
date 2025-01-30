@@ -8,6 +8,13 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 $routes->get('/register', 'RegisterController::index');
 $routes->post('/register/store', 'RegisterController::store');
-$routes->get('/login', 'LoginController::index'); 
+
+$routes->get('/LogIn', 'Auth::login');
+$routes->post('/LogIn/process', 'Auth::process');
+$routes->get('/LogIn', 'Auth::logout');
+
+
 $routes->get('dashboard', 'DashboardController::index');
+
+
 

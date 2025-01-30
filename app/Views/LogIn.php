@@ -49,32 +49,42 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="login-container d-flex">
-                    <div class="col-md-6">
-                        <h4>Login</h4>
-                        <p>See your growth and get support</p>
-                        <div class="google-btn mb-3">
-                            <img src="<?= base_url('img/google.svg'); ?>" alt="Logo" width="100">
-                            Sign in with Google
-                        </div>
-                        <form>
-                            <div class="mb-3">
-                                <label class="form-label">Email*</label>
-                                <input type="email" class="form-control" placeholder="Enter your email">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Password*</label>
-                                <input type="password" class="form-control" placeholder="Minimum 8 characters">
-                            </div>
-                            <div class="mb-3 d-flex justify-content-between">
-                                <div>
-                                    <input type="checkbox"> Remember me
-                                </div>
-                                <a href="<?= site_url('dashboard'); ?>">Forgot password?</a>
-                            </div>
-                            <button class="btn login-btn">Login</button>
-                        </form>
-                        <p class="mt-3">Not registered yet? <a href="<?= site_url('/register') ?>">Create a new account</a></p>
+                <div class="col-md-6">
+                    <h4>Login</h4>
+                    <p>See your growth and get support</p>
+                    <div class="google-btn mb-3">
+                        <img src="<?= base_url('img/google.svg'); ?>" alt="Logo" width="100">
+                        Sign in with Google
                     </div>
+
+                    <!-- Display error flash data -->
+                    <?php if (session()->getFlashdata('error')) : ?>
+                        <div style="color:red">
+                            <?= session()->getFlashdata('error') ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <form action="<?= site_url('LogIn/process')?>" method="post">
+                        <?= csrf_field() ?>
+                        <div class="mb-3">
+                            <label class="form-label">Email*</label>
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password*</label>
+                            <input type="password" class="form-control" name="password_hash" id="password_hash" placeholder="Enter password" required>
+                        </div>
+                        <div class="mb-3 d-flex justify-content-between">
+                            <div>
+                                <input type="checkbox"> Remember me
+                            </div>
+                            <a href="<?= site_url('dashboard'); ?>">Forgot password?</a>
+                        </div>
+                        <button type="submit" class="btn login-btn">Login</button>
+                    </form>
+                    <p class="mt-3">Not registered yet? <a href="<?= site_url('/register') ?>">Create a new account</a></p>
+                </div>
+
                     <div class="col-md-6 text-center">
                         <img src="<?= base_url('img/bgimg.png'); ?>" class="cat-image" alt="Cat Illustration">
                     </div>
