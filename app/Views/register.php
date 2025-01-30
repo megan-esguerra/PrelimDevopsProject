@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    <link rel="icon" type="image/png" href="<?= base_url('img/tabicon.png'); ?>">
     <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -24,10 +25,10 @@
         }  
         .container {
             max-width: 700px;
-            margin: 20px auto;
+            margin: 60px auto 20px; 
             padding: 20px;
             border-radius: 10px;
-        
+          
             position: relative;
             z-index: 1;
         }
@@ -47,6 +48,7 @@
             display: block;
             margin-bottom: 5px;
             color: #041a4a;
+            font-weight: bold;
         }
         input[type="text"], input[type="email"], input[type="password"], input[type="tel"] {
             width: 84%;
@@ -60,7 +62,7 @@
             font-family: 'Karla', sans-serif;
         }
         button {
-            background-color: #2a2a72;
+            background-color: #2c2a25;
             color: #fff;
             padding: 10px 40px;
             border: none;
@@ -70,13 +72,18 @@
             width: 12rem;
             font-family: 'Karla', sans-serif;
             font-size: 14px;
+            margin-top: 1rem;
         }
         button:hover {
-            background-color: #4b4b95;
+            background-color: #1c1b18;
         }
-        .highlight {
-            font-weight: bold;
-            color: #041a4a;
+        h1.highlight {
+           font-size: 35px;
+        }
+       .highlight {
+           font-weight: bold;
+           color: #041a4a;
+           font-size: 18px;
         }
         .terms-container {
             display: flex;
@@ -92,9 +99,9 @@
             color: #2a2a72;
         }
         .cat-image {
-            margin-top: -223px;
-    width: 420px;
-    opacity: 0.8;
+            margin-top: -292px;
+            width: 420px;
+            opacity: 0.8;
         }
     </style>
 </head>
@@ -102,7 +109,7 @@
     <div class="container">
         <h1 class="highlight">Register</h1>
         <p class="highlight">Manage all your inventory efficiently.</p>
-        <p style="color: gray;">Let's get you all set up so you can verify your personal account and begin setting up your work profile.</p>
+        <p style="color:#272626;">Let's get you all set up so you can verify your personal account and begin setting up your work profile.</p>
 
         <form action="<?= site_url('/register/store') ?>" method="post">
             <?= csrf_field() ?>
@@ -139,7 +146,7 @@
             </div>
             <div class="form-group terms-container">
                 <input type="checkbox" name="terms" id="terms" required>
-                <label for="terms">I agree to all terms, <strong>privacy policies, </strong>and <strong>fees</strong></label>
+                <label for="terms">I agree to all terms, privacy policies, and fees</label>
             </div>
             <button type="submit">Sign up</button>
         </form>
