@@ -19,8 +19,8 @@ class Orders extends BaseController
     // Main page to list orders
     public function index()
     {
-        $data['orders'] = $this->orderModel->findAll(); // Fetch all orders
-        return view('orders/index', $data);
+        $orders = $this->orderModel->getOrders(); // Replace with your actual query logic
+        return view('orders/index', ['orders' => $orders]);
     }
 
     // Filter orders based on criteria
