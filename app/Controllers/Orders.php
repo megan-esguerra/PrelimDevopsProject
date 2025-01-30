@@ -8,6 +8,61 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Orders extends BaseController
 {
+
+    public function filterOrders()
+{
+    $filters = [
+        'id' => $this->request->getGet('order_id'),
+        'date' => $this->request->getGet('date'),
+        'sales_channel' => $this->request->getGet('sales_channel'),
+        'status' => $this->request->getGet('status'),
+    ];
+
+    $query = $this->orderModel;
+
+    foreach ($filters as $key => $value) {
+        if (!empty($value)) {
+            $query = $query->like($key, $value);
+        }
+    }
+
+    $data['orders'] = $query->findAll();
+    return view('orders/index', $data);
+}
+
+
+    public function importOrders()
+{
+    $file = $this->request->getFile('orders_file');
+    
+    if ($file->isValid() && !$file->hasMoved()) {
+        $filePath = WRITEPATH . 'uploads/' . $file->getRandomName();
+        $file->move(WRITEPATH . 'uploads', $filePath);
+
+        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($filePath);
+        $sheet = $spreadsheet->getActiveSheet();
+        $data = $sheet->toArray();
+
+        // Skip the header row
+        for ($i = 1; $i < count($data); $i++) {
+            $this->orderModel->save([
+                'id' => $data[$i][0],
+                'date' => $data[$i][1],
+                'customer' => $data[$i][2],
+                'sales_channel' => $data[$i][3],
+                'destination' => $data[$i][4],
+                'items' => $data[$i][5],
+                'status' => $data[$i][6],
+            ]);
+        }
+
+        return redirect()->to(base_url('orders'))->with('success', 'Orders imported successfully.');
+    } else {
+        return redirect()->to(base_url('orders'))->with('error', 'Failed to import orders.');
+    }
+}
+
+
     public function exportOrders()
 {
     $orders = $this->orderModel->findAll(); // Fetch all orders from the database

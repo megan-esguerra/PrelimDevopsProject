@@ -151,22 +151,23 @@ a{
     </div>
 </div>
 
-            <!-- Filters -->
-            <div class="mb-3 d-flex gap-3">
-                <input type="text" class="form-control w-25" placeholder="Search order ID">
-                <input type="date" class="form-control w-25">
-                <select class="form-select w-25">
-                    <option selected>Sales</option>
-                    <option value="1">Online</option>
-                    <option value="2">In-store</option>
-                </select>
-                <select class="form-select w-25">
-                    <option selected>Status</option>
-                    <option value="1">Pending</option>
-                    <option value="2">Completed</option>
-                    <option value="3">Cancelled</option>
-                </select>
-            </div>
+<form action="<?= base_url('orders/filter') ?>" method="GET" class="d-flex gap-3">
+    <input type="text" name="order_id" class="form-control w-25" placeholder="Search order ID">
+    <input type="date" name="date" class="form-control w-25">
+    <select name="sales_channel" class="form-select w-25">
+        <option value="" selected>Sales</option>
+        <option value="Online">Online</option>
+        <option value="In-store">In-store</option>
+    </select>
+    <select name="status" class="form-select w-25">
+        <option value="" selected>Status</option>
+        <option value="Pending">Pending</option>
+        <option value="Completed">Completed</option>
+        <option value="Cancelled">Cancelled</option>
+    </select>
+    <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+
 
             <!-- Table -->
             <table class="table table-striped table-hover">
