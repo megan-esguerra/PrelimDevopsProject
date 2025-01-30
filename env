@@ -20,9 +20,9 @@
 # APP
 #--------------------------------------------------------------------
 
-# app.baseURL = ''
+# app.baseURL = 'https://cat-cafes-inventory-management-system.site/'
 # If you have trouble with `.`, you could also use `_`.
-# app_baseURL = ''
+# app_baseURL = 'https://cat-cafes-inventory-management-system.site/'
 # app.forceGlobalSecureRequests = false
 # app.CSPEnabled = false
 
@@ -30,10 +30,10 @@
 # DATABASE
 #--------------------------------------------------------------------
 
-# database.default.hostname = localhost
-# database.default.database = ci4
-# database.default.username = root
-# database.default.password = root
+# database.default.hostname = 127.0.0.1
+# database.default.database = u910950942_catcafe
+# database.default.username = u910950942_catcafe
+# database.default.password = =X*V42|4i
 # database.default.DBDriver = MySQLi
 # database.default.DBPrefix =
 # database.default.port = 3306
