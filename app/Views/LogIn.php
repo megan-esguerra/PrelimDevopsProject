@@ -56,14 +56,19 @@
                             <img src="<?= base_url('img/google.svg'); ?>" alt="Logo" width="100">
                             Sign in with Google
                         </div>
-                        <form>
+
+                        <?php if (session()->getFlashdata('error')) : ?>
+                            <div style="color:red"><?php if (session()->getFlashdata('error'))?></div>
+                        <?php endif;?>
+
+                        <form action="<?= site_url('../auth/login')?>" >
                             <div class="mb-3">
                                 <label class="form-label">Email*</label>
-                                <input type="email" class="form-control" placeholder="Enter your email">
+                                <input type="email" class="form-control"  name="email" id="email" placeholder="Enter your email" required>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Password*</label>
-                                <input type="password" class="form-control" placeholder="Minimum 8 characters">
+                                <input type="password" class="form-control" name="email" id="email" placeholder="Minimum 8 characters" required>
                             </div>
                             <div class="mb-3 d-flex justify-content-between">
                                 <div>
@@ -71,7 +76,7 @@
                                 </div>
                                 <a href="<?= site_url('dashboard'); ?>">Forgot password?</a>
                             </div>
-                            <button class="btn login-btn">Login</button>
+                            <button type="submit" class="btn login-btn">Login</button>
                         </form>
                         <p class="mt-3">Not registered yet? <a href="<?= site_url('/register') ?>">Create a new account</a></p>
                     </div>
