@@ -69,7 +69,7 @@
                                 <div>
                                     <input type="checkbox"> Remember me
                                 </div>
-                                <a href="#">Forgot password?</a>
+                                <a href="<?= site_url('dashboard'); ?>">Forgot password?</a>
                             </div>
                             <button class="btn login-btn">Login</button>
                         </form>
