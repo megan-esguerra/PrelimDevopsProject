@@ -9,6 +9,12 @@ class Auth extends Controller
 {
     public function login()
     {
+        // Show the login form
+        return view('login');
+    }
+
+    public function verification()
+    {
         // Load helper functions for form and URL
         helper(['form', 'url']);
         
