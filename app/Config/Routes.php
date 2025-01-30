@@ -16,5 +16,8 @@ $routes->get('/LogIn', 'Auth::logout');
 
 $routes->get('dashboard', 'DashboardController::index');
 
+$routes->get('/orders', 'Orders::index');
+
+
 
 

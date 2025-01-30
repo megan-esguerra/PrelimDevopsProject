@@ -101,6 +101,12 @@ a{
 .table {
     background: white;
 }
+.active {
+    font-weight: bold;
+    color: #007bff; /* Bootstrap primary color or any color of your choice */
+    text-decoration: underline;
+}
+
 
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
