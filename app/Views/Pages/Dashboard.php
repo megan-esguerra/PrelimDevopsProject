@@ -6,6 +6,7 @@
     <title>Dashboard</title>
     <link rel="icon" type="image/png" href="<?= base_url('img/tabicon.png'); ?>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <style>
         body {
     display: flex;
@@ -17,9 +18,10 @@
     width: 200px;
     height: 100vh;
     position: fixed;
-    background: #C1BAA1;
+    background: #D7D3BF;
     padding: 20px;
     color: white;
+    border-right: 1px solid rgb(162, 160, 150);
 }
 
 .sidebar ul {
@@ -31,7 +33,24 @@
     padding: 10px;
     cursor: pointer;
 }
+.sidebar ul li a.active {
+    background-color: #A59D84;
+    height: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+}
 
+a{
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+}
+.form-control{
+    border-radius: 10px;
+    background: transparent;
+}
 .main-content {
     flex: 1;
     padding: 20px 40px 20px 240px;
@@ -62,8 +81,17 @@
 .user-profile img {
     border-radius: 50%;
 }
+.Linechart  {
+    background: #D7D3BF;
+    width: 60%;
+}
+.RadarC {
+    background: #D7D3BF;
+    width: 30%;
+}
 
 .card {
+    z-index: -1;
     background: #f2ede0;
     padding: 10px;
     border-radius: 10px;
@@ -126,11 +154,11 @@
             </div>
 
             <!-- Charts -->
-            <div class="row mt-4">
-                <div class="col-md-8">
+            <div class="row w-full p-5 gap-1 ">
+                <div class="Linechart col-md-8">
                     <canvas id="lineChart"></canvas>
                 </div>
-                <div class="col-md-4">
+                <div class="RadarC p-1 col-md-4">
                     <canvas id="radarChart"></canvas>
                 </div>
             </div>

@@ -1,11 +1,10 @@
-
-<div class="sidebar">
-        <ul>
-            <li><i class="bi bi-grid"></i> Dashboard</li>
-            <li><i class="bi bi-box"></i> In Stock</li>
-            <li><i class="bi bi-cart"></i> Products</li>
-            <li><i class="bi bi-basket"></i> Sales</li>
-            <li><i class="bi bi-clipboard"></i> Orders</li>
-            <li><i class="bi bi-people"></i> Users</li>
-        </ul>
-    </div>
+<div id="sidebar" class="sidebar">
+    <ul>
+        <li><a href="<?= base_url('dashboard'); ?>" class="<?= service('request')->getUri()->getPath() == '/index.php/dashboard' ? 'active' : '' ?>">Dashboard</a></li>
+        <li><a href="<?= base_url('stock'); ?>" class="<?= service('request')->getUri()->getPath() == '/index.php/stock' ? 'active' : '' ?>">In Stock</a></li>
+        <li><a href="<?= base_url('products'); ?>" class="<?= service('request')->getUri()->getPath() == '/index.php/products' ? 'active' : '' ?>">Products</a></li>
+        <li><a href="<?= base_url('sales'); ?>" class="<?= service('request')->getUri()->getPath() == '/index.php/sales' ? 'active' : '' ?>">Sales</a></li>
+        <li><a href="<?= base_url('orders'); ?>" class="<?= service('request')->getUri()->getPath() == '/index.php/orders' ? 'active' : '' ?>">Orders</a></li>
+        <li><a href="<?= base_url('users'); ?>" class="<?= service('request')->getUri()->getPath() == '/index.php/users' ? 'active' : '' ?>">Users</a></li>
+    </ul>
+</div>
