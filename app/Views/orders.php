@@ -7,107 +7,97 @@
     <title>Orders</title>
     <style>
         body {
-    display: flex;
-    background: #d4ccb6;
-    font-family: Arial, sans-serif;
-}
+            display: flex;
+            background: #d4ccb6;
+            font-family: Arial, sans-serif;
+        }
 
-.sidebar {
-    width: 200px;
-    height: 100vh;
-    position: fixed;
-    background: #D7D3BF;
-    padding: 20px;
-    color: white;
-    border-right: 1px solid rgb(162, 160, 150);
-}
+        .sidebar {
+            width: 200px;
+            height: 100vh;
+            position: fixed;
+            background: #D7D3BF;
+            padding: 20px;
+            color: white;
+            border-right: 1px solid rgb(162, 160, 150);
+        }
 
-.sidebar ul {
-    list-style: none;
-    padding: 0;
-}
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
 
-.sidebar ul li {
-    padding: 10px;
-    cursor: pointer;
-}
-.sidebar ul li a.active {
-    background-color: #A59D84;
-    height: 5px;
-    padding: 10px;
-    border-radius: 10px;
-    color: white;
-    font-weight: bold;
-}
+        .sidebar ul li {
+            padding: 10px;
+            cursor: pointer;
+        }
 
-a{
-    text-decoration: none;
-    color: white;
-    font-size: 16px;
-}
-.form-control{
-    border-radius: 10px;
-    background: transparent;
-}
-.main-content {
-    flex: 1;
-    padding: 20px 40px 20px 240px;
-}
-.dropdown-item{
-    position: relative;
-    z-index: 9999;
-}
-.dropdown-toggle::after {
-    display: none; 
-}
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    position: sticky;
-    align-items: center;
-    background: #A59D84;
-    padding: 10px;
-    border-radius: 10px;
-}
+        .sidebar ul li a.active {
+            background-color: #A59D84;
+            padding: 10px;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+        }
 
-.search-bar {
-    border: 1px solid #ccc;
-    padding: 5px;
-    border-radius: 5px;
-}
+        a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+        }
 
-.user-profile img {
-    border-radius: 50%;
-}
-.Linechart  {
-    background: #D7D3BF;
-    width: 60%;
-}
-.RadarC {
-    background: #D7D3BF;
-    width: 30%;
-}
+        .form-control {
+            border-radius: 10px;
+            background: transparent;
+        }
 
-.card {
-    z-index: -1;
-    background: #f2ede0;
-    padding: 10px;
-    border-radius: 10px;
-    text-align: center;
-}
+        .main-content {
+            flex: 1;
+            padding: 20px 40px 20px 240px;
+        }
 
-.table {
-    background: white;
-}
-.active {
-    font-weight: bold;
-    color: #007bff; /* Bootstrap primary color or any color of your choice */
-    text-decoration: underline;
-}
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #A59D84;
+            padding: 10px;
+            border-radius: 10px;
+        }
 
+        .card {
+            background: #f2ede0;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+        }
 
+        .table {
+            background: white;
+        }
+
+        .badge {
+            text-transform: capitalize;
+        }
+
+        .modal-content {
+            background: #f9f9f9;
+        }
+
+        .modal-title {
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: #A59D84;
+            border-color: #A59D84;
+        }
+
+        .btn-primary:hover {
+            background-color: #8e846c;
+            border-color: #8e846c;
+        }
     </style>
-
 </head>
 <body>
     <!-- Sidebar -->
@@ -123,7 +113,7 @@ a{
 
             <!-- Toolbar -->
             <div class="d-flex justify-content-between mb-3">
-                <button class="btn btn-primary">+ New Orders</button>
+                <button class="btn btn-primary" onclick="window.location.href='<?= base_url('orders/newOrder'); ?>'">+ New Order</button>
                 <div>
                     <button class="btn btn-outline-success" onclick="window.location.href='<?= base_url('orders/export'); ?>'">Export to Excel</button>
                     <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#importModal">Import Orders</button>
@@ -131,45 +121,45 @@ a{
             </div>
 
             <!-- Modal -->
-<div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form action="<?= base_url('orders/import') ?>" method="POST" enctype="multipart/form-data">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="importModalLabel">Import Orders</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form action="<?= base_url('orders/import') ?>" method="POST" enctype="multipart/form-data">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="importModalLabel">Import Orders</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="file" name="orders_file" class="form-control" accept=".xlsx, .xls" required />
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Import</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <input type="file" name="orders_file" class="form-control" accept=".xlsx, .xls" required />
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Import</button>
-                </div>
+            </div>
+
+            <!-- Filter Form -->
+            <form action="<?= base_url('orders/filter') ?>" method="GET" class="d-flex gap-3 mb-4">
+                <input type="text" name="order_id" class="form-control w-25" placeholder="Order ID">
+                <input type="date" name="date" class="form-control w-25">
+                <select name="sales_channel" class="form-select w-25">
+                    <option value="" selected>Sales Channel</option>
+                    <option value="Online">Online</option>
+                    <option value="In-store">In-store</option>
+                </select>
+                <select name="status" class="form-select w-25">
+                    <option value="" selected>Status</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Cancelled">Cancelled</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Filter</button>
             </form>
-        </div>
-    </div>
-</div>
 
-<form action="<?= base_url('orders/filter') ?>" method="GET" class="d-flex gap-3">
-    <input type="text" name="order_id" class="form-control w-25" placeholder="Search order ID">
-    <input type="date" name="date" class="form-control w-25">
-    <select name="sales_channel" class="form-select w-25">
-        <option value="" selected>Sales</option>
-        <option value="Online">Online</option>
-        <option value="In-store">In-store</option>
-    </select>
-    <select name="status" class="form-select w-25">
-        <option value="" selected>Status</option>
-        <option value="Pending">Pending</option>
-        <option value="Completed">Completed</option>
-        <option value="Cancelled">Cancelled</option>
-    </select>
-    <button type="submit" class="btn btn-primary">Filter</button>
-</form>
-
-
-            <!-- Table -->
+            <!-- Orders Table -->
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
@@ -187,12 +177,12 @@ a{
                     <?php foreach ($orders as $order): ?>
                         <tr>
                             <td><input type="checkbox"></td>
-                            <td><?= $order['id'] ?></td>
-                            <td><?= $order['date'] ?></td>
-                            <td><?= $order['customer'] ?></td>
-                            <td><?= $order['sales_channel'] ?></td>
-                            <td><?= $order['destination'] ?></td>
-                            <td><?= $order['items'] ?></td>
+                            <td><?= htmlspecialchars($order['id']) ?></td>
+                            <td><?= htmlspecialchars($order['date']) ?></td>
+                            <td><?= htmlspecialchars($order['customer']) ?></td>
+                            <td><?= htmlspecialchars($order['sales_channel']) ?></td>
+                            <td><?= htmlspecialchars($order['destination']) ?></td>
+                            <td><?= htmlspecialchars($order['items']) ?></td>
                             <td>
                                 <span class="badge 
                                     <?php 
@@ -206,7 +196,7 @@ a{
                                             echo 'bg-secondary';
                                         }
                                     ?>">
-                                    <?= $order['status'] ?>
+                                    <?= htmlspecialchars($order['status']) ?>
                                 </span>
                             </td>
                         </tr>
@@ -215,5 +205,7 @@ a{
             </table>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
