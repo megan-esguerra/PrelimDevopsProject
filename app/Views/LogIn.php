@@ -52,7 +52,7 @@
                         <h4>Login</h4>
                         <p>See your growth and get support</p>
                         <div class="google-btn mb-3">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" alt="Google">
+                        <img src="<?= base_url('img/google.svg'); ?>" alt="Logo" width="100">
                             Sign in with Google
                         </div>
                         <form>
@@ -75,7 +75,7 @@
                         <p class="mt-3">Not registered yet? <a href="#">Create a new account</a></p>
                     </div>
                     <div class="col-md-6 text-center">
-                        <img src="https://example.com/cat-image.png" class="cat-image" alt="Cat Illustration">
+                        <img src="<?= base_url('img/bgimg.png'); ?>" class="cat-image" alt="Cat Illustration">
                     </div>
                 </div>
             </div>
