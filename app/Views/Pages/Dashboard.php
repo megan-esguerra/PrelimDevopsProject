@@ -153,15 +153,6 @@ a{
     </div>
 </div>
 
-<!-- Charts -->
-<div class="row w-full p-5 gap-1 ">
-    <div class="Linechart col-md-8">
-        <canvas id="lineChart"></canvas>
-    </div>
-    <div class="RadarC p-1 col-md-4">
-        <canvas id="radarChart"></canvas>
-    </div>
-</div>
 
 
             <!-- Charts -->
