@@ -6,7 +6,75 @@
     <title>Dashboard</title>
     <link rel="icon" type="image/png" href="<?= base_url('img/tabicon.png'); ?>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="<?= base_url('css/style.css'); ?>">
+    <style>
+        body {
+    display: flex;
+    background: #d4ccb6;
+    font-family: Arial, sans-serif;
+}
+
+.sidebar {
+    width: 200px;
+    height: 100vh;
+    position: fixed;
+    background: #C1BAA1;
+    padding: 20px;
+    color: white;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px 40px 20px 240px;
+}
+.dropdown-item{
+    position: relative;
+    z-index: 9999;
+}
+.dropdown-toggle::after {
+    display: none; 
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    position: sticky;
+    align-items: center;
+    background: #A59D84;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.search-bar {
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.user-profile img {
+    border-radius: 50%;
+}
+
+.card {
+    background: #f2ede0;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.table {
+    background: white;
+}
+
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -137,7 +205,43 @@
         </div> <!-- Container -->
     </div>
 
-    <script src="<?= base_url('js/script.js'); ?>"></script>
+    <script>
+        // Line Chart
+const ctx = document.getElementById('lineChart').getContext('2d');
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+        datasets: [{
+            label: 'Dataset 1',
+            data: [10, 20, 40, 60, 30],
+            borderColor: 'red',
+            fill: false
+        },
+        {
+            label: 'Dataset 2',
+            data: [5, 15, 35, 55, 25],
+            borderColor: 'yellow',
+            fill: false
+        }]
+    }
+});
+
+// Radar Chart
+const radarCtx = document.getElementById('radarChart').getContext('2d');
+new Chart(radarCtx, {
+    type: 'radar',
+    data: {
+        labels: ['Product A', 'Product B', 'Product C'],
+        datasets: [{
+            label: 'Sales',
+            data: [65, 59, 80],
+            backgroundColor: 'rgba(255, 99, 132, 0.2)'
+        }]
+    }
+});
+
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 
