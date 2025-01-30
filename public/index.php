@@ -42,7 +42,7 @@ if (getcwd() . DIRECTORY_SEPARATOR !== FCPATH) {
 
 // LOAD OUR PATHS CONFIG FILE
 // Adjusted to correctly locate the Paths.php file after moving public files
-$pathsPath = realpath(FCPATH . '../app/Config/Paths.php') ?: '../app/Config/Paths.php';
+$pathsPath = realpath(FCPATH . '/app/Config/Paths.php') ?: '/app/Config/Paths.php';
 require $pathsPath;
 
 // Initialize the Paths configuration
