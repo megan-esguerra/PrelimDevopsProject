@@ -64,7 +64,7 @@
                         </div>
                     <?php endif; ?>
 
-                    <form action="<?= site_url('LogIn/login')?>" method="post">
+                    <form action="<?= site_url('Auth/Login')?>" method="post">
                         <div class="mb-3">
                             <label class="form-label">Email*</label>
                             <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email" required>
