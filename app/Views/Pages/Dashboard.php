@@ -118,40 +118,51 @@ a{
 
         <!-- Cards -->
         <div class="container mt-3">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h6>Revenue</h6>
-                            <h4>+ 30,000</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h6>Sales Return</h6>
-                            <h4>+ 30,000</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h6>Purchase</h6>
-                            <h4>+ 30,000</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h6>Income</h6>
-                            <h4>+ 30,000</h4>
-                        </div>
-                    </div>
-                </div>
+        <div class="row">
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h6>Revenue</h6>
+                <h4>+ <?= number_format($revenue, 2) ?></h4>
             </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h6>Sales</h6>
+                <h4>+ <?= number_format($sales, 2) ?></h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h6>Purchase</h6>
+                <h4>- <?= number_format($purchases, 2) ?></h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h6>Income</h6>
+                <h4><?= ($income >= 0) ? '+ ' . number_format($income, 2) : '- ' . number_format(abs($income), 2) ?></h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts -->
+<div class="row w-full p-5 gap-1 ">
+    <div class="Linechart col-md-8">
+        <canvas id="lineChart"></canvas>
+    </div>
+    <div class="RadarC p-1 col-md-4">
+        <canvas id="radarChart"></canvas>
+    </div>
+</div>
+
 
             <!-- Charts -->
             <div class="row w-full p-5 gap-1 ">
