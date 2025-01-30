@@ -10,6 +10,18 @@ use App\Models\OrderModel;
 class Orders extends BaseController
 {
 
+    protected $orderModel;
+
+    public function __construct()
+    {
+        $this->orderModel = new OrderModel(); // Instantiate the model
+    }
+
+    public function index()
+    {
+        $data['orders'] = $this->orderModel->findAll(); // Fetch all orders
+        return view('orders/index', $data);
+    }
     public function filterOrders()
 {
     $filters = [
