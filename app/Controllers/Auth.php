@@ -34,7 +34,7 @@ class Auth extends Controller {
                 //Redirect based on role
                 switch($user['role']){
                     case 'admin':
-                        return redirect()->to('dashboard');
+                        return redirect()->to('Pages/Dashboard');
                     case 'staff':
                         return redirect()->to('');
                     default: 
