@@ -56,13 +56,3 @@ abstract class BaseController extends Controller
         // E.g.: $this->session = \Config\Services::session();
     }
 }
-protected $orderModel;
-
-public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
-{
-    parent::initController($request, $response, $logger);
-
-    // Load the OrderModel
-    $this->orderModel = new \App\Models\OrderModel();
-}
-
