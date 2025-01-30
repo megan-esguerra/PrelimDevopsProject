@@ -61,7 +61,7 @@
                             <div style="color:red"><?php if (session()->getFlashdata('error'))?></div>
                         <?php endif;?>
 
-                        <form action="<?= site_url('/login')?>" method="post" >
+                        <form action="<?= site_url('auth/login')?>" method="post" >
                             <div class="mb-3">
                                 <label class="form-label">Email*</label>
                                 <input type="email" class="form-control"  name="email" id="email" placeholder="Enter your email" required>
