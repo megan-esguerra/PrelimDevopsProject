@@ -242,56 +242,52 @@ a{
 
     <script>
         // Line Chart
+        document.addEventListener("DOMContentLoaded", function () {
+        // PHP data passed as JSON to JavaScript
+        let financeData = <?= json_encode($finance) ?>;
+
+        // Extract months, revenue, and sales from the data
+        let months = financeData.map(item => item.month);
+        let revenueData = financeData.map(item => item.revenue);
+        let salesData = financeData.map(item => item.sales);
+
+        // Line Chart
         const ctx = document.getElementById('lineChart').getContext('2d');
-
-new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'], // Keep the months as labels
-        datasets: [{
-            label: 'Revenue', // Change label to "Revenue"
-            data: [30000, 45000, 60000, 75000, 90000], // Example revenue data
-            borderColor: '#007bff', // Bootstrap primary blue
-            backgroundColor: 'rgba(0, 123, 255, 0.2)', // Light fill
-            fill: true, // Make it a filled line
-            tension: 0.3, // Smooth the line
-            pointBackgroundColor: '#007bff',
-            pointBorderColor: '#fff',
-            pointRadius: 5
-        }]
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                display: true,
-                position: 'top'
-            }
-        },
-        scales: {
-            y: {
-                beginAtZero: true,
-                title: {
-                    display: true,
-                    text: 'Revenue (PHP)', // Y-axis label
-                    font: {
-                        size: 14
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: months, // Use dynamic months
+                datasets: [
+                    {
+                        label: 'Revenue',
+                        data: revenueData, // Revenue from database
+                        borderColor: 'red',
+                        fill: false
+                    },
+                    {
+                        label: 'Sales',
+                        data: salesData, // Sales from database
+                        borderColor: 'yellow',
+                        fill: false
                     }
-                }
+                ]
             },
-            x: {
-                title: {
-                    display: true,
-                    text: 'Months', // X-axis label
-                    font: {
-                        size: 14
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
                     }
                 }
             }
-        }
-    }
-});
-
+        });
+    });
 
 // Radar Chart
 const radarCtx = document.getElementById('radarChart').getContext('2d');
