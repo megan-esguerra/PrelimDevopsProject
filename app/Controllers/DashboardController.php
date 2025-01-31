@@ -31,18 +31,18 @@ class DashboardController extends BaseController
         $totalIncome = $totalRevenue - $totalPurchases;
 
         // Fetch monthly revenue
-        $monthlyRevenue = $revenueModel->select("MONTHNAME(created_at) as month, SUM(amount) as revenue")
-            ->groupBy('month')
-            ->orderBy('MONTH(created_at)')
-            ->get()
-            ->getResultArray();
-
-        // Fetch monthly sales
-        $monthlySales = $salesModel->select("MONTHNAME(created_at) as month, SUM(total_amount) as sales")
-            ->groupBy('month')
-            ->orderBy('MONTH(created_at)')
-            ->get()
-            ->getResultArray();
+        $monthlyRevenue = $revenueModel->select("MONTHNAME(date) as month, SUM(amount) as revenue")
+        ->groupBy('month')
+        ->orderBy('MONTH(date)')
+        ->get()
+        ->getResultArray();
+    
+    // Fetch monthly sales (use correct date column)
+    $monthlySales = $salesModel->select("MONTHNAME(date) as month, SUM(total_amount) as sales")
+        ->groupBy('month')
+        ->orderBy('MONTH(date)')
+        ->get()
+        ->getResultArray();
 
         return view('Pages/Dashboard', [
             'revenue' => $totalRevenue,
