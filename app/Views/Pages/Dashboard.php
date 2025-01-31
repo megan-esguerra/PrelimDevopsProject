@@ -86,6 +86,11 @@ a {
     .sidebar.show {
         transform: translateX(0);
     }
+    .main-content {
+    flex: 1;
+    padding: 10px;
+    transition: margin-left 0.3s ease-in-out;
+}
 }
 
 
