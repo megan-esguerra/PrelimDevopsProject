@@ -169,7 +169,7 @@
             <button type="submit">Sign up</button>
         </form>
 
-        <p>Already have an account? <a href="<?= site_url('/login') ?>" class="login-link">Log in</a></p>
+        <p>Already have an account? <a href="<?= site_url('/LogIn') ?>" class="login-link">Log in</a></p>
     </div>
     <img src="<?= base_url('images/Cat.png') ?>" alt="Cat" class="cat-image">
 </body>

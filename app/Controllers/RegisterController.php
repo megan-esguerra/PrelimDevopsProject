@@ -24,6 +24,6 @@ class RegisterController extends BaseController
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
-        return redirect()->to('/login')->with('success', 'Registration successful!');
+        return redirect()->to('/LogIn')->with('success', 'Registration successful!');
     }
 }

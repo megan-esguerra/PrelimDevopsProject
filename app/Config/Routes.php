@@ -8,4 +8,24 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 $routes->get('/register', 'RegisterController::index');
 $routes->post('/register/store', 'RegisterController::store');
-$routes->get('/login', 'LoginController::index'); 
+
+$routes->get('/LogIn', 'Auth::login');
+$routes->post('/LogIn/process', 'Auth::process');
+$routes->get('/LogIn', 'Auth::logout');
+
+
+$routes->get('dashboard', 'DashboardController::index');
+
+$routes->get('/orders', 'Orders::index');
+$routes->get('/orders/new', 'Orders::newOrder');
+$routes->get('/orders/export', 'Orders::exportOrders');
+$routes->post('/orders/import', 'Orders::importOrders');
+$routes->get('/orders/filter', 'Orders::filterOrders');
+
+
+
+
+
+
+
+
