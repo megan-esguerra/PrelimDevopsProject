@@ -88,7 +88,8 @@ a {
     }
     .main-content {
     flex: 1;
-    padding: 10px;
+    width: 100%;
+    padding: 5px;
     transition: margin-left 0.3s ease-in-out;
 }
 }
@@ -103,10 +104,7 @@ a{
     border-radius: 10px;
     background: transparent;
 }
-.main-content {
-    flex: 1;
-    padding: 20px 40px 20px 240px;
-}
+
 .dropdown-item{
     position: relative;
     z-index: 9999;
