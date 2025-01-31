@@ -242,52 +242,30 @@ a{
 
     <script>
         // Line Chart
-        document.addEventListener("DOMContentLoaded", function () {
-        // PHP data passed as JSON to JavaScript
-        let financeData = <?= json_encode($finance) ?>;
+        const revenueData = <?= json_encode(array_column($monthlyRevenue, 'revenue')) ?>;
+    const salesData = <?= json_encode(array_column($monthlySales, 'sales')) ?>;
+    const months = <?= json_encode(array_column($monthlyRevenue, 'month')) ?>;
 
-        // Extract months, revenue, and sales from the data
-        let months = financeData.map(item => item.month);
-        let revenueData = financeData.map(item => item.revenue);
-        let salesData = financeData.map(item => item.sales);
-
-        // Line Chart
-        const ctx = document.getElementById('lineChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: months, // Use dynamic months
-                datasets: [
-                    {
-                        label: 'Revenue',
-                        data: revenueData, // Revenue from database
-                        borderColor: 'red',
-                        fill: false
-                    },
-                    {
-                        label: 'Sales',
-                        data: salesData, // Sales from database
-                        borderColor: 'yellow',
-                        fill: false
-                    }
-                ]
+    const ctx = document.getElementById('lineChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: months,
+            datasets: [{
+                label: 'Revenue',
+                data: revenueData,
+                borderColor: 'red',
+                fill: false
             },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'top'
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
+            {
+                label: 'Sales',
+                data: salesData,
+                borderColor: 'yellow',
+                fill: false
+            }]
+        }
     });
+        
 
 // Radar Chart
 const radarCtx = document.getElementById('radarChart').getContext('2d');
