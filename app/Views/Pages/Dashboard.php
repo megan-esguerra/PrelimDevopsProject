@@ -242,25 +242,56 @@ a{
 
     <script>
         // Line Chart
-const ctx = document.getElementById('lineChart').getContext('2d');
+        const ctx = document.getElementById('lineChart').getContext('2d');
+
 new Chart(ctx, {
     type: 'line',
     data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'], // Keep the months as labels
         datasets: [{
-            label: 'Dataset 1',
-            data: [10, 20, 40, 60, 30],
-            borderColor: 'red',
-            fill: false
-        },
-        {
-            label: 'Dataset 2',
-            data: [5, 15, 35, 55, 25],
-            borderColor: 'yellow',
-            fill: false
+            label: 'Revenue', // Change label to "Revenue"
+            data: [30000, 45000, 60000, 75000, 90000], // Example revenue data
+            borderColor: '#007bff', // Bootstrap primary blue
+            backgroundColor: 'rgba(0, 123, 255, 0.2)', // Light fill
+            fill: true, // Make it a filled line
+            tension: 0.3, // Smooth the line
+            pointBackgroundColor: '#007bff',
+            pointBorderColor: '#fff',
+            pointRadius: 5
         }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: true,
+                position: 'top'
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Revenue (PHP)', // Y-axis label
+                    font: {
+                        size: 14
+                    }
+                }
+            },
+            x: {
+                title: {
+                    display: true,
+                    text: 'Months', // X-axis label
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
     }
 });
+
 
 // Radar Chart
 const radarCtx = document.getElementById('radarChart').getContext('2d');
