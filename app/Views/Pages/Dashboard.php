@@ -22,6 +22,7 @@
     padding: 20px;
     color: white;
     border-right: 1px solid rgb(162, 160, 150);
+    transition: transform 0.3s ease-in-out;
 }
 
 .sidebar ul {
@@ -33,6 +34,7 @@
     padding: 10px;
     cursor: pointer;
 }
+
 .sidebar ul li a.active {
     background-color: #A59D84;
     height: 5px;
@@ -41,6 +43,51 @@
     color: white;
     font-weight: bold;
 }
+
+a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px 40px 20px 240px;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    position: sticky;
+    align-items: center;
+    background: #A59D84;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.search-bar {
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+/* Hide sidebar on small screens */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        width: 200px;
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+    }
+
+    .sidebar.show {
+        transform: translateX(0);
+    }
+}
+
 
 a{
     text-decoration: none;
@@ -61,21 +108,6 @@ a{
 }
 .dropdown-toggle::after {
     display: none; 
-}
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    position: sticky;
-    align-items: center;
-    background: #A59D84;
-    padding: 10px;
-    border-radius: 10px;
-}
-
-.search-bar {
-    border: 1px solid #ccc;
-    padding: 5px;
-    border-radius: 5px;
 }
 
 .user-profile img {
@@ -239,10 +271,16 @@ a{
 
         </div> <!-- Container -->
     </div>
+    <script>
+    document.getElementById("sidebarToggle").addEventListener("click", function () {
+        document.getElementById("sidebar").classList.toggle("show");
+    });
+</script>
 
     <script>
+        
         // Line Chart
-        const revenueData = <?= json_encode(array_column($monthlyRevenue, 'revenue')) ?>;
+    const revenueData = <?= json_encode(array_column($monthlyRevenue, 'revenue')) ?>;
     const salesData = <?= json_encode(array_column($monthlySales, 'sales')) ?>;
     const months = <?= json_encode(array_column($monthlyRevenue, 'month')) ?>;
 
