@@ -116,13 +116,18 @@ a{
 .user-profile img {
     border-radius: 50%;
 }
+.chart-container{
+    gap: 70px;
+}
 .Linechart  {
-    background: #D7D3BF;
+    background: #ECEBDE;
     width: 60%;
+    border-radius: 25px;
 }
 .RadarC {
-    background: #D7D3BF;
+    background: #ECEBDE;
     width: 30%;
+    border-radius: 25px;
 }
 
 .card {
@@ -196,7 +201,7 @@ a{
 </div>
 
             <!-- Charts -->
-            <div class="row w-full p-5 gap-1 ">
+            <div class="row w-full p-5 chart-container ">
                 <div class="Linechart col-md-8">
                     <canvas id="lineChart"></canvas>
                 </div>
