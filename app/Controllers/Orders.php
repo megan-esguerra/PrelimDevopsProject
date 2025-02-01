@@ -18,10 +18,12 @@ class Orders extends BaseController
 
     // Main page to list orders
     public function index()
-    {
-        $orders = $this->orderModel->getOrders(); // Replace with your actual query logic
-        return view('orders/index', ['orders' => $orders]);
-    }
+{
+    $orderModel = new OrderModel();
+    $data['orders'] = $orderModel->getOrders(); // Ensure this returns relevant data
+
+    return view('orders/index', $data);
+}
 
     // Filter orders based on criteria
     public function filterOrders()
@@ -125,4 +127,29 @@ class Orders extends BaseController
     {
         return view('orders/new_order_form');
     }
+    public function export()
+{
+    $orderModel = new OrderModel();
+    $orders = $orderModel->getOrders();
+
+    header("Content-Type: application/vnd.ms-excel");
+    header("Content-Disposition: attachment; filename=orders.xls");
+
+    echo "Order ID\tCustomer\tTotal Amount\tStatus\n";
+    foreach ($orders as $order) {
+        echo "{$order['id']}\t{$order['customer']}\t{$order['total_amount']}\t{$order['status']}\n";
+    }
+
+    exit;
+}
+public function import()
+{
+    if ($this->request->getFile('orders_file')) {
+        // Process Excel file (You may need PhpSpreadsheet library)
+        return redirect()->to('/orders')->with('success', 'Orders imported successfully.');
+    }
+
+    return redirect()->to('/orders')->with('error', 'Failed to import orders.');
+}
+
 }

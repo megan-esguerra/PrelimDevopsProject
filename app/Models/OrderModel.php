@@ -13,25 +13,15 @@ class OrderModel extends Model
     protected $allowedFields = ['id', 'date', 'customer', 'sales_channel', 'destination', 'items', 'status'];
 
     // Fetch all orders or apply filters
-    public function getOrders($filters = [])
-    {
-        $query = $this;
+    public function getOrders()
+{
+    return $this->select('orders.*, customers.name as customer, sales.channel as sales_channel')
+                ->join('customers', 'customers.id = orders.customer_id')
+                ->join('sales', 'sales.order_id = orders.id', 'left') // Adjust based on DB structure
+                ->orderBy('orders.id', 'DESC')
+                ->findAll();
+}
 
-        if (!empty($filters['order_id'])) {
-            $query = $query->like('id', $filters['order_id']);
-        }
-        if (!empty($filters['date'])) {
-            $query = $query->where('date', $filters['date']);
-        }
-        if (!empty($filters['sales_channel'])) {
-            $query = $query->where('sales_channel', $filters['sales_channel']);
-        }
-        if (!empty($filters['status'])) {
-            $query = $query->where('status', $filters['status']);
-        }
-
-        return $query->findAll(); // Fetch and return results
-    }
 
     // Bulk import orders (if needed for advanced processing)
     public function importOrders(array $data)
@@ -42,3 +32,4 @@ class OrderModel extends Model
         return true;
     }
 }
+
