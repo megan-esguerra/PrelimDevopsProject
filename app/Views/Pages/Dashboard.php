@@ -147,12 +147,12 @@ canvas#radarChart {
 .Linechart  {
     background: #ECEBDE;
     width: 300px;
-    height: 300px;
+    height: 300px !important;
     border-radius: 25px;
 }
 .RadarC {
     background: #ECEBDE;
-    width: 300px;
+    width: 300px !important;
     height: 300px;
     border-radius: 25px;
 }
