@@ -95,13 +95,18 @@ a{
 .user-profile img {
     border-radius: 50%;
 }
+.chart-container{
+    gap: 70px;
+}
 .Linechart  {
-    background: #D7D3BF;
+    background: #ECEBDE;
     width: 60%;
+    border-radius: 25px;
 }
 .RadarC {
-    background: #D7D3BF;
+    background: #ECEBDE;
     width: 30%;
+    border-radius: 25px;
 }
 
 .card {
