@@ -103,7 +103,24 @@
             width: 420px;
             opacity: 0.8;
         }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: -20px;
+            margin-bottom: 20px;
+        }
     </style>
+    <script>
+        function validatePhoneNumber() {
+            const phoneInput = document.getElementById('phone');
+            const errorMessage = document.getElementById('phone-error');
+            if (phoneInput.value.length < 11) {
+                errorMessage.textContent = 'The phone field must be at least 11 characters in length.';
+            } else {
+                errorMessage.textContent = '';
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -137,7 +154,8 @@
                 </div>
                 <div class="form-group">
                     <label for="phone">Phone Number</label>
-                    <input type="tel" name="phone" id="phone" value="<?= old('phone') ?>" placeholder="Minimum 11 characters" minlength="11" maxlength="11" pattern="[0-9]+" required oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                    <input type="tel" name="phone" id="phone" value="<?= old('phone') ?>" placeholder="Minimum 11 characters" minlength="11" maxlength="11" pattern="[0-9]+" required oninput="this.value = this.value.replace(/[^0-9]/g, ''); validatePhoneNumber();">
+                    <div id="phone-error" class="error-message"></div>
                 </div>
             </div>
             <div class="form-group">

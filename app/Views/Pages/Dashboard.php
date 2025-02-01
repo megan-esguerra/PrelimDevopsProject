@@ -22,6 +22,7 @@
     padding: 20px;
     color: white;
     border-right: 1px solid rgb(162, 160, 150);
+    transition: transform 0.3s ease-in-out;
 }
 
 .sidebar ul {
@@ -33,6 +34,7 @@
     padding: 10px;
     cursor: pointer;
 }
+
 .sidebar ul li a.active {
     background-color: #A59D84;
     height: 5px;
@@ -42,26 +44,18 @@
     font-weight: bold;
 }
 
-a{
+a {
     text-decoration: none;
     color: white;
     font-size: 16px;
 }
-.form-control{
-    border-radius: 10px;
-    background: transparent;
-}
+
 .main-content {
     flex: 1;
     padding: 20px 40px 20px 240px;
+    transition: margin-left 0.3s ease-in-out;
 }
-.dropdown-item{
-    position: relative;
-    z-index: 9999;
-}
-.dropdown-toggle::after {
-    display: none; 
-}
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -78,16 +72,62 @@ a{
     border-radius: 5px;
 }
 
+/* Hide sidebar on small screens */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        width: 200px;
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+    }
+
+    .sidebar.show {
+        transform: translateX(0);
+    }
+    .main-content {
+    flex: 1;
+    width: 100%;
+    padding: 5px;
+    transition: margin-left 0.3s ease-in-out;
+}
+}
+
+
+a{
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+}
+.form-control{
+    border-radius: 10px;
+    background: transparent;
+}
+
+.dropdown-item{
+    position: relative;
+    z-index: 9999;
+}
+.dropdown-toggle::after {
+    display: none; 
+}
+
 .user-profile img {
     border-radius: 50%;
 }
+.chart-container{
+    gap: 70px;
+}
 .Linechart  {
-    background: #D7D3BF;
+    background: #ECEBDE;
     width: 60%;
+    border-radius: 25px;
 }
 .RadarC {
-    background: #D7D3BF;
+    background: #ECEBDE;
     width: 30%;
+    border-radius: 25px;
 }
 
 .card {
@@ -161,7 +201,7 @@ a{
 </div>
 
             <!-- Charts -->
-            <div class="row w-full p-5 gap-1 ">
+            <div class="row w-full p-5 chart-container ">
                 <div class="Linechart col-md-8">
                     <canvas id="lineChart"></canvas>
                 </div>
@@ -239,28 +279,39 @@ a{
 
         </div> <!-- Container -->
     </div>
+    <script>
+    document.getElementById("sidebarToggle").addEventListener("click", function () {
+        document.getElementById("sidebar").classList.toggle("show");
+    });
+</script>
 
     <script>
+        
         // Line Chart
-const ctx = document.getElementById('lineChart').getContext('2d');
-new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
-        datasets: [{
-            label: 'Dataset 1',
-            data: [10, 20, 40, 60, 30],
-            borderColor: 'red',
-            fill: false
-        },
-        {
-            label: 'Dataset 2',
-            data: [5, 15, 35, 55, 25],
-            borderColor: 'yellow',
-            fill: false
-        }]
-    }
-});
+    const revenueData = <?= json_encode(array_column($monthlyRevenue, 'revenue')) ?>;
+    const salesData = <?= json_encode(array_column($monthlySales, 'sales')) ?>;
+    const months = <?= json_encode(array_column($monthlyRevenue, 'month')) ?>;
+
+    const ctx = document.getElementById('lineChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: months,
+            datasets: [{
+                label: 'Revenue',
+                data: revenueData,
+                borderColor: 'red',
+                fill: false
+            },
+            {
+                label: 'Sales',
+                data: salesData,
+                borderColor: 'yellow',
+                fill: false
+            }]
+        }
+    });
+        
 
 // Radar Chart
 const radarCtx = document.getElementById('radarChart').getContext('2d');
