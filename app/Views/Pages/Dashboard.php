@@ -21,7 +21,7 @@ body {
     font-size: 16px;
    
 }
-span{
+.sideLine{
     background: #A59D84;
     width: 5px;
     height: 20px;
