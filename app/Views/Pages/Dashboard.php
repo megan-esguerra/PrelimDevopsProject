@@ -6,14 +6,28 @@
     <title>Dashboard</title>
     <link rel="icon" type="image/png" href="<?= base_url('img/tabicon.png'); ?>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
-        body {
+          @import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Noto+Serif+JP:wght@200..900&display=swap');
+body {
     display: flex;
     background: #d4ccb6;
     font-family: Arial, sans-serif;
 }
-
+.Ims{
+    font-family: 'Karla', sans-serif;
+    color: black;
+    font-weight: bold;
+    font-size: 16px;
+   
+}
+span{
+    background: #A59D84;
+    width: 5px;
+    height: 20px;
+    font-size: 20px;
+    border-radius: 10px;
+}
 .sidebar {
     width: 200px;
     height: 100vh;
