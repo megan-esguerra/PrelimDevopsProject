@@ -112,6 +112,26 @@ a{
     padding: 5px;
     transition: margin-left 0.3s ease-in-out;
     }
+}
+@media (max-width: 600px) {
+    .sidebar {
+        transform: translateX(-100%);
+        width: 200px;
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+    }
+
+    .sidebar.show {
+        transform: translateX(0);
+    }
+    .main-content {
+    flex: 1;
+    width: 100%;
+    padding: 5px;
+    transition: margin-left 0.3s ease-in-out;
+    }
     .Linechart  {
     background: #ECEBDE;
     height: 100%;
@@ -124,8 +144,8 @@ a{
     width: 100px;
     border-radius: 25px;
 }
+    
 }
-
 
 a{
     text-decoration: none;
