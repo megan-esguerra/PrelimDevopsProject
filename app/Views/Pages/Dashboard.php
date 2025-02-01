@@ -135,7 +135,7 @@ a{
 canvas#lineChart {
     background: #ECEBDE;
     height: 100%;
-    width: 600px !important;
+    width: 100%;
     border-radius: 25px;
 }
 canvas#radarChart {
