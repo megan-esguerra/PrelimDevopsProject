@@ -132,16 +132,16 @@ a{
     padding: 5px;
     transition: margin-left 0.3s ease-in-out;
     }
-    .Linechart  {
+canvas#lineChart {
     background: #ECEBDE;
     height: 100%;
-    width: 200px;
+    width: 600px !important;
     border-radius: 25px;
 }
-.RadarC {
+canvas#radarChart {
     background: #ECEBDE;
     height: 100%;
-    width: 100px;
+    width: 100%;
     border-radius: 25px;
 }
     
