@@ -31,8 +31,9 @@
             z-index: 1;
             margin-bottom: 6rem;
             box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
-            background: #e0d6b9;
+            background: linear-gradient(to bottom right, #e0d6b9, #b3a588);
             width: 49rem;
+            border: 3px solid;
         }
         .form-group {
             margin-bottom: 4px;
@@ -59,7 +60,7 @@
             width: 90%;
             padding: 15px;
             background-color: #ecebde;
-            border: 1px solid #8f8f8f;
+            border: 2px solid #271f19;
             border-radius: 5px;
             margin-bottom: 1px;
             height: 22%;
