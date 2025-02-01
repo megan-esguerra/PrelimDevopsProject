@@ -144,7 +144,18 @@ canvas#radarChart {
     width: 100%;
     border-radius: 25px;
 }
-    
+.Linechart  {
+    background: #ECEBDE;
+    width: 250px;
+    height: 300px;
+    border-radius: 25px;
+}
+.RadarC {
+    background: #ECEBDE;
+    width: 250px;
+    height: 300px;
+    border-radius: 25px;
+}
 }
 
 a{
