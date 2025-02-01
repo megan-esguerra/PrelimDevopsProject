@@ -111,6 +111,18 @@ a{
     width: 100%;
     padding: 5px;
     transition: margin-left 0.3s ease-in-out;
+    }
+    .Linechart  {
+    background: #ECEBDE;
+    height: 100%;
+    width: 200px;
+    border-radius: 25px;
+}
+.RadarC {
+    background: #ECEBDE;
+    height: 100%;
+    width: 100px;
+    border-radius: 25px;
 }
 }
 
