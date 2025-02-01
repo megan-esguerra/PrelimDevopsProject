@@ -180,7 +180,7 @@ a{
 </div>
 
             <!-- Charts -->
-            <div class="row w-full p-5 gap-1 ">
+            <div class="row w-full p-5 chart-container">
                 <div class="Linechart col-md-8">
                     <canvas id="lineChart"></canvas>
                 </div>
