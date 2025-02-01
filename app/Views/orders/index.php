@@ -13,18 +13,24 @@
         }
 
         .sidebar {
-    color: #333; /* Dark text for better visibility */
-}
+            width: 200px;
+            height: 100vh;
+            position: fixed;
+            background: #D7D3BF;
+            padding: 20px;
+            color: white;
+            border-right: 1px solid rgb(162, 160, 150);
+        }
 
-.sidebar ul li a {
-    color: #333;
-}
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
 
-.sidebar ul li a:hover {
-    background-color: #A59D84;
-    color: white;
-}
-
+        .sidebar ul li {
+            padding: 10px;
+            cursor: pointer;
+        }
 
         .sidebar ul li a.active {
             background-color: #A59D84;
@@ -108,10 +114,6 @@
             <!-- Toolbar -->
             <div class="d-flex justify-content-between mb-3">
                 <button class="btn btn-primary" onclick="window.location.href='<?= base_url('orders/newOrder'); ?>'">+ New Order</button>
-                <td>
-    <a href="<?= base_url('orders/view/' . $order['id']) ?>" class="btn btn-sm btn-info">View</a>
-</td>
-
                 <div>
                     <button class="btn btn-outline-success" onclick="window.location.href='/orders/export';">Export to Excel</button>
                     <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#importModal">Import Orders</button>
@@ -176,7 +178,7 @@
                         <tr>
                             <td><input type="checkbox"></td>
                             <td><?= htmlspecialchars($order['id']) ?></td>
-                            <td><?= htmlspecialchars($order['created_at']) ?></td> <!-- If 'date' is missing, use 'created_at' -->
+                            <td><?= htmlspecialchars($order['date']) ?></td>
                             <td><?= htmlspecialchars($order['customer']) ?></td>
                             <td><?= htmlspecialchars($order['sales_channel']) ?></td>
                             <td><?= htmlspecialchars($order['destination']) ?></td>
@@ -203,7 +205,7 @@
             </table>
         </div>
     </div>
-
+                                        <!-- commit -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
