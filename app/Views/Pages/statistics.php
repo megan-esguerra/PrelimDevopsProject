@@ -50,7 +50,7 @@
                 <div class="LinechartS col-md-8">
                     <canvas id="lineChart"></canvas>
                 </div>
-                <div class="RadarC p-1 col-md-4">
+                <div class="RadarCS p-1 col-md-4">
                 <canvas id="polarChart"></canvas>
                 </div>
             </div>
