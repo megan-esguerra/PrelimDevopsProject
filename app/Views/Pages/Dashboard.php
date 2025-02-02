@@ -146,8 +146,9 @@ canvas#radarChart {
 }
 .Linechart  {
     background: #ECEBDE;
+    display: contents;
     width: 300px !important;
-    height: 300px !important;
+    height: 350px !important;
     border-radius: 25px;
 }
 .RadarC {
@@ -175,7 +176,10 @@ a{
 .dropdown-toggle::after {
     display: none; 
 }
-
+.table-responsive {
+    overflow-x: auto;
+    white-space: nowrap; /* Prevent text from wrapping */
+  }
 .user-profile img {
     border-radius: 50%;
 }
@@ -264,7 +268,7 @@ a{
 </div>
 
             <!-- Charts -->
-            <div class="row w-full p-5 chart-container">
+            <div class="row w-full p-1 chart-container">
                 <div class="Linechart col-md-8">
                     <canvas id="lineChart"></canvas>
                 </div>
