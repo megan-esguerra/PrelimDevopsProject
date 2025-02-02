@@ -268,12 +268,12 @@ a{
 </div>
 
             <!-- Charts -->
-            <div class="row w-full p-2 chart-container">
+            <div class="row w-full p-3 chart-container">
                 <div class="Linechart col-md-8">
                     <canvas id="lineChart"></canvas>
                 </div>
                 <div class="RadarC p-1 col-md-4">
-                    <canvas id="radarChart"></canvas>
+                <canvas id="polarChart"></canvas>
                 </div>
             </div>
 
@@ -383,19 +383,47 @@ a{
     });
         
 
-// Radar Chart
-const radarCtx = document.getElementById('radarChart').getContext('2d');
-new Chart(radarCtx, {
-    type: 'radar',
+// Polar Area Chart
+const polarCtx = document.getElementById('radarChart').getContext('2d'); // Use the same canvas ID
+new Chart(polarCtx, {
+    type: 'polarArea',
     data: {
         labels: ['Product A', 'Product B', 'Product C'],
         datasets: [{
             label: 'Sales',
             data: [65, 59, 80],
-            backgroundColor: 'rgba(255, 99, 132, 0.2)'
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.5)',
+                'rgba(54, 162, 235, 0.5)',
+                'rgba(255, 206, 86, 0.5)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)'
+            ],
+            borderWidth: 1
         }]
+    },
+    options: {
+        scales: {
+            r: {
+                pointLabels: {
+                    display: true, // Ensure point labels are shown
+                    font: {
+                        size: 14 // Adjust font size
+                    }
+                }
+            }
+        },
+        plugins: {
+            legend: {
+                position: 'top' // Adjust legend position
+            }
+        }
     }
 });
+
 
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
