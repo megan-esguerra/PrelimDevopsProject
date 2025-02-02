@@ -144,7 +144,7 @@ const ctx = document.getElementById('lineChart').getContext('2d');
 
 // Create a gradient for revenue
 const gradientRevenue = ctx.createLinearGradient(0, 0, 0, 400);
-gradientRevenue.addColorStop(0, 'rgba(165, 157, 132, 0.87)'); // #A59D84 (semi-transparent)
+gradientRevenue.addColorStop(0, 'rgba(165, 157, 132, 0.87)'); 
 gradientRevenue.addColorStop(1, 'rgba(165, 157, 132, 0.42)'); // Fully transparent
 
 // Create a gradient for sales
@@ -208,56 +208,35 @@ new Chart(ctx, {
         
 
 // Polar Area Chart
-        document.addEventListener('DOMContentLoaded', function () {
-            const polarCtx = document.getElementById('polarChart').getContext('2d');
+const productLabels = <?= $productLabels ?>;
+        const productStocks = <?= $productStocks ?>;
 
-            const productLabels = <?= $productLabels ?>; // Fetch labels from PHP
-            const productPrices = <?= $productPrices ?>; // Fetch prices from PHP
-
-            new Chart(polarCtx, {
-                type: 'polarArea',
-                data: {
-                    labels: productLabels,
-                    datasets: [{
-                        label: 'Product Prices',
-                        data: productPrices,
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.5)',
-                            'rgba(54, 162, 235, 0.5)',
-                            'rgba(255, 206, 86, 0.5)',
-                            'rgba(75, 192, 192, 0.5)',
-                            'rgba(153, 102, 255, 0.5)',
-                            'rgba(255, 159, 64, 0.5)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        r: {
-                            pointLabels: {
-                                display: true, // Show labels
-                                font: {
-                                    size: 14
-                                }
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            position: 'top'
-                        }
+        // Initialize Polar Area Chart
+        const ctx = document.getElementById('polarChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'polarArea',
+            data: {
+                labels: productLabels,
+                datasets: [{
+                    label: 'Stock Quantity',
+                    data: productStocks,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 206, 86, 0.5)',
+                        'rgba(75, 192, 192, 0.5)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top'
                     }
                 }
-            });
+            }
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
