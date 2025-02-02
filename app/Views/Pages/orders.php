@@ -1,7 +1,7 @@
 <?php include(APPPATH . 'Views/layout/Header.php'); ?>
 <body>
     <!-- Sidebar -->
-    <?php include('path_to_views/layout/sidebar.php'); ?>
+    <?php include(APPPATH . 'Views/layout/sidebar.php'); ?>
 
     <!-- Main Content -->
     <div class="main-content">
