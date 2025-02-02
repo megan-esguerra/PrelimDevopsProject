@@ -67,8 +67,8 @@ class DashboardController extends BaseController
             'soldProductsCount' => $soldProductsCount,
             'purchases' => $totalPurchases,
             'income' => $totalIncome,
-            'monthlyRevenue' => json_encode($monthlyRevenue),
-            'monthlySales' => json_encode($monthlySales),
+            'monthlyRevenue' => $monthlyRevenue, // No need to json_encode
+            'monthlySales' => $monthlySales, // No need to json_encode
             'productLabels' => json_encode($productLabels), // Convert to JSON
             'productStocks' => json_encode($productStocks) // Convert to JSON
         ]);
