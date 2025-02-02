@@ -71,8 +71,9 @@ class DashboardController extends BaseController
             'income' => $totalIncome,
             'monthlyRevenue' => $monthlyRevenue, // No need to json_encode
             'monthlySales' => $monthlySales, // No need to json_encode
-            'productLabels' => json_encode($productLabels), // Convert to JSON
-            'productStocks' => json_encode($productStocks) // Convert to JSON
+            'productLabels' => json_encode(array_values($productLabels)), 
+'productStocks' => json_encode(array_map('intval', array_values($productStocks)))
+
         ]);
     }
 }

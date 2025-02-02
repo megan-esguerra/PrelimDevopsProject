@@ -206,41 +206,46 @@
         }
     });
 
-    // Polar Area Chart for Top 4 Lowest Stock Products
-    const productLabels = <?= json_encode($productLabels) ?>;
-    const productStocks = <?= json_encode($productStocks) ?>;
+    const productLabels = <?= json_encode($productLabels) ?> || [];
+const productStocks = <?= json_encode($productStocks) ?> || [];
 
-    // Check if product data is available
-    if (productLabels.length === 0 || productStocks.length === 0) {
-        console.error("No product data available for Polar Area Chart.");
-    } else {
-        const ctxPolar = document.getElementById('polarChart').getContext('2d');
-        new Chart(ctxPolar, {
-            type: 'polarArea',
-            data: {
-                labels: productLabels,
-                datasets: [{
-                    label: 'Stock Quantity',
-                    data: productStocks,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.5)',
-                        'rgba(54, 162, 235, 0.5)',
-                        'rgba(255, 206, 86, 0.5)',
-                        'rgba(75, 192, 192, 0.5)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top'
-                    }
+console.log("Product Labels:", productLabels);
+console.log("Product Stocks:", productStocks);
+
+// Ensure both are valid arrays
+if (!Array.isArray(productLabels) || !Array.isArray(productStocks)) {
+    console.error("Invalid data for Polar Area Chart. Labels or stocks are not arrays.");
+} else if (productLabels.length === 0 || productStocks.length === 0) {
+    console.warn("Polar Area Chart: No product data available.");
+} else {
+    const ctxPolar = document.getElementById('polarChart').getContext('2d');
+    new Chart(ctxPolar, {
+        type: 'polarArea',
+        data: {
+            labels: productLabels,
+            datasets: [{
+                label: 'Stock Quantity',
+                data: productStocks,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top'
                 }
             }
-        });
-    }
+        }
+    });
+}
+
 </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
