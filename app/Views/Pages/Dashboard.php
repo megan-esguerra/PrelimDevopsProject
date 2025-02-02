@@ -144,13 +144,13 @@ const ctx = document.getElementById('lineChart').getContext('2d');
 
 // Create a gradient for revenue
 const gradientRevenue = ctx.createLinearGradient(0, 0, 0, 400);
-gradientRevenue.addColorStop(0, 'rgba(165, 157, 132, 0.4)'); // #A59D84 (semi-transparent)
-gradientRevenue.addColorStop(1, 'rgba(165, 157, 132, 0)'); // Fully transparent
+gradientRevenue.addColorStop(0, 'rgba(165, 157, 132, 0.87)'); // #A59D84 (semi-transparent)
+gradientRevenue.addColorStop(1, 'rgba(165, 157, 132, 0.42)'); // Fully transparent
 
 // Create a gradient for sales
 const gradientSales = ctx.createLinearGradient(0, 0, 0, 400);
-gradientSales.addColorStop(0, 'rgba(215, 211, 191, 0.4)'); // #D7D3BF (semi-transparent)
-gradientSales.addColorStop(1, 'rgba(215, 211, 191, 0)'); // Fully transparent
+gradientSales.addColorStop(0, 'rgba(215, 211, 191, 0.77)'); // #D7D3BF (semi-transparent)
+gradientSales.addColorStop(1, 'rgba(215, 211, 191, 0.48)'); // Fully transparent
 
 new Chart(ctx, {
     type: 'line',
