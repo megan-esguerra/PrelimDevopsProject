@@ -138,7 +138,7 @@ canvas#lineChart {
     width: 100% !important;
     border-radius: 25px;
 }
-canvas#radarChart {
+canvas#polarChart {
     background: #ECEBDE;
     height: 100%;
     width: 100%;
@@ -384,7 +384,7 @@ a{
         
 
 // Polar Area Chart
-const polarCtx = document.getElementById('radarChart').getContext('2d'); // Use the same canvas ID
+const polarCtx = document.getElementById('polarChart').getContext('2d'); // Use the same canvas ID
 new Chart(polarCtx, {
     type: 'polarArea',
     data: {
