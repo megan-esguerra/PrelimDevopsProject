@@ -8,7 +8,7 @@ use App\Models\SalesItemsModel;
 use App\Models\PurchaseOrdersModel;
 use App\Models\ProductModel; 
 
-class StatisticsController extends BaseController
+class DashboardController extends BaseController
 {
     public function index()
     {
@@ -58,7 +58,7 @@ class StatisticsController extends BaseController
             $productPrices[] = $product['price'];
         }
 
-        return view('Pages/statistics', [
+        return view('Pages/Dashboard', [
             'revenue' => $totalRevenue,
             'sales' => $totalSales,
             'soldProductsCount' => $soldProductsCount,
