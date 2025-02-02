@@ -268,7 +268,7 @@ a{
 </div>
 
             <!-- Charts -->
-            <div class="row w-full p-1 chart-container">
+            <div class="row w-full p-2 chart-container">
                 <div class="Linechart col-md-8">
                     <canvas id="lineChart"></canvas>
                 </div>

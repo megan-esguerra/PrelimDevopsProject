@@ -12,10 +12,11 @@
 
         <!-- User Profile Dropdown -->
         <div class="dropdown">
-            <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="<?= base_url('img/bgimg.png'); ?>" alt="User" class="rounded-circle me-2" width="40" height="40">
-                <span>Ann Lee</span>
-            </a>
+        <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+    <img src="<?= base_url('img/bgimg.png'); ?>" alt="User" class="rounded-circle me-2" width="40" height="40">
+    <span><?= session()->get('name') ?? 'Guest'; ?></span> 
+</a>
+
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                 <li><a class="dropdown-item" href="#">Profile</a></li>
                 <li><a class="dropdown-item" href="#">Settings</a></li>

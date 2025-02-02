@@ -34,9 +34,12 @@ class Auth extends Controller
             $session->set([
                 'id' => $user['user_id'],
                 'email' => $user['email'],
+                'name' => $user['first_name'] . ' ' . $user['last_name'], // Combine first & last name
                 'isLoggedIn' => true
             ]);
             return redirect()->to('/dashboard');
+        
+        
         } else {
             return view('LogIn', [
                 'validation' => $validation->setError('password_hash', 'Invalid email or password')
