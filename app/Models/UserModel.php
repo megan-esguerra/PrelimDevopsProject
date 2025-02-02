@@ -7,7 +7,7 @@ class UserModel extends Model {
     protected $table = 'users';
     protected $primaryKey = 'user_id';
 
-    protected $allowedFields = ['name', 'avatar', 'email', 'password_hash', 'role', 'created_at'];
+    protected $allowedFields = ['first_name', 'last_name', 'email', 'phone', 'password_hash', 'role', 'created_at'];
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
 
@@ -28,4 +28,3 @@ class UserModel extends Model {
         return $this->where('email', $email)->first();
     }
 }
-?>

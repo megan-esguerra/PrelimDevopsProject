@@ -149,7 +149,6 @@
         <h1 class="highlight">Register</h1>
         <p class="highlight">Manage all your inventory efficiently.</p>
      
-
         <form action="<?= site_url('/register/store') ?>" method="post">
             <?= csrf_field() ?>
             <?php if (session()->getFlashdata('errors')): ?>
@@ -162,7 +161,7 @@
             <div class="form-row">
                 <div class="form-group">
                     <label for="first_name">First Name</label>
-                    <input type="text" name="first_name" id="first_name" value="<?= old('first_name') ?>" placeholder="Enter your name" style="padding-right: 10px;" pattern=".{2,}" title="First name must be at least 2 characters long" required>
+                    <input type="text" name="first_name" id="first_name" value="<?= old('first_name') ?>" placeholder="Enter your first name" style="padding-right: 10px;" pattern=".{2,}" title="First name must be at least 2 characters long" required>
                 </div>
                 <div class="form-group">
                     <label for="last_name">Last Name</label>

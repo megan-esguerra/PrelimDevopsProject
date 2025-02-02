@@ -72,7 +72,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Password*</label>
-                            <input type="password" class="form-control" name="password_hash" id="password_hash" placeholder="Enter password" required>
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Enter password" required>
                         </div>
                         <div class="mb-3 d-flex justify-content-between">
                             <div>
