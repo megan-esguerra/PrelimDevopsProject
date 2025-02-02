@@ -6,7 +6,7 @@ use App\Models\RevenueModel;
 use App\Models\SalesModel;
 use App\Models\SalesItemsModel;
 use App\Models\PurchaseOrdersModel;
-use App\Models\ProductModel; // Added ProductModel
+use App\Models\ProductModel;
 
 class DashboardController extends BaseController
 {
@@ -16,7 +16,7 @@ class DashboardController extends BaseController
         $salesModel = new SalesModel();
         $salesItemsModel = new SalesItemsModel();
         $purchaseModel = new PurchaseOrdersModel();
-        $productModel = new ProductModel(); // Load ProductModel
+        $productModel = new ProductModel();
 
         // Fetch total revenue
         $totalRevenue = $revenueModel->selectSum('amount')->get()->getRow()->amount ?? 0;
@@ -47,17 +47,16 @@ class DashboardController extends BaseController
             ->get()
             ->getResultArray();
 
-        // Fetch top 4 products with the **lowest stock quantity**
-        $lowStockProducts = $productModel->select('product_name, stock_quantity')
-            ->orderBy('stock_quantity', 'ASC') // ASC for lowest first
-            ->limit(4)
-            ->get()
-            ->getResultArray();
+        // 🔹 Get the **lowest 4 products** based on stock quantity
+        $products = $productModel->select('product_name, stock_quantity')
+            ->orderBy('stock_quantity', 'ASC') // Sort by lowest stock
+            ->limit(4) // Get only 4 items
+            ->find();
 
         // Format data for Chart.js
         $productLabels = [];
         $productStocks = [];
-        foreach ($lowStockProducts as $product) {
+        foreach ($products as $product) {
             $productLabels[] = $product['product_name'];
             $productStocks[] = $product['stock_quantity'];
         }
@@ -68,10 +67,10 @@ class DashboardController extends BaseController
             'soldProductsCount' => $soldProductsCount,
             'purchases' => $totalPurchases,
             'income' => $totalIncome,
-            'monthlyRevenue' => $monthlyRevenue,
-            'monthlySales' => $monthlySales,
-            'productLabels' => json_encode($productLabels), // Convert to JSON for Chart.js
-            'productStocks' => json_encode($productStocks) // Convert to JSON for Chart.js
+            'monthlyRevenue' => json_encode($monthlyRevenue),
+            'monthlySales' => json_encode($monthlySales),
+            'productLabels' => json_encode($productLabels), // Convert to JSON
+            'productStocks' => json_encode($productStocks) // Convert to JSON
         ]);
     }
 }
