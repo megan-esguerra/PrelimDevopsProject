@@ -136,29 +136,76 @@
 
     <script>
         // Line Chart
-    const revenueData = <?= json_encode(array_column($monthlyRevenue, 'revenue')) ?>;
-    const salesData = <?= json_encode(array_column($monthlySales, 'sales')) ?>;
-    const months = <?= json_encode(array_column($monthlyRevenue, 'month')) ?>;
+ const revenueData = <?= json_encode(array_column($monthlyRevenue, 'revenue')) ?>;
+const salesData = <?= json_encode(array_column($monthlySales, 'sales')) ?>;
+const months = <?= json_encode(array_column($monthlyRevenue, 'month')) ?>;
 
-    const ctx = document.getElementById('lineChart').getContext('2d');
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: months,
-            datasets: [{
+const ctx = document.getElementById('lineChart').getContext('2d');
+
+// Create a gradient for revenue
+const gradientRevenue = ctx.createLinearGradient(0, 0, 0, 400);
+gradientRevenue.addColorStop(0, 'rgba(255, 0, 0, 0.4)'); // Red (semi-transparent)
+gradientRevenue.addColorStop(1, 'rgba(255, 0, 0, 0)'); // Fully transparent
+
+// Create a gradient for sales
+const gradientSales = ctx.createLinearGradient(0, 0, 0, 400);
+gradientSales.addColorStop(0, 'rgba(255, 255, 0, 0.4)'); // Yellow (semi-transparent)
+gradientSales.addColorStop(1, 'rgba(255, 255, 0, 0)'); // Fully transparent
+
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: months,
+        datasets: [
+            {
                 label: 'Revenue',
                 data: revenueData,
                 borderColor: 'red',
-                fill: false
+                backgroundColor: gradientRevenue,
+                fill: true, // Enable gradient fill
+                tension: 0.4, // Smooth line
+                pointRadius: 3,
+                pointBackgroundColor: 'red',
+                pointHoverRadius: 5
             },
             {
                 label: 'Sales',
                 data: salesData,
                 borderColor: 'yellow',
-                fill: false
-            }]
+                backgroundColor: gradientSales,
+                fill: true, // Enable gradient fill
+                tension: 0.4, // Smooth line
+                pointRadius: 3,
+                pointBackgroundColor: 'yellow',
+                pointHoverRadius: 5
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: false // Hide legend for a cleaner look
+            }
+        },
+        scales: {
+            x: {
+                grid: {
+                    display: false // Remove grid lines
+                }
+            },
+            y: {
+                grid: {
+                    display: false // Remove grid lines
+                },
+                ticks: {
+                    display: false // Hide y-axis numbers
+                }
+            }
         }
-    });
+    }
+});
+
         
 
 // Polar Area Chart
