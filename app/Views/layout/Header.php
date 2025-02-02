@@ -137,6 +137,7 @@ canvas#lineChart {
     height: 100% !important;
     width: 100% !important;
     border-radius: 25px;
+    border: none;
 }
 canvas#polarChart {
     background: #ECEBDE;
