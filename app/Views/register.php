@@ -24,13 +24,16 @@
            position: relative;
         }  
         .container {
-            max-width: 700px;
-            margin: 60px auto 20px; 
-            padding: 20px;
+            margin: 67px auto 18px;
+            padding: 30px;
             border-radius: 10px;
-          
             position: relative;
             z-index: 1;
+            margin-bottom: 6rem;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(to bottom right, #e0d6b9, #b3a588);
+            width: 49rem;
+            border: 3px solid;
         }
         .form-group {
             margin-bottom: 4px;
@@ -44,20 +47,23 @@
             flex: 1;
             margin-top: 1rem;
         }
+        .form-row .form-group.half-width {
+            flex: 0.5;
+        }
         label {
             display: block;
             margin-bottom: 5px;
             color: #041a4a;
             font-weight: bold;
         }
-        input[type="text"], input[type="email"], input[type="password"], input[type="tel"] {
-            width: 84%;
+        input[type="text"], input[type="email"], input[type="password"], input[type="tel"], select {
+            width: 90%;
             padding: 15px;
-            background-color: #ecebde; 
-            border: 1px solid #8f8f8f; 
+            background-color: #ecebde;
+            border: 2px solid #271f19;
             border-radius: 5px;
-            margin-bottom: 23px;
-            height: 28%;
+            margin-bottom: 1px;
+            height: 22%;
             font-size: 17px;
             font-family: 'Karla', sans-serif;
         }
@@ -81,9 +87,8 @@
            font-size: 35px;
         }
        .highlight {
-           font-weight: bold;
-           color: #041a4a;
-           font-size: 18px;
+        color: #041a4a;
+        font-size: 15px;
         }
         .terms-container {
             display: flex;
@@ -106,8 +111,13 @@
         .error-message {
             color: red;
             font-size: 14px;
-            margin-top: -20px;
+            margin-top: 2px;
             margin-bottom: 20px;
+        }
+        select#role {
+            height: 64%;
+            width: 100%;
+            font-family: 'Karla', sans-serif;
         }
     </style>
     <script>
@@ -120,13 +130,25 @@
                 errorMessage.textContent = '';
             }
         }
+
+        function updateRoleDisplay() {
+            const roleSelect = document.getElementById('role');
+            const selectedRole = roleSelect.options[roleSelect.selectedIndex].text;
+            roleSelect.setAttribute('title', selectedRole);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const roleSelect = document.getElementById('role');
+            roleSelect.addEventListener('change', updateRoleDisplay);
+            updateRoleDisplay(); 
+        });
     </script>
 </head>
 <body>
     <div class="container">
         <h1 class="highlight">Register</h1>
         <p class="highlight">Manage all your inventory efficiently.</p>
-        <p style="color:#272626;">Let's get you all set up so you can verify your personal account and begin setting up your work profile.</p>
+     
 
         <form action="<?= site_url('/register/store') ?>" method="post">
             <?= csrf_field() ?>
@@ -158,9 +180,18 @@
                     <div id="phone-error" class="error-message"></div>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" placeholder="Enter your password" pattern=".{8,}" title="Password must be at least 8 characters long" required>
+            <div class="form-row">
+                <div class="form-group half-width">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" placeholder="Enter your password" pattern=".{8,}" title="Password must be at least 8 characters long" required>
+                </div>
+                <div class="form-group half-width">
+                    <label for="role">Role</label>
+                    <select name="role" id="role" required>
+                        <option value="staff">Staff</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
             </div>
             <div class="form-group terms-container">
                 <input type="checkbox" name="terms" id="terms" required>
