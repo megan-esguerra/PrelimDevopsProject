@@ -134,120 +134,132 @@
     });
 </script>
 
-<script>
-    // Line Chart
-    const revenueData = <?= json_encode(array_column($monthlyRevenue, 'revenue')) ?>;
-    const salesData = <?= json_encode(array_column($monthlySales, 'sales')) ?>;
-    const months = <?= json_encode(array_column($monthlyRevenue, 'month')) ?>;
+    <script>
+        // Line Chart
+        const revenueData = <?= json_encode(array_column($monthlyRevenue, 'revenue')) ?>;
+const salesData = <?= json_encode(array_column($monthlySales, 'sales')) ?>;
+const months = <?= json_encode(array_column($monthlyRevenue, 'month')) ?>;
 
-    const ctx = document.getElementById('lineChart').getContext('2d');
+const ctx = document.getElementById('lineChart').getContext('2d');
 
-    // Create a gradient for revenue
-    const gradientRevenue = ctx.createLinearGradient(0, 0, 0, 400);
-    gradientRevenue.addColorStop(0, 'rgba(165, 157, 132, 0.87)');
-    gradientRevenue.addColorStop(1, 'rgba(165, 157, 132, 0.42)');
+// Create a gradient for revenue
+const gradientRevenue = ctx.createLinearGradient(0, 0, 0, 400);
+gradientRevenue.addColorStop(0, 'rgba(165, 157, 132, 0.87)'); 
+gradientRevenue.addColorStop(1, 'rgba(165, 157, 132, 0.42)'); // Fully transparent
 
-    // Create a gradient for sales
-    const gradientSales = ctx.createLinearGradient(0, 0, 0, 400);
-    gradientSales.addColorStop(0, 'rgba(215, 211, 191, 0.77)');
-    gradientSales.addColorStop(1, 'rgba(215, 211, 191, 0.48)');
+// Create a gradient for sales
+const gradientSales = ctx.createLinearGradient(0, 0, 0, 400);
+gradientSales.addColorStop(0, 'rgba(215, 211, 191, 0.77)'); // #D7D3BF (semi-transparent)
+gradientSales.addColorStop(1, 'rgba(215, 211, 191, 0.48)'); // Fully transparent
 
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: months,
-            datasets: [
-                {
-                    label: 'Revenue',
-                    data: revenueData,
-                    borderColor: '#A59D84',
-                    backgroundColor: gradientRevenue,
-                    fill: true,
-                    tension: 0.4,
-                    pointRadius: 3,
-                    pointBackgroundColor: '#A59D84',
-                    pointHoverRadius: 5
-                },
-                {
-                    label: 'Sales',
-                    data: salesData,
-                    borderColor: '#D7D3BF',
-                    backgroundColor: gradientSales,
-                    fill: true,
-                    tension: 0.4,
-                    pointRadius: 3,
-                    pointBackgroundColor: '#D7D3BF',
-                    pointHoverRadius: 5
-                }
-            ]
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: months,
+        datasets: [
+            {
+                label: 'Revenue',
+                data: revenueData,
+                borderColor: '#A59D84', // Updated color
+                backgroundColor: gradientRevenue,
+                fill: true,
+                tension: 0.4,
+                pointRadius: 3,
+                pointBackgroundColor: '#A59D84',
+                pointHoverRadius: 5
+            },
+            {
+                label: 'Sales',
+                data: salesData,
+                borderColor: '#D7D3BF', // Updated color
+                backgroundColor: gradientSales,
+                fill: true,
+                tension: 0.4,
+                pointRadius: 3,
+                pointBackgroundColor: '#D7D3BF',
+                pointHoverRadius: 5
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: false
+            }
         },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
+        scales: {
+            x: {
+                grid: {
                     display: false
                 }
             },
-            scales: {
-                x: {
-                    grid: {
-                        display: false
-                    }
+            y: {
+                grid: {
+                    display: false
                 },
-                y: {
-                    grid: {
-                        display: false
+                ticks: {
+                    display: false
+                }
+            }
+        }
+    }
+});
+        
+
+// Polar Area Chart
+        document.addEventListener('DOMContentLoaded', function () {
+            const polarCtx = document.getElementById('polarChart').getContext('2d');
+
+            const productLabels = <?= $productLabels ?>; // Fetch labels from PHP
+            const productPrices = <?= $productPrices ?>; // Fetch prices from PHP
+
+            new Chart(polarCtx, {
+                type: 'polarArea',
+                data: {
+                    labels: productLabels,
+                    datasets: [{
+                        label: 'Product Prices',
+                        data: productPrices,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(54, 162, 235, 0.5)',
+                            'rgba(255, 206, 86, 0.5)',
+                            'rgba(75, 192, 192, 0.5)',
+                            'rgba(153, 102, 255, 0.5)',
+                            'rgba(255, 159, 64, 0.5)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            pointLabels: {
+                                display: true, // Show labels
+                                font: {
+                                    size: 14
+                                }
+                            }
+                        }
                     },
-                    ticks: {
-                        display: false
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        }
                     }
                 }
-            }
-        }
-    });
-
-    const productLabels = <?= json_encode($productLabels) ?> || [];
-const productStocks = <?= json_encode($productStocks) ?> || [];
-
-console.log("Product Labels:", productLabels);
-console.log("Product Stocks:", productStocks);
-
-// Ensure both are valid arrays
-if (!Array.isArray(productLabels) || !Array.isArray(productStocks)) {
-    console.error("Invalid data for Polar Area Chart. Labels or stocks are not arrays.");
-} else if (productLabels.length === 0 || productStocks.length === 0) {
-    console.warn("Polar Area Chart: No product data available.");
-} else {
-    const ctxPolar = document.getElementById('polarChart').getContext('2d');
-    new Chart(ctxPolar, {
-        type: 'polarArea',
-        data: {
-            labels: productLabels,
-            datasets: [{
-                label: 'Stock Quantity',
-                data: productStocks,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.5)',
-                    'rgba(54, 162, 235, 0.5)',
-                    'rgba(255, 206, 86, 0.5)',
-                    'rgba(75, 192, 192, 0.5)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top'
-                }
-            }
-        }
-    });
-}
-
-</script>
-
+            });
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 

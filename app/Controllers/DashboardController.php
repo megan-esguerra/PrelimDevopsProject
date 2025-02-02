@@ -6,9 +6,9 @@ use App\Models\RevenueModel;
 use App\Models\SalesModel;
 use App\Models\SalesItemsModel;
 use App\Models\PurchaseOrdersModel;
-use App\Models\ProductModel;
+use App\Models\ProductModel; 
 
-class DashboardController extends BaseController
+class StatisticsController extends BaseController
 {
     public function index()
     {
@@ -16,7 +16,7 @@ class DashboardController extends BaseController
         $salesModel = new SalesModel();
         $salesItemsModel = new SalesItemsModel();
         $purchaseModel = new PurchaseOrdersModel();
-        $productModel = new ProductModel();
+        $productModel = new ProductModel(); // Load ProductModel
 
         // Fetch total revenue
         $totalRevenue = $revenueModel->selectSum('amount')->get()->getRow()->amount ?? 0;
@@ -47,33 +47,27 @@ class DashboardController extends BaseController
             ->get()
             ->getResultArray();
 
-        // 🔹 Get the **lowest 4 products** based on stock quantity
-        $products = $productModel->select('product_name, stock_quantity')
-            ->orderBy('stock_quantity', 'ASC') // Sort by lowest stock
-            ->limit(4) // Get only 4 items
-            ->findAll(); // ✅ Fix: Use findAll() instead of find()
-
-        // Debugging: Check if products data exists
-        if (empty($products)) {
-            echo "No product data found!";
-            die();
-        }
+        // Fetch product data for Polar Area Chart
+        $products = $productModel->select('product_name, price')->findAll();
 
         // Format data for Chart.js
-        $productLabels = array_column($products, 'product_name');
-        $productStocks = array_column($products, 'stock_quantity');
+        $productLabels = [];
+        $productPrices = [];
+        foreach ($products as $product) {
+            $productLabels[] = $product['product_name'];
+            $productPrices[] = $product['price'];
+        }
 
-        return view('Pages/Dashboard', [
+        return view('Pages/statistics', [
             'revenue' => $totalRevenue,
             'sales' => $totalSales,
             'soldProductsCount' => $soldProductsCount,
             'purchases' => $totalPurchases,
             'income' => $totalIncome,
-            'monthlyRevenue' => $monthlyRevenue, // No need to json_encode
-            'monthlySales' => $monthlySales, // No need to json_encode
-            'productLabels' => json_encode(array_values($productLabels)), 
-'productStocks' => json_encode(array_map('intval', array_values($productStocks)))
-
+            'monthlyRevenue' => $monthlyRevenue,
+            'monthlySales' => $monthlySales,
+            'productLabels' => json_encode($productLabels), // Convert to JSON for Chart.js
+            'productPrices' => json_encode($productPrices) // Convert to JSON for Chart.js
         ]);
     }
 }
