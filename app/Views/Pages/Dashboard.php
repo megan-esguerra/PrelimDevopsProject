@@ -1,16 +1,12 @@
   
     <?php include(APPPATH . 'Views/layout/Header.php'); ?>
 <body>
-
     <!-- Sidebar -->
-  
     <?php include(APPPATH . 'Views/layout/sidebar.php'); ?>
-
     <!-- Main Content -->
     <div class="main-content">
         <!-- Navbar -->
         <?php include(APPPATH . 'Views/layout/navbar.php'); ?>
-
         <!-- Cards -->
         <div class="container mt-3">
         <div class="row">

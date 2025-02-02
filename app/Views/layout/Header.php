@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Cat Cafe's</title>
     <link rel="icon" type="image/png" href="<?= base_url('img/tabicon.png'); ?>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -213,7 +213,27 @@ a{
     color: #007bff; /* Bootstrap primary color or any color of your choice */
     text-decoration: underline;
 }
+.badge {
+            text-transform: capitalize;
+        }
 
+        .modal-content {
+            background: #f9f9f9;
+        }
+
+        .modal-title {
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: #A59D84;
+            border-color: #A59D84;
+        }
+
+        .btn-primary:hover {
+            background-color: #8e846c;
+            border-color: #8e846c;
+        }
 
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
