@@ -134,8 +134,8 @@ a{
     }
 canvas#lineChart {
     background: #ECEBDE;
-    height: 100%;
-    width: 100%;
+    height: 100% !important;
+    width: 100% !important;
     border-radius: 25px;
 }
 canvas#radarChart {
@@ -146,7 +146,6 @@ canvas#radarChart {
 }
 .Linechart  {
     background: #ECEBDE;
-    width: 300px;
     height: 300px !important;
     border-radius: 25px;
 }
@@ -275,70 +274,75 @@ a{
 
             <!-- Tables -->
             <div class="row mt-4">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5>Stock Alert</h5>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Order ID</th>
-                                        <th>Date</th>
-                                        <th>Quantity</th>
-                                        <th>Alert Amt.</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>123</td>
-                                        <td>2024-01-01</td>
-                                        <td>10</td>
-                                        <td>5</td>
-                                        <td>Low</td>
-                                    </tr>
-                                    <tr>
-                                        <td>456</td>
-                                        <td>2024-01-02</td>
-                                        <td>20</td>
-                                        <td>8</td>
-                                        <td>Medium</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5>Top Selling Products</h5>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Order ID</th>
-                                        <th>Quantity</th>
-                                        <th>Alert Amt.</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>789</td>
-                                        <td>50</td>
-                                        <td>20</td>
-                                    </tr>
-                                    <tr>
-                                        <td>101</td>
-                                        <td>30</td>
-                                        <td>15</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5>Stock Alert</h5>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Date</th>
+                                <th>Quantity</th>
+                                <th>Alert Amt.</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>123</td>
+                                <td>2024-01-01</td>
+                                <td>10</td>
+                                <td>5</td>
+                                <td>Low</td>
+                            </tr>
+                            <tr>
+                                <td>456</td>
+                                <td>2024-01-02</td>
+                                <td>20</td>
+                                <td>8</td>
+                                <td>Medium</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5>Top Selling Products</h5>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Quantity</th>
+                                <th>Alert Amt.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>789</td>
+                                <td>50</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <td>101</td>
+                                <td>30</td>
+                                <td>15</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
         </div> <!-- Container -->
     </div>
