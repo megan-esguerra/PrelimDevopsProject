@@ -51,15 +51,17 @@ class DashboardController extends BaseController
         $products = $productModel->select('product_name, stock_quantity')
             ->orderBy('stock_quantity', 'ASC') // Sort by lowest stock
             ->limit(4) // Get only 4 items
-            ->find();
+            ->findAll(); // ✅ Fix: Use findAll() instead of find()
+
+        // Debugging: Check if products data exists
+        if (empty($products)) {
+            echo "No product data found!";
+            die();
+        }
 
         // Format data for Chart.js
-        $productLabels = [];
-        $productStocks = [];
-        foreach ($products as $product) {
-            $productLabels[] = $product['product_name'];
-            $productStocks[] = $product['stock_quantity'];
-        }
+        $productLabels = array_column($products, 'product_name');
+        $productStocks = array_column($products, 'stock_quantity');
 
         return view('Pages/Dashboard', [
             'revenue' => $totalRevenue,
