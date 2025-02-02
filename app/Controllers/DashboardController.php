@@ -47,19 +47,15 @@ class DashboardController extends BaseController
             ->get()
             ->getResultArray();
 
-        // Fetch top 4 products with the **lowest stock quantity**
-        $lowStockProducts = $productModel->select('product_name, stock_quantity')
-            ->orderBy('stock_quantity', 'ASC') // ASC for lowest first
-            ->limit(4)
-            ->get()
-            ->getResultArray();
+        // Fetch product data for Polar Area Chart
+        $products = $productModel->select('product_name, price')->findAll();
 
         // Format data for Chart.js
         $productLabels = [];
-        $productStocks = [];
-        foreach ($lowStockProducts as $product) {
+        $productPrices = [];
+        foreach ($products as $product) {
             $productLabels[] = $product['product_name'];
-            $productStocks[] = $product['stock_quantity'];
+            $productPrices[] = $product['price'];
         }
 
         return view('Pages/Dashboard', [
@@ -71,7 +67,7 @@ class DashboardController extends BaseController
             'monthlyRevenue' => $monthlyRevenue,
             'monthlySales' => $monthlySales,
             'productLabels' => json_encode($productLabels), // Convert to JSON for Chart.js
-            'productStocks' => json_encode($productStocks) // Convert to JSON for Chart.js
+            'productPrices' => json_encode($productPrices) // Convert to JSON for Chart.js
         ]);
     }
 }
