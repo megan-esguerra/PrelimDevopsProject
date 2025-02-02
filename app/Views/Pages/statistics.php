@@ -47,7 +47,7 @@
 
             <!-- Charts -->
             <div class="row w-full p-3 chart-container">
-                <div class="Linechart col-md-8">
+                <div class="LinechartS col-md-8">
                     <canvas id="lineChart"></canvas>
                 </div>
                 <div class="RadarC p-1 col-md-4">

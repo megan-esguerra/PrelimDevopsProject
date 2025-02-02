@@ -48,7 +48,7 @@ body {
     cursor: pointer;
 }
 .sidebar ul li a.active {
-    background-color: #A59D84;
+    background-color: #d4ccb6;
     height: 5px;
     padding: 10px;
     border-radius: 10px;
@@ -191,12 +191,21 @@ a{
     width: 60%;
     border-radius: 25px;
 }
+.LinechartS{
+    background: #ECEBDE;
+    width: 100%;
+    border-radius: 25px;
+}
 .RadarC {
     background: #ECEBDE;
     width: 30%;
     border-radius: 25px;
 }
-
+.RadarCS {
+    background: #ECEBDE;
+    width: 100%;
+    border-radius: 25px;
+}
 .card {
     z-index: -1;
     background: #f2ede0;
@@ -210,8 +219,8 @@ a{
 }
 .active {
     font-weight: bold;
-    color: #007bff; /* Bootstrap primary color or any color of your choice */
-    text-decoration: underline;
+    color: #007bff;
+    text-decoration: none;
 }
 .badge {
             text-transform: capitalize;
