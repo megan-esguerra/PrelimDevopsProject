@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Controllers;
+
 use App\Models\RevenueModel;
 use App\Models\SalesModel;
 use App\Models\SalesItemsModel;
 use App\Models\PurchaseOrdersModel;
+use App\Models\ProductModel; 
 
 class DashboardController extends BaseController
 {
@@ -14,6 +16,7 @@ class DashboardController extends BaseController
         $salesModel = new SalesModel();
         $salesItemsModel = new SalesItemsModel();
         $purchaseModel = new PurchaseOrdersModel();
+        $productModel = new ProductModel(); // Load ProductModel
 
         // Fetch total revenue
         $totalRevenue = $revenueModel->selectSum('amount')->get()->getRow()->amount ?? 0;
@@ -30,21 +33,30 @@ class DashboardController extends BaseController
         // Calculate total income
         $totalIncome = $totalRevenue - $totalPurchases;
 
-        // Fetch monthly revenue
-     // Fetch monthly revenue using revenue_date
-            $monthlyRevenue = $revenueModel->select("MONTHNAME(revenue_date) as month, SUM(amount) as revenue")
+        // Fetch monthly revenue using revenue_date
+        $monthlyRevenue = $revenueModel->select("MONTHNAME(revenue_date) as month, SUM(amount) as revenue")
             ->groupBy('month')
             ->orderBy('MONTH(revenue_date)')
             ->get()
             ->getResultArray();
 
-            // Fetch monthly sales using sale_date
-            $monthlySales = $salesModel->select("MONTHNAME(sale_date) as month, SUM(total_amount) as sales")
+        // Fetch monthly sales using sale_date
+        $monthlySales = $salesModel->select("MONTHNAME(sale_date) as month, SUM(total_amount) as sales")
             ->groupBy('month')
             ->orderBy('MONTH(sale_date)')
             ->get()
             ->getResultArray();
 
+        // Fetch product data for Polar Area Chart
+        $products = $productModel->select('product_name, price')->findAll();
+
+        // Format data for Chart.js
+        $productLabels = [];
+        $productPrices = [];
+        foreach ($products as $product) {
+            $productLabels[] = $product['product_name'];
+            $productPrices[] = $product['price'];
+        }
 
         return view('Pages/Dashboard', [
             'revenue' => $totalRevenue,
@@ -52,8 +64,10 @@ class DashboardController extends BaseController
             'soldProductsCount' => $soldProductsCount,
             'purchases' => $totalPurchases,
             'income' => $totalIncome,
-            'monthlyRevenue' => $monthlyRevenue, // Pass monthly revenue data
-            'monthlySales' => $monthlySales // Pass monthly sales data
+            'monthlyRevenue' => $monthlyRevenue,
+            'monthlySales' => $monthlySales,
+            'productLabels' => json_encode($productLabels), // Convert to JSON for Chart.js
+            'productPrices' => json_encode($productPrices) // Convert to JSON for Chart.js
         ]);
     }
 }

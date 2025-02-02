@@ -384,47 +384,57 @@ a{
         
 
 // Polar Area Chart
-const polarCtx = document.getElementById('polarChart').getContext('2d'); // Use the same canvas ID
-new Chart(polarCtx, {
-    type: 'polarArea',
-    data: {
-        labels: ['Product A', 'Product B', 'Product C'],
-        datasets: [{
-            label: 'Sales',
-            data: [65, 59, 80],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.5)',
-                'rgba(54, 162, 235, 0.5)',
-                'rgba(255, 206, 86, 0.5)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            r: {
-                pointLabels: {
-                    display: true, // Ensure point labels are shown
-                    font: {
-                        size: 14 // Adjust font size
+        document.addEventListener('DOMContentLoaded', function () {
+            const polarCtx = document.getElementById('polarChart').getContext('2d');
+
+            const productLabels = <?= $productLabels ?>; // Fetch labels from PHP
+            const productPrices = <?= $productPrices ?>; // Fetch prices from PHP
+
+            new Chart(polarCtx, {
+                type: 'polarArea',
+                data: {
+                    labels: productLabels,
+                    datasets: [{
+                        label: 'Product Prices',
+                        data: productPrices,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(54, 162, 235, 0.5)',
+                            'rgba(255, 206, 86, 0.5)',
+                            'rgba(75, 192, 192, 0.5)',
+                            'rgba(153, 102, 255, 0.5)',
+                            'rgba(255, 159, 64, 0.5)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            pointLabels: {
+                                display: true, // Show labels
+                                font: {
+                                    size: 14
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        }
                     }
                 }
-            }
-        },
-        plugins: {
-            legend: {
-                position: 'top' // Adjust legend position
-            }
-        }
-    }
-});
-
-
+            });
+        });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
