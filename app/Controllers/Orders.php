@@ -20,7 +20,7 @@ class Orders extends BaseController
     public function index()
     {
         $orders = $this->orderModel->getOrders(); // Replace with your actual query logic
-        return view('orders', ['orders' => $orders]);
+        return view('Pages/orders', ['orders' => $orders]);
     }
 
     // Filter orders based on criteria
@@ -42,7 +42,7 @@ class Orders extends BaseController
         }
 
         $data['orders'] = $query->findAll();
-        return view('orders', $data);
+        return view('Pages/orders', $data);
     }
 
     // Import orders from an Excel file
