@@ -22,7 +22,7 @@ class Orders extends BaseController
         $orderModel = new OrderModel();
         $data['orders'] = $orderModel->findAll(); // Fetch all orders from the database
 
-        return view('orders/index', $data); // Pass the data to the view
+        return view('Pages/index', $data); // Pass the data to the view
     }
 
     // Filter orders based on criteria
