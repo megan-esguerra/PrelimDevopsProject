@@ -15,7 +15,7 @@
             <div class="d-flex justify-content-between mb-3">
                 <button class="btn btn-primary" onclick="window.location.href='<?= base_url('orders/newOrder'); ?>'">+ New Order</button>
                 <div>
-                    <!-- <button class="btn btn-outline-success" onclick="window.location.href='/orders/export';">Export to Excel</button> -->
+                    <button class="btn btn-outline-success" onclick="window.location.href='/orders/export';">Export to Excel</button>
                     <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#importModal">Import Orders</button>
                 </div>
             </div>
