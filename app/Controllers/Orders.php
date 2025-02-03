@@ -80,47 +80,47 @@ class Orders extends BaseController
     }
 
     // Export orders to an Excel file
-    public function exportOrders()
-    {
-        $orders = $this->orderModel->findAll(); // Fetch all orders from the database
+    // public function exportOrders()
+    // {
+    //     $orders = $this->orderModel->findAll(); // Fetch all orders from the database
 
-        $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();
-        $sheet->setTitle('Orders');
+    //     $spreadsheet = new Spreadsheet();
+    //     $sheet = $spreadsheet->getActiveSheet();
+    //     $sheet->setTitle('Orders');
 
-        // Set headers
-        $sheet->setCellValue('A1', 'Order ID');
-        $sheet->setCellValue('B1', 'Date');
-        $sheet->setCellValue('C1', 'Customer');
-        $sheet->setCellValue('D1', 'Sales Channel');
-        $sheet->setCellValue('E1', 'Destination');
-        $sheet->setCellValue('F1', 'Items');
-        $sheet->setCellValue('G1', 'Status');
+    //     // Set headers
+    //     $sheet->setCellValue('A1', 'Order ID');
+    //     $sheet->setCellValue('B1', 'Date');
+    //     $sheet->setCellValue('C1', 'Customer');
+    //     $sheet->setCellValue('D1', 'Sales Channel');
+    //     $sheet->setCellValue('E1', 'Destination');
+    //     $sheet->setCellValue('F1', 'Items');
+    //     $sheet->setCellValue('G1', 'Status');
 
-        // Fill data
-        $row = 2;
-        foreach ($orders as $order) {
-            $sheet->setCellValue('A' . $row, $order['id']);
-            $sheet->setCellValue('B' . $row, $order['date']);
-            $sheet->setCellValue('C' . $row, $order['customer']);
-            $sheet->setCellValue('D' . $row, $order['sales_channel']);
-            $sheet->setCellValue('E' . $row, $order['destination']);
-            $sheet->setCellValue('F' . $row, $order['items']);
-            $sheet->setCellValue('G' . $row, $order['status']);
-            $row++;
-        }
+    //     // Fill data
+    //     $row = 2;
+    //     foreach ($orders as $order) {
+    //         $sheet->setCellValue('A' . $row, $order['id']);
+    //         $sheet->setCellValue('B' . $row, $order['date']);
+    //         $sheet->setCellValue('C' . $row, $order['customer']);
+    //         $sheet->setCellValue('D' . $row, $order['sales_channel']);
+    //         $sheet->setCellValue('E' . $row, $order['destination']);
+    //         $sheet->setCellValue('F' . $row, $order['items']);
+    //         $sheet->setCellValue('G' . $row, $order['status']);
+    //         $row++;
+    //     }
 
-        // Download Excel file
-        $writer = new Xlsx($spreadsheet);
-        $filename = 'Orders_' . date('Y-m-d_H-i-s') . '.xlsx';
+    //     // Download Excel file
+    //     $writer = new Xlsx($spreadsheet);
+    //     $filename = 'Orders_' . date('Y-m-d_H-i-s') . '.xlsx';
 
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="' . $filename . '"');
-        header('Cache-Control: max-age=0');
+    //     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    //     header('Content-Disposition: attachment;filename="' . $filename . '"');
+    //     header('Cache-Control: max-age=0');
 
-        $writer->save('php://output');
-        exit;
-    }
+    //     $writer->save('php://output');
+    //     exit;
+    // }
 
     // Load the form for creating a new order
     public function newOrder()
