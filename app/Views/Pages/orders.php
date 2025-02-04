@@ -89,7 +89,7 @@
                     <?php endfor; ?>
                 </ul>
             </nav>
-        </div>
+
 
         <!-- Loading Spinner -->
         <div id="loadingSpinner" class="d-none text-center my-3">

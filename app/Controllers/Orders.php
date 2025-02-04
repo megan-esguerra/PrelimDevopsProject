@@ -39,6 +39,23 @@ class Orders extends BaseController
             'customers' => $customers,
             'suppliers' => $suppliers,
         ]);
+
+        $rowsPerPage = 10; // Number of rows per page
+        $currentPage = $this->request->getVar('page') ?? 1;
+
+        // Get total count of orders
+        $totalOrders = $this->orderModel->getOrderCount();
+        $totalPages = ceil($totalOrders / $rowsPerPage);
+
+        // Fetch orders for the current page
+        $offset = ($currentPage - 1) * $rowsPerPage;
+        $orders = $this->orderModel->getOrders($rowsPerPage, $offset);
+
+        return view('orders/index', [
+            'orders' => $orders,
+            'page' => $currentPage,
+            'totalPages' => $totalPages,
+        ]);
     }
 
     public function create()
