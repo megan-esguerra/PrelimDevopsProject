@@ -14,9 +14,10 @@
         }
         .table {
             border-spacing: 0 1rem;
-            background-color:rgb(233, 228, 214);
+            background-color: rgb(143 136 113) !important;
             border-radius: 10px;
             overflow: hidden;
+            border: 2px solid #8f8871;
         }
         .table thead th {
             background-color:  #f8f9fa; 
