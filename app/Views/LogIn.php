@@ -43,6 +43,7 @@
             max-width: 100%;
         }
     </style>
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6LesE8wqAAAAAFGQb8owvb9VoWoM7tSeaFbcv296"></script>
 </head>
 <body>
     <div class="container">

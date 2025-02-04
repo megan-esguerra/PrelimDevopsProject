@@ -120,6 +120,7 @@
             font-family: 'Karla', sans-serif;
         }
     </style>
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6LesE8wqAAAAAFGQb8owvb9VoWoM7tSeaFbcv296"></script>
     <script>
         function validatePhoneNumber() {
             const phoneInput = document.getElementById('phone');
