@@ -46,7 +46,7 @@
                     <tr>
                         <th>Order ID</th>
                         <th>Date</th>
-                        <th>Customer</th>
+                        <th class="col-auto text-center" style="width: 60px;">Customer</th>
                         <th>Supplier</th>
                         <th>Items</th>
                         <th>Status</th>
@@ -59,7 +59,7 @@
                             <tr>
                                 <td class="text-truncate" style="max-width: 150px;"><?= htmlspecialchars($order['id']) ?></td>
                                 <td class="text-truncate" style="max-width: 150px;"><?= htmlspecialchars($order['date']) ?></td>
-                                <td class="text-truncate" style="max-width: 150px;"><?= htmlspecialchars($order['customer_name']) ?></td>
+                                <td class="col-auto text-truncate" style="width: 60px;"<?= htmlspecialchars($order['customer_name']) ?></td>
                                 <td class="text-truncate" style="max-width: 150px;"><?= htmlspecialchars($order['supplier_name']) ?></td>
                                 <td class="text-truncate" style="max-width: 150px;"><?= htmlspecialchars($order['items']) ?></td>
                                 <td>
