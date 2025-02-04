@@ -55,11 +55,9 @@
                             <td>
                                 <button class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#editStatusModal" data-id="<?= htmlspecialchars($order['id']) ?>" data-status="<?= htmlspecialchars($order['status']) ?>">Edit</button>
 
-                                <form action="<?= site_url('orders/delete') ?>" method="post" class="d-inline">
-                                    <?= csrf_field() ?>
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <input type="hidden" name="order_id" value="<?= htmlspecialchars($order['id']) ?>">
-                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to archive this order?')">Archive</button>
+                                <form id="deleteOrderForm" action="<?= base_url('orders/delete') ?>" method="post">
+                                    <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
+                                    <button type="submit" class="btn btn-danger">Archive</button>
                                 </form>
                             </td>
 

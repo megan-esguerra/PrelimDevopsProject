@@ -120,6 +120,7 @@ public function deleteOrder()
     }
 }
 
+
 public function restoreOrder()
 {
     $orderId = $this->request->getPost('order_id');
