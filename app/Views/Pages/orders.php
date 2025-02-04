@@ -15,12 +15,12 @@
             <div class="d-flex justify-content-between mb-3">
                 <button class="btn btn-primary" onclick="window.location.href='<?= base_url('orders/newOrder'); ?>'">+ New Order</button>
                 <div>
-                    <button class="btn btn-outline-success" onclick="window.location.href='<?= base_url('orders/export'); ?>'">Export to Excel</button>
+                    <button class="btn btn-outline-success" onclick="window.location.href='/orders/export';">Export to Excel</button>
                     <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#importModal">Import Orders</button>
                 </div>
             </div>
 
-            <!-- Import Orders Modal -->
+            <!-- Modal -->
             <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -67,7 +67,6 @@
                         <th scope="col">Order ID</th>
                         <th scope="col">Date</th>
                         <th scope="col">Customer</th>
-                        <th scope="col">Product</th>
                         <th scope="col">Sales Channel</th>
                         <th scope="col">Destination</th>
                         <th scope="col">Items</th>
@@ -80,8 +79,7 @@
                             <td><input type="checkbox"></td>
                             <td><?= htmlspecialchars($order['id']) ?></td>
                             <td><?= htmlspecialchars($order['date']) ?></td>
-                            <td><?= htmlspecialchars($order['customer_name']) ?></td> <!-- Customer Name -->
-                            <td><?= htmlspecialchars($order['product_name']) ?></td> <!-- Product Name -->
+                            <td><?= htmlspecialchars($order['customer']) ?></td>
                             <td><?= htmlspecialchars($order['sales_channel']) ?></td>
                             <td><?= htmlspecialchars($order['destination']) ?></td>
                             <td><?= htmlspecialchars($order['items']) ?></td>
