@@ -185,7 +185,7 @@
                 responsive: true,
                 plugins: {
                     legend: {
-                        display: false
+                        display: true
                     }
                 },
                 scales: {

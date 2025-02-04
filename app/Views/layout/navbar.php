@@ -6,9 +6,9 @@
             ☰
         </button>
 
-        <input type="text" class="form-control w-25 me-3" placeholder="Search...">
+        <!-- <input type="text" class="form-control w-25 me-3" placeholder="Search...">
         
-        <i class="bi bi-bell fs-4 me-3"></i> <!-- Notification Icon -->
+        <i class="bi bi-bell fs-4 me-3"></i>  -->
 
         <!-- User Profile Dropdown -->
         <div class="dropdown">
