@@ -59,6 +59,7 @@
                                     <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
                                     <button type="submit" class="btn btn-danger">Archive</button>
                                 </form>
+
                             </td>
 
                         </tr>
@@ -259,14 +260,12 @@
 
 function confirmArchive(orderId) {
     if (confirm('Are you sure you want to archive this order?')) {
-        fetch("<?= site_url('orders/delete') ?>", {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '<?= csrf_hash() ?>',
-            },
-            body: JSON.stringify({ order_id: orderId }),
-        })
+        fetch('<?= base_url('orders/delete') ?>', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `order_id=${orderId}`
+})
+
         .then(response => response.json())
         .then(data => {
             if (data.success) {
