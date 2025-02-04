@@ -62,7 +62,7 @@ class Auth extends Controller
             $userRole = $session->get('role');
             if (!in_array($userRole, ['admin', 'staff'])) {
                 // If user is not admin or staff, redirect with error message
-                return redirect()->to('/login')->with('error', 'You do not have access to this page.');
+                return redirect()->to('/LogIn')->with('error', 'You do not have access to this page.');
             }
 
             // Redirect to dashboard on successful login
@@ -119,7 +119,7 @@ class Auth extends Controller
         }
 
         // Success message, redirect to login
-        return redirect()->to('/login')->with('success', 'Password reset link sent to your email.');
+        return redirect()->to('/LogIn')->with('success', 'Password reset link sent to your email.');
     }
 
     // Show reset password page
@@ -144,7 +144,7 @@ class Auth extends Controller
 
         // Validate the reset token
         if (!$user || new Time() > new Time($user['reset_token_expiration'])) {
-            return redirect()->to('/login')->with('error', 'Invalid or expired reset token.');
+            return redirect()->to('/LogIn')->with('error', 'Invalid or expired reset token.');
         }
 
         // Password validation
@@ -168,13 +168,13 @@ class Auth extends Controller
         ]);
 
         // Redirect to login with success message
-        return redirect()->to('/login')->with('success', 'Password updated successfully. Please log in.');
+        return redirect()->to('/LogIn')->with('success', 'Password updated successfully. Please log in.');
     }
 
     // Logout user
     public function logout()
     {
         session()->destroy();
-        return redirect()->to('/login');
+        return redirect()->to('/LogIn');
     }
 }
