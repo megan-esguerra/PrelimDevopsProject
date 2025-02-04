@@ -33,4 +33,23 @@ class Orders extends BaseController
             'suppliers' => $suppliers,
         ]);
     }
+
+    public function create()
+{
+    $orderModel = new \App\Models\OrderModel();
+
+    $data = [
+        'customer_id' => $this->request->getPost('customer_id'),
+        'supplier_id' => $this->request->getPost('supplier_id'),
+        'items'       => $this->request->getPost('items'),
+        'status'      => $this->request->getPost('status'),
+    ];
+
+    if ($orderModel->insert($data)) {
+        return redirect()->to(base_url('orders'))->with('success', 'Order created successfully!');
+    } else {
+        return redirect()->back()->with('error', 'Failed to create the order.');
+    }
+}
+
 }

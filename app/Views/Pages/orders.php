@@ -65,7 +65,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="newOrderForm" action="<?= base_url('orders/create') ?>" method="post">
+            <form id="newOrderForm" action="<?= base_url('orders/create') ?>" method="post">
                     <!-- Customer Dropdown -->
                     <div class="mb-3">
                         <label for="customerName" class="form-label">Customer Name</label>
