@@ -62,46 +62,51 @@
 
             <!-- Orders Table -->
             <table class="table table-striped table-hover">
-            <thead>
+    <thead>
+        <tr>
+            <th scope="col"><input type="checkbox"></th>
+            <th scope="col">Order ID</th>
+            <th scope="col">Date</th>
+            <th scope="col">Customer</th>
+            <th scope="col">Supplier</th>
+            <th scope="col">Items</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if (!empty($orders)): ?>
+            <?php foreach ($orders as $order): ?>
                 <tr>
-                    <th scope="col"><input type="checkbox"></th>
-                    <th scope="col">Order ID</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Customer</th>
-                    <th scope="col">Supplier</th>
-                    <th scope="col">Items</th>
-                    <th scope="col">Status</th>
+                    <td><input type="checkbox"></td>
+                    <td><?= isset($order['id']) ? htmlspecialchars($order['id']) : 'N/A' ?></td>
+                    <td><?= isset($order['date']) ? htmlspecialchars($order['date']) : 'N/A' ?></td>
+                    <td><?= isset($order['customer_name']) ? htmlspecialchars($order['customer_name']) : 'Unknown' ?></td>
+                    <td><?= isset($order['supplier_name']) ? htmlspecialchars($order['supplier_name']) : 'Unknown' ?></td>
+                    <td><?= isset($order['items']) ? htmlspecialchars($order['items']) : 'No Items' ?></td>
+                    <td>
+                        <?php 
+                            $status = isset($order['status']) ? $order['status'] : 'Unknown';
+                            $badgeClass = match($status) {
+                                'Completed' => 'bg-success',
+                                'Pending' => 'bg-warning',
+                                'Cancelled' => 'bg-danger',
+                                default => 'bg-secondary'
+                            };
+                        ?>
+                        <span class="badge <?= $badgeClass ?>">
+                            <?= htmlspecialchars($status) ?>
+                        </span>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($orders as $order): ?>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td><?= htmlspecialchars($order['id']) ?></td>
-                        <td><?= htmlspecialchars($order['date']) ?></td>
-                        <td><?= htmlspecialchars($order['customer_name']) ?></td>
-                        <td><?= htmlspecialchars($order['supplier_name']) ?></td>
-                        <td><?= htmlspecialchars($order['items']) ?></td>
-                        <td>
-                            <span class="badge 
-                                <?php 
-                                    if ($order['status'] == 'Completed') {
-                                        echo 'bg-success';
-                                    } elseif ($order['status'] == 'Pending') {
-                                        echo 'bg-warning';
-                                    } elseif ($order['status'] == 'Cancelled') {
-                                        echo 'bg-danger';
-                                    } else {
-                                        echo 'bg-secondary';
-                                    }
-                                ?>">
-                                <?= htmlspecialchars($order['status']) ?>
-                            </span>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-            </table>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <tr>
+                <td colspan="7" class="text-center">No orders found.</td>
+            </tr>
+        <?php endif; ?>
+    </tbody>
+</table>
+
         </div>
     </div>
 
