@@ -26,11 +26,12 @@ $routes->get('/users', 'UsersController::index');
 
 $routes->get('orders', 'Orders::index'); // View all orders
 $routes->post('orders/create', 'Orders::create'); // Create new order
-$routes->post('orders/update_status', 'Orders::updateStatus'); // Update order status
+$routes->post('orders/update_status', 'Orders::update_status'); // Update order status
 $routes->post('orders/update', 'Orders::update'); // Update order details
 $routes->post('orders/delete', 'Orders::deleteOrder'); // Archive (soft delete) order
 $routes->post('orders/restore', 'Orders::restoreOrder'); // Restore archived order
 $routes->get('orders/get_archived', 'Orders::getArchivedOrders'); // Get archived orders
+
 
 
 

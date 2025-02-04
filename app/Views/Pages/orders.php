@@ -149,7 +149,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="editStatusForm" action="<?= base_url('orders/update_status') ?>" method="post">
+            <form id="editStatusForm" action="<?= base_url('orders/update_status') ?>" method="post">
                     <?= csrf_field() ?> <!-- CSRF Protection -->
                     <input type="hidden" id="orderId" name="order_id">
                     
