@@ -224,8 +224,8 @@
                     let row = `
                         <tr>
                             <td>${order.id}</td>
-                            <td>${order.customer_name}</td>
-                            <td>${order.supplier_name}</td>
+                            <td>${order.customer_id}</td>
+                            <td>${order.supplier_id}</td>
                             <td>${order.items}</td>
                             <td>${order.status}</td>
                             <td>

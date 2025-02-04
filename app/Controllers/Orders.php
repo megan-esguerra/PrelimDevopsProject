@@ -87,16 +87,18 @@ class Orders extends BaseController
         }
     }
 
-    public function delete()
-    {
-        $orderId = $this->request->getPost('order_id');
+    public function deleteOrder()
+{
+    $orderId = $this->request->getPost('order_id');
+    $ordersModel = new OrderModel();
 
-        if ($this->orderModel->delete($orderId)) {
-            return redirect()->to(base_url('orders'))->with('success', 'Order archived successfully!');
-        } else {
-            return redirect()->back()->with('error', 'Failed to archive order.');
-        }
+    if ($ordersModel->delete($orderId)) {
+        return redirect()->to('/orders')->with('success', 'Order archived successfully.');
+    } else {
+        return redirect()->to('/orders')->with('error', 'Failed to archive order.');
     }
+}
+
 
     public function get_archived()
 {
@@ -108,28 +110,30 @@ class Orders extends BaseController
 
     return $this->response->setJSON($orders);
 }
-public function getArchivedOrders()
-{
-    $ordersModel = new OrderModel();
-    $archivedOrders = $ordersModel->where('status', 'Archived')->findAll();
+    public function getArchivedOrders()
+    {
+        $ordersModel = new OrderModel();
+        
+        // Fetch ONLY soft-deleted records
+        $archivedOrders = $ordersModel->onlyDeleted()->findAll();
 
-    if (empty($archivedOrders)) {
-        return $this->response->setJSON(['message' => 'No archived orders found', 'data' => []]);
+        if (empty($archivedOrders)) {
+            return $this->response->setJSON(['message' => 'No archived orders found', 'data' => []]);
+        }
+
+        return $this->response->setJSON(['message' => 'Success', 'data' => $archivedOrders]);
     }
 
-    return $this->response->setJSON(['message' => 'Success', 'data' => $archivedOrders]);
+
+    public function restoreOrder()
+{
+    $orderId = $this->request->getPost('order_id');
+    $ordersModel = new OrderModel();
+
+    // Restore order by setting `deleted_at` to NULL
+    $ordersModel->update($orderId, ['deleted_at' => NULL]);
+
+    return redirect()->to('/orders')->with('success', 'Order restored successfully.');
 }
 
-
-
-    public function restore()
-    {
-        $orderId = $this->request->getPost('order_id');
-
-        if ($this->orderModel->update($orderId, ['deleted_at' => null])) {
-            return redirect()->to(base_url('orders'))->with('success', 'Order restored successfully!');
-        } else {
-            return redirect()->back()->with('error', 'Failed to restore order.');
-        }
-    }
 }
