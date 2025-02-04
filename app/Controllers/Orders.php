@@ -9,24 +9,31 @@ use CodeIgniter\Controller;
 
 class Orders extends BaseController
 {
+    protected $orderModel;
+    protected $customerModel;
+    protected $supplierModel;
+
+    public function __construct()
+    {
+        $this->orderModel = new OrderModel();
+        $this->customerModel = new CustomerModel();
+        $this->supplierModel = new SupplierModel();
+    }
+
     public function index()
     {
-        $orderModel = new OrderModel();
-        $customerModel = new CustomerModel();
-        $supplierModel = new SupplierModel();
-
-        // Fetch orders with customer and supplier names
-        $orders = $orderModel
+        // Fetch active (non-archived) orders with customer and supplier names
+        $orders = $this->orderModel
             ->select('orders.*, customers.customer_name, suppliers.supplier_name')
             ->join('customers', 'customers.customer_id = orders.customer_id')
             ->join('suppliers', 'suppliers.supplier_id = orders.supplier_id')
+            ->where('orders.deleted_at', null)
             ->findAll();
 
-        // Fetch all customers and suppliers for the dropdowns
-        $customers = $customerModel->findAll();
-        $suppliers = $supplierModel->findAll();
+        // Fetch customers and suppliers for dropdowns
+        $customers = $this->customerModel->findAll();
+        $suppliers = $this->supplierModel->findAll();
 
-        // Pass data to the view
         return view('Pages/orders', [
             'orders' => $orders,
             'customers' => $customers,
@@ -35,35 +42,82 @@ class Orders extends BaseController
     }
 
     public function create()
-{
-    $orderModel = new \App\Models\OrderModel();
+    {
+        $data = [
+            'customer_id' => $this->request->getPost('customer_id'),
+            'supplier_id' => $this->request->getPost('supplier_id'),
+            'items'       => $this->request->getPost('items'),
+            'status'      => $this->request->getPost('status'),
+        ];
 
-    $data = [
-        'customer_id' => $this->request->getPost('customer_id'),
-        'supplier_id' => $this->request->getPost('supplier_id'),
-        'items'       => $this->request->getPost('items'),
-        'status'      => $this->request->getPost('status'),
-    ];
-
-    if ($orderModel->insert($data)) {
-        return redirect()->to(base_url('orders'))->with('success', 'Order created successfully!');
-    } else {
-        return redirect()->back()->with('error', 'Failed to create the order.');
+        if ($this->orderModel->insert($data)) {
+            return redirect()->to(base_url('orders'))->with('success', 'Order created successfully!');
+        } else {
+            return redirect()->back()->with('error', 'Failed to create the order.');
+        }
     }
-}
 
-public function update_status()
-{
-    $orderModel = new \App\Models\OrderModel();
+    public function update()
+    {
+        $orderId = $this->request->getPost('order_id');
 
-    $orderId = $this->request->getPost('order_id');
-    $status = $this->request->getPost('status');
+        $data = [
+            'customer_id' => $this->request->getPost('customer_id'),
+            'supplier_id' => $this->request->getPost('supplier_id'),
+            'items'       => $this->request->getPost('items'),
+            'status'      => $this->request->getPost('status'),
+        ];
 
-    if ($orderModel->update($orderId, ['status' => $status])) {
-        return redirect()->to(base_url('orders'))->with('success', 'Order status updated successfully!');
-    } else {
-        return redirect()->back()->with('error', 'Failed to update order status.');
+        if ($this->orderModel->update($orderId, $data)) {
+            return redirect()->to(base_url('orders'))->with('success', 'Order updated successfully!');
+        } else {
+            return redirect()->back()->with('error', 'Failed to update order.');
+        }
     }
-}
 
+    public function update_status()
+    {
+        $orderId = $this->request->getPost('order_id');
+        $status = $this->request->getPost('status');
+
+        if ($this->orderModel->update($orderId, ['status' => $status])) {
+            return redirect()->to(base_url('orders'))->with('success', 'Order status updated successfully!');
+        } else {
+            return redirect()->back()->with('error', 'Failed to update order status.');
+        }
+    }
+
+    public function delete()
+    {
+        $orderId = $this->request->getPost('order_id');
+
+        if ($this->orderModel->delete($orderId)) {
+            return redirect()->to(base_url('orders'))->with('success', 'Order archived successfully!');
+        } else {
+            return redirect()->back()->with('error', 'Failed to archive order.');
+        }
+    }
+
+    public function archive()
+    {
+        // Fetch only archived (soft-deleted) orders
+        $orders = $this->orderModel->onlyDeleted()
+            ->select('orders.*, customers.customer_name, suppliers.supplier_name')
+            ->join('customers', 'customers.customer_id = orders.customer_id')
+            ->join('suppliers', 'suppliers.supplier_id = orders.supplier_id')
+            ->findAll();
+
+        return view('Pages/archive', ['orders' => $orders]);
+    }
+
+    public function restore()
+    {
+        $orderId = $this->request->getPost('order_id');
+
+        if ($this->orderModel->update($orderId, ['deleted_at' => null])) {
+            return redirect()->to(base_url('orders'))->with('success', 'Order restored successfully!');
+        } else {
+            return redirect()->back()->with('error', 'Failed to restore order.');
+        }
+    }
 }

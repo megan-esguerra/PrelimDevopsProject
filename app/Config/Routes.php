@@ -25,8 +25,13 @@ $routes->get('orders', 'Orders::index');
 $routes->get('/orders/filter', 'Orders::filterOrders');
 $routes->get('/users', 'UsersController::index');
 
-$routes->post('orders/create', 'Orders::create');
-$routes->post('orders/update_status', 'Orders::update_status');
+$routes->get('orders', 'Orders::index'); // View all orders
+$routes->post('orders/create', 'Orders::create'); // Create new order
+$routes->post('orders/update_status', 'Orders::updateStatus'); // Update order status
+$routes->post('orders/update', 'Orders::update'); // Update order details
+$routes->post('orders/delete', 'Orders::delete'); // Delete order
+$routes->post('orders/archive', 'Orders::archive'); // Archive order
+
 
 
 
