@@ -109,7 +109,124 @@
     </div>
 
     <!-- Modals (New Order, Edit Status, Archived Orders) -->
-    <?php include(APPPATH . 'Views/modals/orders.php'); ?>
+    <!-- New Order Modal -->
+<div class="modal fade" id="newOrderModal" tabindex="-1" aria-labelledby="newOrderModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newOrderModalLabel">Create New Order</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="newOrderForm" action="<?= base_url('orders/create') ?>" method="post">
+                    <!-- Customer Dropdown -->
+                    <div class="mb-3">
+                        <label for="customerName" class="form-label">Customer Name</label>
+                        <select class="form-select" id="customerName" name="customer_id" required>
+                            <option value="" selected disabled>Select Customer</option>
+                            <?php foreach ($customers as $customer): ?>
+                                <option value="<?= htmlspecialchars($customer['customer_id']) ?>">
+                                    <?= htmlspecialchars($customer['customer_name']) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <!-- Supplier Dropdown -->
+                    <div class="mb-3">
+                        <label for="supplierName" class="form-label">Supplier Name</label>
+                        <select class="form-select" id="supplierName" name="supplier_id" required>
+                            <option value="" selected disabled>Select Supplier</option>
+                            <?php foreach ($suppliers as $supplier): ?>
+                                <option value="<?= htmlspecialchars($supplier['supplier_id']) ?>">
+                                    <?= htmlspecialchars($supplier['supplier_name']) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <!-- Items Textarea -->
+                    <div class="mb-3">
+                        <label for="orderItems" class="form-label">Items</label>
+                        <textarea class="form-control" id="orderItems" name="items" rows="3" required></textarea>
+                    </div>
+
+                    <!-- Status Dropdown -->
+                    <div class="mb-3">
+                        <label for="orderStatus" class="form-label">Status</label>
+                        <select class="form-select" id="orderStatus" name="status" required>
+                            <option value="Pending">Pending</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Create Order</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Status Modal -->
+<div class="modal fade" id="editStatusModal" tabindex="-1" aria-labelledby="editStatusModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editStatusModalLabel">Edit Order Status</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editStatusForm" action="<?= base_url('orders/update_status') ?>" method="post">
+                    <?= csrf_field() ?> <!-- CSRF Protection -->
+                    <input type="hidden" id="orderId" name="order_id">
+
+                    <!-- Status Dropdown -->
+                    <div class="mb-3">
+                        <label for="orderStatusEdit" class="form-label">Status</label>
+                        <select class="form-select" id="orderStatusEdit" name="status" required>
+                            <option value="Pending">Pending</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Archive Orders Modal -->
+<div class="modal fade" id="archiveModal" tabindex="-1" aria-labelledby="archiveModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="archiveModalLabel">Archived Orders</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Supplier</th>
+                            <th>Items</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="archivedOrdersTable">
+                        <!-- Orders will be dynamically loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     <script>
         // Edit Order Modal
