@@ -128,16 +128,6 @@
         </div>
     </div>
 
-    <!-- Edit Button -->
-<button 
-    class="btn btn-sm btn-secondary" 
-    data-bs-toggle="modal" 
-    data-bs-target="#editStatusModal" 
-    data-id="<?= htmlspecialchars($order['id']) ?>" 
-    data-status="<?= htmlspecialchars($order['status']) ?>"
->
-    Edit
-</button>
 
 <!-- Edit Status Modal -->
 <div class="modal fade" id="editStatusModal" tabindex="-1" aria-labelledby="editStatusModalLabel" aria-hidden="true">
