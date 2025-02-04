@@ -53,13 +53,15 @@
                                 </span>
                             </td>
                             <td>
-                                <button class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#editStatusModal" data-id="<?= $order['id'] ?>" data-status="<?= $order['status'] ?>">Edit</button>
+                                <button class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#editStatusModal" data-id="<?= htmlspecialchars($order['id']) ?>" data-status="<?= htmlspecialchars($order['status']) ?>">Edit</button>
 
-                                <form action="<?= base_url('orders/delete') ?>" method="post" class="d-inline">
-                                    <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
+                                <form action="<?= site_url('orders/delete') ?>" method="post" class="d-inline">
+                                    <?= csrf_field() ?>
+                                    <input type="hidden" name="order_id" value="<?= htmlspecialchars($order['id']) ?>">
                                     <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to archive this order?')">Archive</button>
                                 </form>
                             </td>
+
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
