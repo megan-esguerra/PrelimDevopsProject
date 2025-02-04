@@ -41,7 +41,7 @@
 
 
             <!-- Orders Table -->
-            <table class="table table-striped table-hover">
+            <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>Order ID</th>
