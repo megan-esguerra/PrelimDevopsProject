@@ -63,8 +63,12 @@ h6 {
 
 a{
     text-decoration: none;
-    color: white;
+    color: #D4A373;
     font-size: 16px;
+}
+a.bx{
+    font-size: 20px;
+    color: #5A4E3C;
 }
 .form-control{
     border-radius: 10px;
