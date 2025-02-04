@@ -25,7 +25,7 @@ class Orders extends BaseController {
         $data['customers'] = $customerModel->findAll();
         $data['suppliers'] = $supplierModel->findAll();
 
-        return view('orders/new_order', $data);
+        return view('Pages/new_order', $data);
     }
 
     public function create() {
