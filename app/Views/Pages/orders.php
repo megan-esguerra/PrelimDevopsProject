@@ -71,7 +71,7 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <div class=" flex-row gap-2">
+                                    <div class="d-flex flex-row">
                                         <button class="btn btn-sm btn-secondary" 
                                             data-bs-toggle="modal" 
                                             data-bs-target="#editStatusModal" 
