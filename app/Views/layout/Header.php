@@ -36,6 +36,7 @@ body {
     padding: 20px;
     color: white;
     border-right: 1px solid rgb(162, 160, 150);
+    box-shadow: #5A4E3C -3px 2px 15px 0px;
 }
 
 .sidebar ul {
@@ -84,6 +85,7 @@ a{
     background: #A59D84;
     padding: 10px;
     border-radius: 10px;
+    box-shadow: #5A4E3C -3px 2px 15px 0px;
 }
 
 .search-bar {
@@ -191,6 +193,7 @@ a{
     background: #ECEBDE;
     width: 60%;
     border-radius: 25px;
+    box-shadow: #5A4E3C -3px 2px 15px 0px;
 }
 .LinechartS{
     background: #ECEBDE;
@@ -201,6 +204,7 @@ a{
     background: #ECEBDE;
     width: 30%;
     border-radius: 25px;
+    box-shadow: #5A4E3C -3px 2px 15px 0px;
 }
 .RadarCS {
     background: #ECEBDE;
@@ -213,6 +217,7 @@ a{
     padding: 10px;
     border-radius: 10px;
     text-align: center;
+    box-shadow: #5A4E3C -3px 2px 15px 0px;
 }
 
 .table {
