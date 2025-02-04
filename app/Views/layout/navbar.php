@@ -18,10 +18,10 @@
 </a>
 
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <!-- <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li> -->
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item text-danger" href="<?= site_url('/LogIn') ?>">Logout</a></li>
+                <li><a class="dropdown-item text-light" href="<?= site_url('/LogIn') ?>">Logout</a></li>
             </ul>
         </div>
     </div>
