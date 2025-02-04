@@ -113,8 +113,13 @@ public function getArchivedOrders()
     $ordersModel = new OrderModel();
     $archivedOrders = $ordersModel->where('status', 'Archived')->findAll();
 
-    return $this->response->setJSON($archivedOrders);
+    if (empty($archivedOrders)) {
+        return $this->response->setJSON(['message' => 'No archived orders found', 'data' => []]);
+    }
+
+    return $this->response->setJSON(['message' => 'Success', 'data' => $archivedOrders]);
 }
+
 
 
     public function restore()
