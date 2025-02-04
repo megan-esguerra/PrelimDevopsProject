@@ -76,16 +76,17 @@ class Orders extends BaseController
     }
 
     public function update_status()
-    {
-        $orderId = $this->request->getPost('order_id');
-        $status = $this->request->getPost('status');
+{
+    $orderId = $this->request->getPost('order_id');
+    $status = $this->request->getPost('status');
 
-        if ($this->orderModel->update($orderId, ['status' => $status])) {
-            return redirect()->to(base_url('orders'))->with('success', 'Order status updated successfully!');
-        } else {
-            return redirect()->back()->with('error', 'Failed to update order status.');
-        }
+    if ($this->orderModel->update($orderId, ['status' => $status])) {
+        return redirect()->to('/orders')->with('success', 'Order status updated successfully.');
+    } else {
+        return redirect()->back()->with('error', 'Failed to update order status.');
     }
+}
+
 
     public function get_archived()
 {
