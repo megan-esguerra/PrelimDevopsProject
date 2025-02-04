@@ -44,12 +44,12 @@
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th class="text-truncate" style="max-width: 150px;">Order ID</th>
-                        <th class="text-truncate" style="max-width: 150px;">Date</th>
+                        <th class="text-truncate" style="max-width: 60px;">Order ID</th>
+                        <th class="text-truncate" style="max-width: 60px;">Date</th>
                         <th class="text-truncate" style="max-width: 150px;">Customer</th>
                         <th class="text-truncate" style="max-width: 150px;">Supplier</th>
-                        <th class="text-truncate" style="max-width: 150px;">Items</th>
-                        <th class="text-truncate" style="max-width: 150px;">Status</th>
+                        <th class="text-truncate" style="max-width: 60px;">Items</th>
+                        <th class="text-truncate" style="max-width: 60px;">Status</th>
                         <th class="text-truncate" style="max-width: 150px;">Actions</th>
                     </tr>
                 </thead>
@@ -57,11 +57,11 @@
                     <?php if (!empty($orders)): ?>
                         <?php foreach ($orders as $order): ?>
                             <tr>
-                                <td class="text-truncate" style="max-width: 150px;"><?= htmlspecialchars($order['id']) ?></td>
-                                <td class="text-truncate" style="max-width: 150px;"><?= htmlspecialchars($order['date']) ?></td>
+                                <td class="text-truncate" style="max-width: 60px;"><?= htmlspecialchars($order['id']) ?></td>
+                                <td class="text-truncate" style="max-width: 60px;"><?= htmlspecialchars($order['date']) ?></td>
                                 <td class="text-truncate" style="max-width: 150px;"><?= htmlspecialchars($order['customer_name']) ?></td>
                                 <td class="text-truncate" style="max-width: 150px;"><?= htmlspecialchars($order['supplier_name']) ?></td>
-                                <td class="text-truncate" style="max-width: 150px;"><?= htmlspecialchars($order['items']) ?></td>
+                                <td class="text-truncate" style="max-width: 60px;"><?= htmlspecialchars($order['items']) ?></td>
                                 <td>
                                     <span class="badge 
                                         <?= $order['status'] == 'Completed' ? 'bg-success' : 
