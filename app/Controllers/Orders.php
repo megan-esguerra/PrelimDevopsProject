@@ -98,17 +98,16 @@ class Orders extends BaseController
         }
     }
 
-    public function archive()
-    {
-        // Fetch only archived (soft-deleted) orders
-        $orders = $this->orderModel->onlyDeleted()
-            ->select('orders.*, customers.customer_name, suppliers.supplier_name')
-            ->join('customers', 'customers.customer_id = orders.customer_id')
-            ->join('suppliers', 'suppliers.supplier_id = orders.supplier_id')
-            ->findAll();
+    public function get_archived()
+{
+    $orders = $this->orderModel->onlyDeleted()
+        ->select('orders.*, customers.customer_name, suppliers.supplier_name')
+        ->join('customers', 'customers.customer_id = orders.customer_id')
+        ->join('suppliers', 'suppliers.supplier_id = orders.supplier_id')
+        ->findAll();
 
-        return view('Pages/archive', ['orders' => $orders]);
-    }
+    return $this->response->setJSON($orders);
+}
 
     public function restore()
     {

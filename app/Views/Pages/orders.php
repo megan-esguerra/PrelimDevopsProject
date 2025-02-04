@@ -11,7 +11,8 @@
             <!-- Toolbar -->
             <div class="d-flex justify-content-between mb-3">
                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newOrderModal">+ New Order</button>
-               <a href="<?= base_url('orders/archive') ?>" class="btn btn-warning">View Archived Orders</a>
+               <!-- Button to Open Archive Modal -->
+                <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#archiveModal">View Archived Orders</button>
             </div>
 
             <!-- Orders Table -->
@@ -174,31 +175,14 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <?php foreach ($archivedOrders as $order): ?>
-                            <tr>
-                                <td><?= htmlspecialchars($order['id']) ?></td>
-                                <td><?= htmlspecialchars($order['customer_name']) ?></td>
-                                <td><?= htmlspecialchars($order['supplier_name']) ?></td>
-                                <td><?= htmlspecialchars($order['items']) ?></td>
-                                <td><?= htmlspecialchars($order['status']) ?></td>
-                                <td>
-                                    <form action="<?= base_url('orders/restore') ?>" method="post">
-                                        <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
-                                        <button type="submit" class="btn btn-sm btn-success">Restore</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
+                    <tbody id="archivedOrdersTable">
+                        <!-- Orders will be dynamically loaded here -->
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-
-<!-- Button to Open Archive Modal -->
-<button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#archiveModal">View Archived Orders</button>
 
 
     <script>
@@ -216,6 +200,47 @@
             statusSelect.value = status;
         });
     });
+
+    document.addEventListener('DOMContentLoaded', function () {
+    const archiveModal = document.getElementById('archiveModal');
+
+    archiveModal.addEventListener('show.bs.modal', function () {
+        fetchArchivedOrders();
+    });
+
+    function fetchArchivedOrders() {
+        fetch("<?= base_url('orders/get_archived') ?>") 
+            .then(response => response.json())
+            .then(data => {
+                let tableBody = document.getElementById("archivedOrdersTable");
+                tableBody.innerHTML = "";
+
+                if (data.length === 0) {
+                    tableBody.innerHTML = "<tr><td colspan='6' class='text-center'>No archived orders found.</td></tr>";
+                } else {
+                    data.forEach(order => {
+                        let row = `
+                            <tr>
+                                <td>${order.id}</td>
+                                <td>${order.customer_name}</td>
+                                <td>${order.supplier_name}</td>
+                                <td>${order.items}</td>
+                                <td>${order.status}</td>
+                                <td>
+                                    <form action="<?= base_url('orders/restore') ?>" method="post">
+                                        <input type="hidden" name="order_id" value="${order.id}">
+                                        <button type="submit" class="btn btn-sm btn-success">Restore</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        `;
+                        tableBody.innerHTML += row;
+                    });
+                }
+            })
+            .catch(error => console.error('Error fetching archived orders:', error));
+    }
+});
     </script>
 
     <!-- Bootstrap JS (Ensure Bootstrap is included in your layout/Header.php) -->
