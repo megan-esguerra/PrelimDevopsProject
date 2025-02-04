@@ -31,6 +31,9 @@ $routes->post('orders/update', 'Orders::update'); // Update order details
 $routes->post('orders/delete', 'Orders::deleteOrder'); // Archive (soft delete) order
 $routes->post('orders/restore', 'Orders::restoreOrder'); // Restore archived order
 $routes->get('orders/get_archived', 'Orders::getArchivedOrders'); // Get archived orders
+$routes->get('orders/getArchivedOrders', 'Orders::getArchivedOrders');
+$routes->post('orders/deletePermanent/(:num)', 'Orders::deletePermanent/$1');
+
 
 
 

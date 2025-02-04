@@ -226,6 +226,26 @@
     </div>
 </div>
 
+<!-- Confirmation Modal for Permanent Deletion -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteLabel">Confirm Permanent Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to permanently delete this order?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteButton">Delete Permanently</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
     <script>
         // Edit Order Modal
@@ -282,6 +302,57 @@
                     .catch(error => console.error('Error fetching archived orders:', error));
             }
         });
+
+        $(document).ready(function () {
+    loadArchivedOrders();
+
+    function loadArchivedOrders() {
+        $.ajax({
+            url: "<?= base_url('orders/getArchivedOrders') ?>",
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                let tableContent = "";
+                data.forEach(function (order) {
+                    tableContent += `
+                        <tr>
+                            <td>${order.id}</td>
+                            <td>${order.customer_name}</td>
+                            <td>${order.supplier}</td>
+                            <td>${order.items}</td>
+                            <td>${order.status}</td>
+                            <td>
+                                <button class="btn btn-danger btn-sm delete-permanent" data-id="${order.id}" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
+                                    Delete Permanently
+                                </button>
+                            </td>
+                        </tr>`;
+                });
+                $("#archivedOrdersTable").html(tableContent);
+            }
+        });
+    }
+
+    // Handle delete button click
+    let deleteOrderId;
+    $(document).on("click", ".delete-permanent", function () {
+        deleteOrderId = $(this).data("id");
+    });
+
+    $("#confirmDeleteButton").click(function () {
+        if (deleteOrderId) {
+            $.ajax({
+                url: "<?= base_url('orders/deletePermanent') ?>/" + deleteOrderId,
+                type: "POST",
+                success: function (response) {
+                    $("#confirmDeleteModal").modal("hide");
+                    loadArchivedOrders();
+                }
+            });
+        }
+    });
+});
+
     </script>
 
     <!-- Bootstrap JS -->
