@@ -52,4 +52,18 @@ class Orders extends BaseController
     }
 }
 
+public function update_status()
+{
+    $orderModel = new \App\Models\OrderModel();
+
+    $orderId = $this->request->getPost('order_id');
+    $status = $this->request->getPost('status');
+
+    if ($orderModel->update($orderId, ['status' => $status])) {
+        return redirect()->to(base_url('orders'))->with('success', 'Order status updated successfully!');
+    } else {
+        return redirect()->back()->with('error', 'Failed to update order status.');
+    }
+}
+
 }

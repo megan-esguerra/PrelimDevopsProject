@@ -23,6 +23,7 @@
                         <th>Supplier</th>
                         <th>Items</th>
                         <th>Status</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,6 +49,11 @@
                                     ?>">
                                     <?= htmlspecialchars($order['status']) ?>
                                 </span>
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#editStatusModal" data-id="<?= $order['id'] ?>" data-status="<?= $order['status'] ?>">
+                                    Edit
+                                </button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -114,6 +120,56 @@
         </div>
     </div>
 </div>
+
+<!-- Edit Status Modal -->
+<div class="modal fade" id="editStatusModal" tabindex="-1" aria-labelledby="editStatusModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editStatusModalLabel">Edit Order Status</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editStatusForm" action="<?= base_url('orders/update_status') ?>" method="post">
+                    <input type="hidden" id="orderId" name="order_id">
+                    
+                    <!-- Status Dropdown -->
+                    <div class="mb-3">
+                        <label for="orderStatusEdit" class="form-label">Status</label>
+                        <select class="form-select" id="orderStatusEdit" name="status" required>
+                            <option value="Pending">Pending</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const editStatusModal = document.getElementById('editStatusModal');
+    editStatusModal.addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget;
+        const orderId = button.getAttribute('data-id');
+        const status = button.getAttribute('data-status');
+
+        const orderIdInput = editStatusModal.querySelector('#orderId');
+        const statusSelect = editStatusModal.querySelector('#orderStatusEdit');
+
+        orderIdInput.value = orderId;
+        statusSelect.value = status;
+    });
+});
+
+
+
+
+</script>
 
 
 
