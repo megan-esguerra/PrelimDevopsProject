@@ -30,6 +30,8 @@ $routes->post('orders/create', 'Orders::create'); // Create new order
 $routes->post('orders/update_status', 'Orders::updateStatus'); // Update order status
 $routes->post('orders/update', 'Orders::update'); // Update order details
 $routes->post('orders/delete', 'Orders::delete'); // Delete order
+$routes->get('orders/get_archived', 'Orders::getArchivedOrders');
+
 
 
 

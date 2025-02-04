@@ -108,6 +108,14 @@ class Orders extends BaseController
 
     return $this->response->setJSON($orders);
 }
+public function getArchivedOrders()
+{
+    $ordersModel = new OrderModel();
+    $archivedOrders = $ordersModel->where('status', 'Archived')->findAll();
+
+    return $this->response->setJSON($archivedOrders);
+}
+
 
     public function restore()
     {

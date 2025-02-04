@@ -209,37 +209,43 @@
     });
 
     function fetchArchivedOrders() {
-        fetch("<?= base_url('orders/get_archived') ?>") 
-            .then(response => response.json())
-            .then(data => {
-                let tableBody = document.getElementById("archivedOrdersTable");
-                tableBody.innerHTML = "";
+    fetch("<?= base_url('orders/get_archived') ?>")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch data');
+            }
+            return response.json();
+        })
+        .then(data => {
+            let tableBody = document.getElementById("archivedOrdersTable");
+            tableBody.innerHTML = "";
 
-                if (data.length === 0) {
-                    tableBody.innerHTML = "<tr><td colspan='6' class='text-center'>No archived orders found.</td></tr>";
-                } else {
-                    data.forEach(order => {
-                        let row = `
-                            <tr>
-                                <td>${order.id}</td>
-                                <td>${order.customer_name}</td>
-                                <td>${order.supplier_name}</td>
-                                <td>${order.items}</td>
-                                <td>${order.status}</td>
-                                <td>
-                                    <form action="<?= base_url('orders/restore') ?>" method="post">
-                                        <input type="hidden" name="order_id" value="${order.id}">
-                                        <button type="submit" class="btn btn-sm btn-success">Restore</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        `;
-                        tableBody.innerHTML += row;
-                    });
-                }
-            })
-            .catch(error => console.error('Error fetching archived orders:', error));
-    }
+            if (!data || data.length === 0) {
+                tableBody.innerHTML = "<tr><td colspan='6' class='text-center'>No archived orders found.</td></tr>";
+            } else {
+                data.forEach(order => {
+                    let row = `
+                        <tr>
+                            <td>${order.id}</td>
+                            <td>${order.customer_name}</td>
+                            <td>${order.supplier_name}</td>
+                            <td>${order.items}</td>
+                            <td>${order.status}</td>
+                            <td>
+                                <form action="<?= base_url('orders/restore') ?>" method="post">
+                                    <input type="hidden" name="order_id" value="${order.id}">
+                                    <button type="submit" class="btn btn-sm btn-success">Restore</button>
+                                </form>
+                            </td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                });
+            }
+        })
+        .catch(error => console.error('Error fetching archived orders:', error));
+}
+
 });
     </script>
 
