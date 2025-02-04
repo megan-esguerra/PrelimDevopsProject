@@ -126,7 +126,7 @@ class Auth extends Controller
         // Validate the new password
         $validation = \Config\Services::validation();
         $validation->setRules([
-            'password_hash' => 'required|min_length[8]',
+            'password' => 'required|min_length[8]',
             'confirm_password' => 'required|matches[password]'
         ]);
 
