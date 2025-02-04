@@ -78,7 +78,7 @@
                             <div>
                                 <input type="checkbox"> Remember me
                             </div>
-                            <a href="<?= site_url('dashboard'); ?>">Forgot password?</a>
+                            <a href="<?= site_url('/forgot_password'); ?>">Forgot password?</a>
                         </div>
                         <button type="submit" class="btn login-btn">Login</button>
                     </form>
