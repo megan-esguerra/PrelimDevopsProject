@@ -21,6 +21,7 @@ $routes->post('/reset_password/(:segment)', 'Auth::updatePassword/$1');
 
 $routes->get('dashboard', 'DashboardController::index');
 $routes->get('statistics', 'StatisticsController::index');
+$routes->get('orders', 'Orders::index');
 $routes->get('/orders/filter', 'Orders::filterOrders');
 $routes->get('/users', 'UsersController::index');
 
@@ -38,9 +39,7 @@ $routes->get('orders/get_archived', 'Orders::getArchivedOrders'); // Get archive
 
 
 
-$routes->get('/in-stock', 'InStockController::index');         
-$routes->get('/new-stock', 'InStockController::addStock');   
-$routes->post('/save-stock', 'InStockController::saveStock');
+$routes->get('/in-stock', 'StockController::index');
 
 
 
