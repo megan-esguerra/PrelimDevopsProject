@@ -23,10 +23,28 @@ class Auth extends Controller
             'password' => 'required|min_length[8]'
         ]);
 
+        if (!$this->validate($validation->getRules())) {
+            return redirect()->back()->withInput()->with('error', 'Invalid email or password.');
+        }
+        // if (!$validation->withRequest($this->request)->run()) {
+        //     return view('LogIn', [
+        //         'validation' => $validation
+        //     ]);
+        // }
+
+        // Check if validation fails
         if (!$validation->withRequest($this->request)->run()) {
-            return view('LogIn', [
-                'validation' => $validation
-            ]);
+            return redirect()->back()->withInput()->with('error', $validation->getErrors());
+        }
+
+        // Sanitize email input
+        $email = esc($this->request->getVar('email'));
+        $password = $this->request->getVar('password');
+
+        // Check login attempts (Rate Limiting)
+        $throttler = \Config\Services::throttler();
+        if ($throttler->check(md5($this->request->getIPAddress()), 5, MINUTE) === false) {
+            return redirect()->back()->with('error', 'Too many login attempts. Try again later.');
         }
 
         $userModel = new UserModel();
@@ -34,6 +52,7 @@ class Auth extends Controller
 
         if ($user && password_verify($this->request->getVar('password'), $user['password_hash'])) {
             $session = session();
+            $session->regenerate(true);
             $session->set([
                 'id' => $user['user_id'],
                 'email' => $user['email'],

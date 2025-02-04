@@ -51,6 +51,7 @@
                 <div class="login-container d-flex">
                 <div class="col-md-6">
                     <h4>Forgot Password </h4>
+                    <p>Enter your email address or username and we’ll send you a link </p>
 
                     <!-- Display error flash data -->
                     <?php if (session()->getFlashdata('error')): ?>
