@@ -53,22 +53,39 @@ h6 {
     cursor: pointer;
 }
 .sidebar ul li a.active {
-    background-color: #d4ccb6;
+    background-color: #5A4E3C;
+    color: white;
     height: 5px;
     padding: 10px;
     border-radius: 10px;
     color: white;
     font-weight: bold;
 }
+/* Scrollbar width */
+::-webkit-scrollbar {
+    width: 12px;
+}
 
+/* Scrollbar Track */
+::-webkit-scrollbar-track {
+    background: #D4A373;
+    border-radius: 10px;
+}
+
+/* Default Scrollbar Handle (Thumb) */
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: linear-gradient(180deg, #5A4E3C, #A6CDC6); /* Default (scroll up) */
+    transition: background 0.3s ease-in-out;
+}
 a{
     text-decoration: none;
     color: #D4A373;
     font-size: 16px;
 }
-a.bx{
-    font-size: 20px;
-    color: #5A4E3C;
+.bx{
+    font-size: 20px !important;
+    color: #5A4E3C !important;
 }
 .form-control{
     border-radius: 10px;
@@ -170,11 +187,6 @@ canvas#polarChart {
 }
 }
 
-a{
-    text-decoration: none;
-    color: white;
-    font-size: 16px;
-}
 .form-control{
     border-radius: 10px;
     background: transparent;
