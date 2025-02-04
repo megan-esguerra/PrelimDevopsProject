@@ -100,7 +100,7 @@
     </div>
 
     <!-- Modals -->
-    <!-- <?= include(APPPATH . 'Views/orders/modals.php'); ?> -->
+
 
     <!-- JavaScript Enhancements -->
     <script>
