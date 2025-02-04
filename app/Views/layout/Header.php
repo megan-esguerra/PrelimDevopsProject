@@ -38,7 +38,11 @@ body {
     border-right: 1px solid rgb(162, 160, 150);
     box-shadow: #5A4E3C -3px 2px 15px 0px;
 }
-
+h6 {
+    font-size: 1rem;
+    color: #D4A373;
+    font-weight: bold;
+}
 .sidebar ul {
     list-style: none;
     padding: 0;
@@ -253,3 +257,4 @@ a{
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
