@@ -212,15 +212,13 @@
     fetch("<?= base_url('orders/get_archived') ?>")
         .then(response => response.json())
         .then(data => {
-            console.log("Fetched Data:", data); // Debugging
-
             let tableBody = document.getElementById("archivedOrdersTable");
             tableBody.innerHTML = "";
 
-            if (!data || data.data.length === 0) {
+            if (data.length === 0) {
                 tableBody.innerHTML = "<tr><td colspan='6' class='text-center'>No archived orders found.</td></tr>";
             } else {
-                data.data.forEach(order => {
+                data.forEach(order => {
                     let row = `
                         <tr>
                             <td>${order.id}</td>
@@ -242,6 +240,7 @@
         })
         .catch(error => console.error('Error fetching archived orders:', error));
 }
+
 });
     </script>
 
