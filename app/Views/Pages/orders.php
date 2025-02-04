@@ -62,7 +62,7 @@
                                 <td class="text-truncate" style="max-width: 80px;"><?= htmlspecialchars($order['customer_name']) ?></td>
                                 <td class="text-truncate" style="max-width: 80px;"><?= htmlspecialchars($order['supplier_name']) ?></td>
                                 <td class="text-truncate" style="max-width: 50px;"><?= htmlspecialchars($order['items']) ?></td>
-                                <td>
+                                <td class="text-truncate" style="max-width: 50px;"></td>>
                                     <span class="badge 
                                         <?= $order['status'] == 'Completed' ? 'bg-success' : 
                                         ($order['status'] == 'Pending' ? 'bg-warning' : 
@@ -71,7 +71,7 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <div class="d-flex flex-row">
+                                    <div class="d-flex flex-row gap-2">
                                         <button class="btn btn-sm btn-secondary" 
                                             data-bs-toggle="modal" 
                                             data-bs-target="#editStatusModal" 
