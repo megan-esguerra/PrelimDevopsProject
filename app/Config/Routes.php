@@ -13,6 +13,11 @@ $routes->get('/LogIn', 'Auth::login');
 $routes->post('/LogIn/process', 'Auth::process');
 $routes->get('/LogIn', 'Auth::logout');
 
+$routes->get('/forgot-password', 'Auth::forgotPassword');
+$routes->post('/forgot-password', 'Auth::forgotPasswordProcess');
+$routes->get('/reset-password/(:segment)', 'Auth::resetPassword/$1');
+$routes->post('/reset-password/(:segment)', 'Auth::updatePassword/$1');
+
 
 $routes->get('dashboard', 'DashboardController::index');
 $routes->get('statistics', 'StatisticsController::index');
