@@ -12,17 +12,7 @@ class OrderModel extends Model
     protected $useTimestamps = true;
     protected $useSoftDeletes = true;  // Enable soft deletes
     protected $deletedField = 'deleted_at';
-
-    public function getOrderCount() {
-        return $this->db->table('orders')->countAll();
-    }
     
-    public function getOrders($limit, $offset) {
-        return $this->db->table('orders')
-                        ->limit($limit, $offset)
-                        ->get()
-                        ->getResultArray();
-    }
 }
 
 
