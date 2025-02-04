@@ -63,7 +63,7 @@
             <div class="card-body">
                 <h5>Stock Alert</h5>
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table" style="background: transparent !important">
                         <thead>
                             <tr>
                                 <th>Product Name</th>
@@ -103,7 +103,7 @@
             <div class="card-body">
                 <h5>Top Selling Products</h5>
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table" style="background: transparent !important">
                         <thead>
                             <tr>
                                 <th>Product Name</th>
@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 label: 'Product Prices Layer 3',
                 data: productPrices, // Outermost layer (Full value)
                 backgroundColor: [
-                    'rgba(165, 157, 132, 0.87)', // Full opacity Light #A59D84
+                    'rgba(165, 157, 132, 0.86)', // Full opacity Light #A59D84
                     'rgba(133, 123, 98, 1)',  // Full opacity Darker #857B62
                     'rgba(165, 157, 132, 1)',
                     'rgba(133, 123, 98, 1)',

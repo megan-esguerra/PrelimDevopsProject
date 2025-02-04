@@ -118,9 +118,6 @@ a{
     padding: 5px;
     border-radius: 5px;
 }
-.table {
-    background: transparent !important;
-}
 
 .table thead th,
 .table tbody tr {
