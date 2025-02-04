@@ -70,7 +70,7 @@
                                         <?= htmlspecialchars($order['status']) ?>
                                     </span>
                                 </td>
-                                <td>
+                                <td "d-flex flex-column gap-2">
                                     <button class="btn btn-sm btn-secondary" 
                                         data-bs-toggle="modal" 
                                         data-bs-target="#editStatusModal" 
@@ -83,7 +83,7 @@
                                         <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
                                         <button type="submit" class="btn btn-sm btn-danger">Archive</button>
                                     </form>
-                                </td>
+                                </t>
                             </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
