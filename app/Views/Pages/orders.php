@@ -60,7 +60,7 @@
                                 <td><?= htmlspecialchars($order['id']) ?></td>
                                 <td><?= htmlspecialchars($order['date']) ?></td>
                                 <td><?= htmlspecialchars($order['customer_name']) ?></td>
-                                <td><?= htmlspecialchars($order['supplier_name']) ?></td>
+                                <td class="text-truncate" style="max-width: 150px;"><?= htmlspecialchars($order['supplier_name']) ?></td>
                                 <td><?= htmlspecialchars($order['items']) ?></td>
                                 <td>
                                     <span class="badge 
