@@ -70,23 +70,20 @@
                                         <?= htmlspecialchars($order['status']) ?>
                                     </span>
                                 </td>
-                                <td class="w-25 text-center">
-                                    <div class="d-flex flex-column gap-2">
-                                        <button class="btn btn-sm btn-secondary" 
-                                            data-bs-toggle="modal" 
-                                            data-bs-target="#editStatusModal" 
-                                            data-id="<?= htmlspecialchars($order['id']) ?>" 
-                                            data-status="<?= htmlspecialchars($order['status']) ?>">
-                                            Edit
-                                        </button>
+                                <td w-25 d-flex flex-column gap-2>
+                                    <button class="btn btn-sm btn-secondary" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#editStatusModal" 
+                                        data-id="<?= htmlspecialchars($order['id']) ?>" 
+                                        data-status="<?= htmlspecialchars($order['status']) ?>">
+                                        Edit
+                                    </button>
 
-                                        <form action="<?= base_url('orders/delete') ?>" method="post">
-                                            <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
-                                            <button type="submit" class="btn btn-sm btn-danger">Archive</button>
-                                        </form>
-                                    </div>
+                                    <form action="<?= base_url('orders/delete') ?>" method="post">
+                                        <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
+                                        <button type="submit" class="btn btn-sm btn-danger">Archive</button>
+                                    </form>
                                 </td>
-
                             </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
