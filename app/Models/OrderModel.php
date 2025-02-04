@@ -33,12 +33,12 @@ class OrderModel extends Model
         return $query->findAll(); // Fetch and return results
     }
 
-    // Bulk import orders (if needed for advanced processing)
-    public function importOrders(array $data)
-    {
-        foreach ($data as $row) {
-            $this->save($row); // Save each row to the database
-        }
-        return true;
-    }
+    // // Bulk import orders (if needed for advanced processing)
+    // public function importOrders(array $data)
+    // {
+    //     foreach ($data as $row) {
+    //         $this->save($row); // Save each row to the database
+    //     }
+    //     return true;
+    // }
 }
