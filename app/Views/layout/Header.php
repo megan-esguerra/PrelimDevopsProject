@@ -118,7 +118,14 @@ a{
     padding: 5px;
     border-radius: 5px;
 }
+.table {
+    background: transparent !important;
+}
 
+.table thead th,
+.table tbody tr {
+    background: transparent !important;
+}
 /* Hide sidebar on small screens */
 @media (max-width: 768px) {
     .sidebar {
@@ -240,17 +247,8 @@ canvas#polarChart {
     box-shadow: #5A4E3C -3px 2px 15px 0px;
 }
 
-.table {
-    background: transparent !important;
-}
-
-.table thead th,
-.table tbody tr {
-    background: transparent !important;
-}
-
 .dropdown-menu {
-    background: #5A4E3C;
+    background: #ECEBDE;
     border-radius: 10px;
 }
 .active {
