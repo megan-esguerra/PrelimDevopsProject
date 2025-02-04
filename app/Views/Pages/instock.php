@@ -27,14 +27,14 @@
                 </tr>
             </thead>
             <tbody>
-                <?php if (!empty($stocks)): ?>
-                    <?php foreach ($stocks as $stock): ?>
+                <?php if (!empty($products)): ?>
+                    <?php foreach ($products as $products): ?>
                         <tr>
-                            <td><?= $stock['id']; ?></td>
-                            <td><?= $stock['item_name']; ?></td>
-                            <td><?= $stock['category']; ?></td>
-                            <td><?= $stock['quantity']; ?></td>
-                            <td><?= number_format($stock['price'], 2); ?></td>
+                            <td><?= $products['product_id']; ?></td>
+                            <td><?= $products['product_name']; ?></td>
+                            <td><?= $products['category_id']; ?></td>
+                            <td><?= $products['stock_quantity']; ?></td>
+                            <td><?= number_format($products['price'], 2); ?></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>

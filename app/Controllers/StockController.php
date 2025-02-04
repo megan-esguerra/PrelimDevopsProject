@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\StockModel;
+use App\Models\ProductModel;
 
 
 class StockController extends BaseController
@@ -10,7 +10,7 @@ class StockController extends BaseController
     public function index()
     {
         $stockModel = new StockModel();
-        $data['stocks'] = $stockModel->getInStockItems(); // Fetch in-stock items
+        $data['products'] = $stockModel->getInStockItems(); // Fetch in-stock items
 
         return view('instock', $data);
     }
