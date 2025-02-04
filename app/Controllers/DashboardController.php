@@ -10,6 +10,7 @@ use App\Models\ProductModel;
 
 class DashboardController extends BaseController
 {
+
     public function index()
     {
         $revenueModel = new RevenueModel();

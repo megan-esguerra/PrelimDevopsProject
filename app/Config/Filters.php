@@ -34,6 +34,8 @@ class Filters extends BaseFilters
         'forcehttps'    => ForceHTTPS::class,
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
+
+        'auth'          => \App\Filters\AuthFilter::class,
     ];
 
     /**
@@ -53,6 +55,7 @@ class Filters extends BaseFilters
         'before' => [
             'forcehttps', // Force Global Secure Requests
             'pagecache',  // Web Page Caching
+            'auth',
         ],
         'after' => [
             'pagecache',   // Web Page Caching
@@ -79,6 +82,8 @@ class Filters extends BaseFilters
         ],
     ];
 
+
+
     /**
      * List of filter aliases that works on a
      * particular HTTP method (GET, POST, etc.).
@@ -103,5 +108,12 @@ class Filters extends BaseFilters
      *
      * @var array<string, array<string, list<string>>>
      */
-    public array $filters = [];
+    public array $filters = [
+                    // ✅ Secure all pages inside "pages" subfolder
+                    'auth' => ['before' => ['pages/*', 'Dashboard/*', 'in_stocks/*', 'orders/*', 'statistics/*', 'users/*']],
+        
+                    // ✅ Allow public access to authentication pages
+                    // 'noauth' => ['before' => ['login', 'register', 'forgot_password']],
+        
+    ];
 }

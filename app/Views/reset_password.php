@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forgot Password</title>
+    <title>Reset Password</title>
     <link rel="icon" type="image/png" href="<?= base_url('img/tabicon.png'); ?>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -50,24 +50,27 @@
             <div class="col-md-8">
                 <div class="login-container d-flex">
                 <div class="col-md-6">
-                    <h4>Forgot Password </h4>
-                    <p>Enter your email address or username and we’ll send you a link </p>
-
+                    <h4>Reset Password</h4>
+                   
                     <!-- Display error flash data -->
-                    <?php if (session()->getFlashdata('error')): ?>
-                        <p style="color:red"><?= session()->getFlashdata('error') ?></p>
+                    <?php if (isset($validation)): ?>
+                        <p style="color:red"><?= $validation->listErrors() ?></p>
                     <?php endif; ?>
 
-                    <form action="<?= site_url('forgot_password')?>" method="post">
+                    <form action="<?= site_url('/reset_password/' . $token) ?>" method="post">
                         <?= csrf_field() ?>
                         <div class="mb-3">
-                            <label class="form-label">Email*</label>
-                            <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email" required>
+                            <label class="form-label"> New Password*</label>
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Enter password" required>
                         </div>
-                        <button type="submit" class="btn login-btn">Reset Password</button>
+                        <div class="mb-3">
+                            <label class="form-label"> Confirm Password*</label>
+                            <input type="password" class="form-control" name="confirm_password" id="password" placeholder="Enter password" required>
+                        </div>
+
+                        <button type="submit" class="btn login-btn">Login</button>
                     </form>
                     <p class="mt-3"><a href="<?= site_url('/LogIn') ?>">Cancel</a></p>
-                    
                 </div>
 
                     <div class="col-md-6 text-center">
