@@ -51,7 +51,7 @@
                     <canvas id="lineChart"></canvas>
                 </div>
                 <div class="RadarC p-1 col-md-4">
-                <canvas id="polarChart"></canvas>
+                <canvas id="radialBarChart"></canvas>
                 </div>
             </div>
 
@@ -207,20 +207,20 @@ new Chart(ctx, {
 });
         
 
-// Polar Area Chart
-        document.addEventListener('DOMContentLoaded', function () {
-            const polarCtx = document.getElementById('polarChart').getContext('2d');
+document.addEventListener('DOMContentLoaded', function () {
+        const ctx = document.getElementById('radialBarChart').getContext('2d');
 
-            const productLabels = <?= $productLabels ?>; // Fetch labels from PHP
-            const productPrices = <?= $productPrices ?>; // Fetch prices from PHP
+        const productLabels = <?= $productLabels ?>; // Fetch labels from PHP
+        const productPrices = <?= $productPrices ?>; // Fetch prices from PHP
 
-            new Chart(polarCtx, {
-                type: 'polarArea',
-                data: {
-                    labels: productLabels,
-                    datasets: [{
-                        label: 'Product Prices',
-                        data: productPrices,
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: productLabels,
+                datasets: [
+                    {
+                        label: 'Product Prices Layer 1',
+                        data: productPrices.map(value => value * 0.5), // First layer (50%)
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.5)',
                             'rgba(54, 162, 235, 0.5)',
@@ -229,7 +229,25 @@ new Chart(ctx, {
                             'rgba(153, 102, 255, 0.5)',
                             'rgba(255, 159, 64, 0.5)'
                         ],
-                        borderColor: [
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Product Prices Layer 2',
+                        data: productPrices.map(value => value * 0.8), // Second layer (80%)
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.7)',
+                            'rgba(54, 162, 235, 0.7)',
+                            'rgba(255, 206, 86, 0.7)',
+                            'rgba(75, 192, 192, 0.7)',
+                            'rgba(153, 102, 255, 0.7)',
+                            'rgba(255, 159, 64, 0.7)'
+                        ],
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Product Prices Layer 3',
+                        data: productPrices, // Outermost layer (Full value)
+                        backgroundColor: [
                             'rgba(255, 99, 132, 1)',
                             'rgba(54, 162, 235, 1)',
                             'rgba(255, 206, 86, 1)',
@@ -238,27 +256,20 @@ new Chart(ctx, {
                             'rgba(255, 159, 64, 1)'
                         ],
                         borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        r: {
-                            pointLabels: {
-                                display: true, // Show labels
-                                font: {
-                                    size: 14
-                                }
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            position: 'top'
-                        }
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                cutout: '50%', // Adjusts the inner cutout to make it a radial bar chart
+                plugins: {
+                    legend: {
+                        position: 'top'
                     }
                 }
-            });
+            }
         });
+    });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
