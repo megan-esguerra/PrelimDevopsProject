@@ -60,7 +60,7 @@ class Auth extends Controller
         $user = $userModel->where('email', $email)->first();
 
         if (!$user) {
-            return redirect()->to('/forgot-password')->with('error', 'Email not found.');
+            return redirect()->to('/forgot_password')->with('error', 'Email not found.');
         }
 
         // Generate Reset Token
@@ -75,7 +75,7 @@ class Auth extends Controller
         $emailService->setMessage("Click the link to reset your password: <a href='{$resetLink}'>Reset Password</a>");
         $emailService->send();
 
-        return redirect()->to('/login')->with('success', 'Password reset link sent to your email.');
+        return redirect()->to('/LogIn')->with('success', 'Password reset link sent to your email.');
     }
 
     public function resetPassword($token)
@@ -84,7 +84,7 @@ class Auth extends Controller
         $user = $userModel->where('reset_token', $token)->first();
 
         if (!$user) {
-            return redirect()->to('/login')->with('error', 'Invalid or expired reset token.');
+            return redirect()->to('LogIn')->with('error', 'Invalid or expired reset token.');
         }
 
         return view('reset_password', ['token' => $token]);
@@ -96,7 +96,7 @@ class Auth extends Controller
         $user = $userModel->where('reset_token', $token)->first();
 
         if (!$user) {
-            return redirect()->to('/login')->with('error', 'Invalid or expired reset token.');
+            return redirect()->to('/LogIn')->with('error', 'Invalid or expired reset token.');
         }
 
         $validation = \Config\Services::validation();
@@ -113,7 +113,7 @@ class Auth extends Controller
         $newPassword = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);
         $userModel->update($user['user_id'], ['password_hash' => $newPassword, 'reset_token' => null]);
 
-        return redirect()->to('/login')->with('success', 'Password updated successfully. Please log in.');
+        return redirect()->to('/LogIn')->with('success', 'Password updated successfully. Please log in.');
     }
 
     public function logout()
