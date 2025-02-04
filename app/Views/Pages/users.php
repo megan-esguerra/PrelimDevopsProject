@@ -13,13 +13,14 @@
             margin-bottom: 2rem;
         }
         .table {
-            border-collapse: separate;
             border-spacing: 0 1rem;
         }
         .table thead th {
-            background-color: #f8f9fa;
+            background-color: #a59d84;
             border: none;
             font-weight: 700;
+            font-family: 'Karla', sans-serif;
+            color: white;
         }
         .table tbody tr {
             background-color: #ffffff;
@@ -28,6 +29,7 @@
         .table tbody td {
             border: none;
             padding: 1rem;
+            font-family: 'Karla', sans-serif;
         }
         .table tbody tr:hover {
             background-color: #f1f1f1;
