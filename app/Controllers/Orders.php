@@ -21,23 +21,17 @@ class Orders extends BaseController
 {
     $db = \Config\Database::connect();
 
-    $customers = $db->query("SELECT id, customer_name FROM customers")->getResultArray();
-    $suppliers = $db->query("SELECT id, supplier_name FROM suppliers")->getResultArray();
-
     $query = $db->query("
         SELECT o.id, o.date, c.customer_name, s.supplier_name, o.items, o.status
         FROM orders o
-        JOIN customers c ON o.customer_id = c.id
-        JOIN suppliers s ON o.supplier_id = s.id
+        LEFT JOIN customers c ON o.customer_id = c.id
+        LEFT JOIN suppliers s ON o.supplier_id = s.id
     ");
     $orders = $query->getResultArray();
 
-    return view('orders/index', [
-        'orders' => $orders,
-        'customers' => $customers,
-        'suppliers' => $suppliers
-    ]);
+    return view('orders/index', ['orders' => $orders]);
 }
+
 
 
 
