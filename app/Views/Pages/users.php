@@ -19,7 +19,7 @@
             overflow: hidden;
         }
         .table thead th {
-            background-color: #7a6e4f; 
+            background-color:  #f8f9fa; 
             border: none;
             font-weight: 700;
             font-family: 'Karla', sans-serif;
