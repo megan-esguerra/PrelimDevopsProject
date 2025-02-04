@@ -40,7 +40,7 @@ $routes->get('orders/get_archived', 'Orders::getArchivedOrders'); // Get archive
 
 
 
-$routes->get('/in-stock', 'StockController::index');
+$routes->get('/in_stock', 'StockController::index');
 
 
 
