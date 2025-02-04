@@ -11,4 +11,9 @@ class ProductModel extends Model
         'product_name', 'category_id', 'supplier_id', 'price', 'stock_quantity',
         'reorder_level', 'description', 'created_at', 'updated_at'
     ];
+    public function getInStockItems()
+    {
+        return $this->where('stock_quantity >', 0)->findAll(); // Get products where stock is available
+    }
+
 }
