@@ -2,9 +2,11 @@
 
 namespace App\Controllers;
 
-use Config\Services;
+
 use App\Models\UserModel;
 use CodeIgniter\Controller;
+use CodeIgniter\I18n\Time;
+use Config\Services;
 
 class Auth extends Controller
 {
@@ -52,22 +54,23 @@ class Auth extends Controller
         return view('forgot_password');
     }
 
+    // Process the Forgot Password
     public function forgotPasswordProcess()
     {
         $email = $this->request->getPost('email');
         $userModel = new UserModel();
         $user = $userModel->where('email', $email)->first();
     
-        // If email doesn't exist in database
+        // If email doesn't exist in the database
         if (!$user) {
             return redirect()->to('/forgot_password')->with('error', 'Email not found.');
         }
     
-        // Generate a secure token (simple yet effective)
+        // Generate a secure token
         $token = bin2hex(random_bytes(50)); // Random 100-character hex token
     
         // Expiration time (1 hour)
-        $expiration = new \CodeIgniter\I18n\Time('+1 hour');
+        $expiration = new Time('+1 hour');
     
         // Update the user with the reset token and expiration time
         $userModel->update($user['user_id'], [
@@ -76,61 +79,73 @@ class Auth extends Controller
         ]);
     
         // Send reset link to email
-        $emailService = \Config\Services::email();
+        $emailService = Services::email();
         $emailService->setTo($email);
         $emailService->setSubject('Password Reset Request');
         $resetLink = site_url("Auth/resetPassword/{$token}");
         $emailService->setMessage("Click here to reset your password: <a href='{$resetLink}'>Reset Password</a>");
     
-        // Debugging email sending process
+        // Send the email and check the result
         if ($emailService->send()) {
-            log_message('info', 'Password reset email sent to ' . $email);
+            log_message('info', 'Password reset email sent to: ' . $email);
         } else {
             log_message('error', 'Failed to send email: ' . $emailService->printDebugger());
+            return redirect()->to('/forgot_password')->with('error', 'There was an error sending the reset email.');
         }
     
         // Redirect to login with a success message
         return redirect()->to('/LogIn')->with('success', 'Password reset link sent to your email.');
     }
 
+    // Display the reset password form
     public function resetPassword($token)
     {
         $userModel = new UserModel();
         $user = $userModel->where('reset_token', $token)->first();
 
-        if (!$user) {
-            return redirect()->to('LogIn')->with('error', 'Invalid or expired reset token.');
+        // If no user is found or the token has expired
+        if (!$user || new Time() > new Time($user['reset_token_expiration'])) {
+            return redirect()->to('/LogIn')->with('error', 'Invalid or expired reset token.');
         }
 
         return view('reset_password', ['token' => $token]);
     }
 
+    // Process the password update
     public function updatePassword($token)
     {
         $userModel = new UserModel();
         $user = $userModel->where('reset_token', $token)->first();
 
-        if (!$user) {
+        // If no user is found or the token has expired
+        if (!$user || new Time() > new Time($user['reset_token_expiration'])) {
             return redirect()->to('/LogIn')->with('error', 'Invalid or expired reset token.');
         }
 
+        // Validate the new password
         $validation = \Config\Services::validation();
         $validation->setRules([
-            'password' => 'required|min_length[8]',
+            'password_hash' => 'required|min_length[8]',
             'confirm_password' => 'required|matches[password]'
         ]);
 
+        // If validation fails, return to the reset password page with errors
         if (!$validation->withRequest($this->request)->run()) {
             return view('reset_password', ['token' => $token, 'validation' => $validation]);
         }
 
-        // Hash New Password
+        // Hash the new password and save it
         $newPassword = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);
-        $userModel->update($user['user_id'], ['password_hash' => $newPassword, 'reset_token' => null]);
+        $userModel->update($user['user_id'], [
+            'password_hash' => $newPassword,
+            'reset_token' => null, // Remove the reset token after resetting the password
+            'reset_token_expiration' => null // Clear expiration time
+        ]);
 
+        // Redirect to login with a success message
         return redirect()->to('/LogIn')->with('success', 'Password updated successfully. Please log in.');
     }
-
+    
     public function logout()
     {
         session()->destroy();
