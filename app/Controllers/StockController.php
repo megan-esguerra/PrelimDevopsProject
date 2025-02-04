@@ -12,6 +12,6 @@ class StockController extends BaseController
         $stockModel = new ProductModel();
         $data['products'] = $stockModel->getInStockItems(); // Fetch in-stock items
 
-        return view('instock', $data);
+        return view('Pages/instock', $data);
     }
 }
