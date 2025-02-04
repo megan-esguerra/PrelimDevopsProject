@@ -68,7 +68,6 @@
                         <th scope="col">Date</th>
                         <th scope="col">Customer</th>
                         <th scope="col">Sales Channel</th>
-                        <th scope="col">Destination</th>
                         <th scope="col">Items</th>
                         <th scope="col">Status</th>
                     </tr>
@@ -81,7 +80,6 @@
                             <td><?= htmlspecialchars($order['date']) ?></td>
                             <td><?= htmlspecialchars($order['customer']) ?></td>
                             <td><?= htmlspecialchars($order['sales_channel']) ?></td>
-                            <td><?= htmlspecialchars($order['destination']) ?></td>
                             <td><?= htmlspecialchars($order['items']) ?></td>
                             <td>
                                 <span class="badge 

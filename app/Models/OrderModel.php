@@ -10,7 +10,7 @@ class OrderModel extends Model
     protected $primaryKey = 'id'; // Primary key of the table
 
     // Fields allowed for mass assignment
-    protected $allowedFields = ['id', 'date', 'customer', 'sales_channel', 'destination', 'items', 'status'];
+    protected $allowedFields = ['id', 'date', 'customer', 'sales_channel',  'items', 'status'];
 
     // Fetch all orders or apply filters
     public function getOrders($filters = [])
