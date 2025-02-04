@@ -10,8 +10,8 @@ class Orders extends BaseController {
         $orderModel = new OrderModel();
         $orders = $orderModel
             ->select('orders.*, customers.customer_name, suppliers.supplier_name')
-            ->join('customers', 'customers.id = orders.customer_id')
-            ->join('suppliers', 'suppliers.id = orders.supplier_id')
+            ->join('customers', 'customers.customer_id = orders.customer_id')
+            ->join('suppliers', 'suppliers.supplier_id = orders.supplier_id')
             ->findAll();
 
         return view('orders', ['orders' => $orders]);
