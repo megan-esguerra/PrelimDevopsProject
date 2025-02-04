@@ -70,9 +70,9 @@
                                         <?= htmlspecialchars($order['status']) ?>
                                     </span>
                                 </td>
-                                <td class="w-25">
+                                <td class="w-25 text-center">
                                     <div class="d-flex flex-column gap-2">
-                                        <button class="btn btn-sm btn-secondary" 
+                                        <button class="btn btn-sm btn-secondary w-100" 
                                             data-bs-toggle="modal" 
                                             data-bs-target="#editStatusModal" 
                                             data-id="<?= htmlspecialchars($order['id']) ?>" 
@@ -82,7 +82,7 @@
 
                                         <form action="<?= base_url('orders/delete') ?>" method="post">
                                             <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
-                                            <button type="submit" class="btn btn-sm btn-danger">Archive</button>
+                                            <button type="submit" class="btn btn-sm btn-danger w-100">Archive</button>
                                         </form>
                                     </div>
                                 </td>
