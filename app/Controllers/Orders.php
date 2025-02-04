@@ -22,25 +22,46 @@ class Orders extends BaseController
 
     public function index()
     {
-        // Fetch active (non-archived) orders with customer and supplier names
+        // Number of rows per page
+        $rowsPerPage = 10;
+    
+        // Get the current page from the request, default to 1
+        $currentPage = $this->request->getVar('page') ?? 1;
+    
+        // Calculate the offset for the query
+        $offset = ($currentPage - 1) * $rowsPerPage;
+    
+        // Fetch total count of active (non-archived) orders
+        $totalOrders = $this->orderModel
+            ->where('orders.deleted_at', null)
+            ->countAllResults();
+    
+        // Calculate total pages
+        $totalPages = ceil($totalOrders / $rowsPerPage);
+    
+        // Fetch paginated orders with customer and supplier names
         $orders = $this->orderModel
             ->select('orders.*, customers.customer_name, suppliers.supplier_name')
             ->join('customers', 'customers.customer_id = orders.customer_id')
             ->join('suppliers', 'suppliers.supplier_id = orders.supplier_id')
             ->where('orders.deleted_at', null)
+            ->limit($rowsPerPage, $offset)
             ->findAll();
-
+    
         // Fetch customers and suppliers for dropdowns
         $customers = $this->customerModel->findAll();
         $suppliers = $this->supplierModel->findAll();
-
+    
+        // Pass data to the view
         return view('Pages/orders', [
             'orders' => $orders,
             'customers' => $customers,
             'suppliers' => $suppliers,
+            'page' => $currentPage,
+            'totalPages' => $totalPages,
         ]);
-        
     }
+    
 
     public function create()
     {
