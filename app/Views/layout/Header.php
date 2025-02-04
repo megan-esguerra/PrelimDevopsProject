@@ -68,14 +68,14 @@ h6 {
 
 /* Scrollbar Track */
 ::-webkit-scrollbar-track {
-    background: #D4A373;
+    background: #d4ccb6;
     border-radius: 10px;
 }
 
 /* Default Scrollbar Handle (Thumb) */
 ::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background: linear-gradient(180deg, #5A4E3C, #A6CDC6); /* Default (scroll up) */
+    background: linear-gradient(180deg, #5A4E3C, #D4A373); /* Default (scroll up) */
     transition: background 0.3s ease-in-out;
 }
 a{
@@ -110,7 +110,7 @@ a{
     background: #A59D84;
     padding: 10px;
     border-radius: 10px;
-    box-shadow: #5A4E3C -3px 2px 15px 0px;
+    box-shadow: #5A4E3C -3px 2px 2px 0px;
 }
 
 .search-bar {
@@ -118,7 +118,14 @@ a{
     padding: 5px;
     border-radius: 5px;
 }
+.table {
+    background: transparent !important;
+}
 
+.table thead th,
+.table tbody tr {
+    background: transparent !important;
+}
 /* Hide sidebar on small screens */
 @media (max-width: 768px) {
     .sidebar {
@@ -240,8 +247,9 @@ canvas#polarChart {
     box-shadow: #5A4E3C -3px 2px 15px 0px;
 }
 
-.table {
-    background: white;
+.dropdown-menu {
+    background: #ECEBDE;
+    border-radius: 10px;
 }
 .active {
     font-weight: bold;

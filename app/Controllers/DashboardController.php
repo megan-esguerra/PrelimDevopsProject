@@ -57,6 +57,19 @@ class DashboardController extends BaseController
             $productLabels[] = $product['product_name'];
             $productPrices[] = $product['price'];
         }
+        // Fetch stock alert products (where stock_quantity <= reorder_level)
+        $stockAlerts = $productModel->where('stock_quantity <= reorder_level')
+        ->orderBy('stock_quantity', 'ASC')
+        ->findAll();
+
+        // Fetch top-selling products (based on total quantity sold)
+        $topSellingProducts = $salesItemsModel->select('products.product_name, SUM(sales_items.quantity) as total_sold')
+                ->join('products', 'products.product_id = sales_items.product_id')
+                ->groupBy('sales_items.product_id')
+                ->orderBy('total_sold', 'DESC')
+                ->limit(5)
+                ->findAll();
+
 
         return view('Pages/Dashboard', [
             'revenue' => $totalRevenue,
@@ -66,6 +79,8 @@ class DashboardController extends BaseController
             'income' => $totalIncome,
             'monthlyRevenue' => $monthlyRevenue,
             'monthlySales' => $monthlySales,
+            'stockAlerts' => $stockAlerts,
+            'topSellingProducts' => $topSellingProducts,
             'productLabels' => json_encode($productLabels), // Convert to JSON for Chart.js
             'productPrices' => json_encode($productPrices) // Convert to JSON for Chart.js
         ]);

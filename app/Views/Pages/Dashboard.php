@@ -57,36 +57,39 @@
 
             <!-- Tables -->
             <div class="row mt-4">
+    <!-- Stock Alert Table -->
     <div class="col-md-6">
         <div class="card">
             <div class="card-body">
                 <h5>Stock Alert</h5>
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered">
+                    <table class="table">
                         <thead>
                             <tr>
-                                <th>Order ID</th>
-                                <th>Date</th>
-                                <th>Quantity</th>
-                                <th>Alert Amt.</th>
+                                <th>Product Name</th>
+                                <th>Stock Quantity</th>
+                                <th>Reorder Level</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>123</td>
-                                <td>2024-01-01</td>
-                                <td>10</td>
-                                <td>5</td>
-                                <td>Low</td>
-                            </tr>
-                            <tr>
-                                <td>456</td>
-                                <td>2024-01-02</td>
-                                <td>20</td>
-                                <td>8</td>
-                                <td>Medium</td>
-                            </tr>
+                            <?php foreach ($stockAlerts as $product) : ?>
+                                <tr>
+                                    <td><?= esc($product['product_name']) ?></td>
+                                    <td><?= esc($product['stock_quantity']) ?></td>
+                                    <td><?= esc($product['reorder_level']) ?></td>
+                                    <td>
+                                        <?php if ($product['stock_quantity'] == 0) : ?>
+                                            <span class="text-danger">Out of Stock</span>
+                                        <?php elseif ($product['stock_quantity'] <= $product['reorder_level']) : ?>
+                                            <span class="text-warning">Low</span>
+                                        <?php else : ?>
+                                            <span class="text-success">OK</span>
+                                        <?php endif; ?>
+                                        
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
@@ -94,30 +97,26 @@
         </div>
     </div>
 
+    <!-- Top Selling Products Table -->
     <div class="col-md-6">
         <div class="card">
             <div class="card-body">
                 <h5>Top Selling Products</h5>
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered">
+                    <table class="table">
                         <thead>
                             <tr>
-                                <th>Order ID</th>
-                                <th>Quantity</th>
-                                <th>Alert Amt.</th>
+                                <th>Product Name</th>
+                                <th>Total Sold</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>789</td>
-                                <td>50</td>
-                                <td>20</td>
-                            </tr>
-                            <tr>
-                                <td>101</td>
-                                <td>30</td>
-                                <td>15</td>
-                            </tr>
+                            <?php foreach ($topSellingProducts as $product) : ?>
+                                <tr>
+                                    <td><?= esc($product['product_name']) ?></td>
+                                    <td><?= esc($product['total_sold']) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
@@ -125,6 +124,7 @@
         </div>
     </div>
 </div>
+
 
         </div> <!-- Container -->
     </div>
@@ -137,74 +137,74 @@
     <script>
         // Line Chart
         const revenueData = <?= json_encode(array_column($monthlyRevenue, 'revenue')) ?>;
-const salesData = <?= json_encode(array_column($monthlySales, 'sales')) ?>;
-const months = <?= json_encode(array_column($monthlyRevenue, 'month')) ?>;
+        const salesData = <?= json_encode(array_column($monthlySales, 'sales')) ?>;
+        const months = <?= json_encode(array_column($monthlyRevenue, 'month')) ?>;
 
-const ctx = document.getElementById('lineChart').getContext('2d');
+        const ctx = document.getElementById('lineChart').getContext('2d');
 
-// Create a gradient for revenue
-const gradientRevenue = ctx.createLinearGradient(0, 0, 0, 400);
-gradientRevenue.addColorStop(0, 'rgba(165, 157, 132, 0.87)'); 
-gradientRevenue.addColorStop(1, 'rgba(165, 157, 132, 0.42)'); // Fully transparent
+        // Create a gradient for revenue
+        const gradientRevenue = ctx.createLinearGradient(0, 0, 0, 400);
+        gradientRevenue.addColorStop(0, 'rgba(165, 157, 132, 0.87)'); 
+        gradientRevenue.addColorStop(1, 'rgba(165, 157, 132, 0.42)'); // Fully transparent
 
-// Create a gradient for sales
-const gradientSales = ctx.createLinearGradient(0, 0, 0, 400);
-gradientSales.addColorStop(0, 'rgba(215, 211, 191, 0.77)'); // #D7D3BF (semi-transparent)
-gradientSales.addColorStop(1, 'rgba(215, 211, 191, 0.48)'); // Fully transparent
+        // Create a gradient for sales
+        const gradientSales = ctx.createLinearGradient(0, 0, 0, 400);
+        gradientSales.addColorStop(0, 'rgba(212, 163, 115, 0.76)'); // #D7D3BF (semi-transparent)
+        gradientSales.addColorStop(1, 'rgba(212, 163, 115, 0.4)'); // Fully transparent
 
-new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: months,
-        datasets: [
-            {
-                label: 'Revenue',
-                data: revenueData,
-                borderColor: '#A59D84', // Updated color
-                backgroundColor: gradientRevenue,
-                fill: true,
-                tension: 0.4,
-                pointRadius: 3,
-                pointBackgroundColor: '#A59D84',
-                pointHoverRadius: 5
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: months,
+                datasets: [
+                    {
+                        label: 'Revenue',
+                        data: revenueData,
+                        borderColor: '#A59D84', // Updated color
+                        backgroundColor: gradientRevenue,
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 3,
+                        pointBackgroundColor: '#A59D84',
+                        pointHoverRadius: 5
+                    },
+                    {
+                        label: 'Sales',
+                        data: salesData,
+                        borderColor: '#D4A373', // Updated color
+                        backgroundColor: gradientSales,
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 3,
+                        pointBackgroundColor: '#D4A373',
+                        pointHoverRadius: 5
+                    }
+                ]
             },
-            {
-                label: 'Sales',
-                data: salesData,
-                borderColor: '#D7D3BF', // Updated color
-                backgroundColor: gradientSales,
-                fill: true,
-                tension: 0.4,
-                pointRadius: 3,
-                pointBackgroundColor: '#D7D3BF',
-                pointHoverRadius: 5
-            }
-        ]
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                display: false
-            }
-        },
-        scales: {
-            x: {
-                grid: {
-                    display: false
-                }
-            },
-            y: {
-                grid: {
-                    display: false
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
                 },
-                ticks: {
-                    display: false
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            display: false
+                        }
+                    }
                 }
             }
-        }
-    }
-});
+        });
         
 //doughnut chart
 document.addEventListener('DOMContentLoaded', function () {
@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 label: 'Product Prices Layer 3',
                 data: productPrices, // Outermost layer (Full value)
                 backgroundColor: [
-                    'rgba(165, 157, 132, 1)', // Full opacity Light #A59D84
+                    'rgba(165, 157, 132, 0.87)', // Full opacity Light #A59D84
                     'rgba(133, 123, 98, 1)',  // Full opacity Darker #857B62
                     'rgba(165, 157, 132, 1)',
                     'rgba(133, 123, 98, 1)',

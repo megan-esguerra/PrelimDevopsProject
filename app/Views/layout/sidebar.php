@@ -7,7 +7,7 @@
         <li><a href="<?= base_url('orders'); ?>" class="<?= service('request')->getUri()->getPath() == '/orders' ? 'active' : '' ?>"><i class='bx bxs-cart-download'></i>Orders</a></li>
 
         <?php if (session()->get('role') !== 'Staff') : ?>
-            <li><a href="#" class="<?= service('request')->getUri()->getPath() == '/users' ? 'active' : '' ?>"><i class='bx bxs-user-account'></i>Users</a></li>
+            <li><a href="<?= base_url('users'); ?>" class="<?= service('request')->getUri()->getPath() == '/users' ? 'active' : '' ?>"><i class='bx bxs-user-account'></i>Users</a></li>
         <?php endif; ?>
     </ul>
 </div>
