@@ -9,7 +9,7 @@
         <p style="color:red"><?= session()->getFlashdata('error') ?></p>
     <?php endif; ?>
 
-    <form action="<?= site_url('/forgot-password') ?>" method="post">
+    <form action="<?= site_url('/forgot_password') ?>" method="post">
         <?= csrf_field() ?>
         <label>Email Address</label>
         <input type="email" name="email" required>
