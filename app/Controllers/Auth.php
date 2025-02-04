@@ -60,6 +60,13 @@ class Auth extends Controller
                 'role' => $user['role'],
                 'isLoggedIn' => true
             ]);
+
+            $userRole = $session->get('role');
+            if (!in_array($userRole, ['admin', 'staff'])) {
+                // If the user is not an admin or staff, redirect them to the login page
+                return redirect()->to('/LogIn')->with('error', 'You do not have access to this page.');
+            }
+
             return redirect()->to('/dashboard');
         } else {
             return view('LogIn', [
