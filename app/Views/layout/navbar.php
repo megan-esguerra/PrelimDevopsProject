@@ -5,15 +5,15 @@
         <button class="btn btn-light d-lg-none" id="sidebarToggle">
             ☰
         </button>
-
-        <input type="text" class="form-control w-25 me-3" placeholder="Search...">
+        <img src="<?= base_url('img/bgimg.png'); ?>" alt="User" class="rounded-circle me-2" width="40" height="40">
+        <!-- <input type="text" class="form-control w-25 me-3" placeholder="Search...">
         
-        <i class="bi bi-bell fs-4 me-3"></i> <!-- Notification Icon -->
+        <i class="bi bi-bell fs-4 me-3"></i>  -->
 
         <!-- User Profile Dropdown -->
         <div class="dropdown">
         <a href="#" class="d-flex align-items-center text-light text-decoration-none dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-    <img src="<?= base_url('img/bgimg.png'); ?>" alt="User" class="rounded-circle me-2" width="40" height="40">
+   
     <span><?= session()->get('name') ?? 'Guest'; ?></span> 
 </a>
 
