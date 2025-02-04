@@ -281,17 +281,12 @@ canvas#polarChart {
 }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6LesE8wqAAAAAFGQb8owvb9VoWoM7tSeaFbcv296"></script>
+
+
 </head>
 
 <div class="Captcha">
-<input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
-<script src="https://www.google.com/recaptcha/api.js?render=YOUR_SITE_KEY"></script>
-<script>
-    grecaptcha.ready(function() {
-        grecaptcha.execute('YOUR_SITE_KEY', {action: 'submit'}).then(function(token) {
-            document.getElementById('g-recaptcha-response').value = token;
-        });
-    });
-</script>
 
+ 
 </div>
