@@ -35,7 +35,7 @@ class Filters extends BaseFilters
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
 
-        'auth'          => \App\Filters\AuthFilter::class,
+        'role'          => \App\Filters\AuthFilter::class,
     ];
 
     /**
@@ -55,7 +55,7 @@ class Filters extends BaseFilters
         'before' => [
             'forcehttps', // Force Global Secure Requests
             'pagecache',  // Web Page Caching
-            'auth',
+            'role',
         ],
         'after' => [
             'pagecache',   // Web Page Caching
