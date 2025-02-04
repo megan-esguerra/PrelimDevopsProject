@@ -10,7 +10,7 @@
 
             <!-- Toolbar -->
             <div class="d-flex justify-content-between mb-3">
-                <button class="btn btn-primary" onclick="window.location.href='<?= base_url('orders/newOrder'); ?>'">+ New Order</button>
+               <button class="btn btn-primary" onclick="window.location.href='<?= base_url('pages/new_order'); ?>'">+ New Order</button>
             </div>
 
             <!-- Orders Table -->
