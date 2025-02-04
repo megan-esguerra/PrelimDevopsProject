@@ -17,7 +17,7 @@
             background-color: rgb(143 136 113) !important;
             border-radius: 10px;
             overflow: hidden;
-            border: 2px solid #8f8871;
+            box-shadow: #5A4E3C -3px 2px 15px 0px;
         }
         .table thead th {
             background-color:  #f8f9fa; 
