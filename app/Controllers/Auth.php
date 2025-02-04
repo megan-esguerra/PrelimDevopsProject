@@ -54,27 +54,42 @@ class Auth extends Controller
 
     public function forgotPasswordProcess()
     {
-        $emailService = Services::email();
         $email = $this->request->getPost('email');
         $userModel = new UserModel();
         $user = $userModel->where('email', $email)->first();
-
+    
+        // If email doesn't exist in database
         if (!$user) {
             return redirect()->to('/forgot_password')->with('error', 'Email not found.');
         }
-
-        // Generate Reset Token
-        $token = bin2hex(random_bytes(50)); 
-        $userModel->update($user['user_id'], ['reset_token' => $token]);
-
-        // Send Reset Email
-        $emailService = Services::email();
+    
+        // Generate a secure token (simple yet effective)
+        $token = bin2hex(random_bytes(50)); // Random 100-character hex token
+    
+        // Expiration time (1 hour)
+        $expiration = new \CodeIgniter\I18n\Time('+1 hour');
+    
+        // Update the user with the reset token and expiration time
+        $userModel->update($user['user_id'], [
+            'reset_token' => $token,
+            'reset_token_expiration' => $expiration->toDateTimeString(),
+        ]);
+    
+        // Send reset link to email
+        $emailService = \Config\Services::email();
         $emailService->setTo($email);
         $emailService->setSubject('Password Reset Request');
-        $resetLink = site_url("reset_password/{$token}");
-        $emailService->setMessage("Click the link to reset your password: <a href='{$resetLink}'>Reset Password</a>");
-        $emailService->send();
-
+        $resetLink = site_url("Auth/resetPassword/{$token}");
+        $emailService->setMessage("Click here to reset your password: <a href='{$resetLink}'>Reset Password</a>");
+    
+        // Debugging email sending process
+        if ($emailService->send()) {
+            log_message('info', 'Password reset email sent to ' . $email);
+        } else {
+            log_message('error', 'Failed to send email: ' . $emailService->printDebugger());
+        }
+    
+        // Redirect to login with a success message
         return redirect()->to('/LogIn')->with('success', 'Password reset link sent to your email.');
     }
 
