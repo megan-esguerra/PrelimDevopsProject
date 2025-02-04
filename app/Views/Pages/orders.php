@@ -45,11 +45,11 @@
                 <thead>
                     <tr>
                         <th class="text-truncate" style="max-width: 50px;">Order ID</th>
-                        <th class="text-truncate" style="max-width: 30px;">Date</th>
-                        <th class="text-truncate" style="max-width: 150px;">Customer</th>
-                        <th class="text-truncate" style="max-width: 150px;">Supplier</th>
-                        <th class="text-truncate" style="max-width: 30px;">Items</th>
-                        <th class="text-truncate" style="max-width: 60px;">Status</th>
+                        <th class="text-truncate" style="max-width: 40px;">Date</th>
+                        <th class="text-truncate" style="max-width: 100px;">Customer</th>
+                        <th class="text-truncate" style="max-width: 1px;">Supplier</th>
+                        <th class="text-truncate" style="max-width: 50px;">Items</th>
+                        <th class="text-truncate" style="max-width: 40px;">Status</th>
                         <th class="text-truncate" style="max-width: 150px;">Actions</th>
                     </tr>
                 </thead>
