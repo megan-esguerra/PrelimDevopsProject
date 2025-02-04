@@ -14,42 +14,32 @@ class Auth extends Controller
         return view('LogIn');
     }
 
-    public function process()
+    public function process() 
     {
         $validation = \Config\Services::validation();
-
+    
         $validation->setRules([
             'email' => 'required|valid_email',
             'password' => 'required|min_length[8]'
         ]);
-
+    
         if (!$this->validate($validation->getRules())) {
             return redirect()->back()->withInput()->with('error', 'Invalid email or password.');
         }
-        // if (!$validation->withRequest($this->request)->run()) {
-        //     return view('LogIn', [
-        //         'validation' => $validation
-        //     ]);
-        // }
-
-        // Check if validation fails
-        if (!$validation->withRequest($this->request)->run()) {
-            return redirect()->back()->withInput()->with('error', $validation->getErrors());
-        }
-
+    
         // Sanitize email input
         $email = esc($this->request->getVar('email'));
         $password = $this->request->getVar('password');
-
+    
         // Check login attempts (Rate Limiting)
         $throttler = \Config\Services::throttler();
-        if ($throttler->check(md5($this->request->getIPAddress()), 1, MINUTE) === false) {
+        if ($throttler->check(md5($this->request->getIPAddress()), 5, MINUTE) === false) {
             return redirect()->back()->with('error', 'Too many login attempts. Try again later.');
         }
-
+    
         $userModel = new UserModel();
         $user = $userModel->where('email', $this->request->getVar('email'))->first();
-
+    
         if ($user && password_verify($this->request->getVar('password'), $user['password_hash'])) {
             $session = session();
             $session->regenerate(true);
@@ -60,13 +50,16 @@ class Auth extends Controller
                 'role' => $user['role'],
                 'isLoggedIn' => true
             ]);
-
-            $userRole = $session->get('role');
+    
+            // Debugging: Check the session data
+            log_message('info', 'Session Data: ' . print_r(session()->get(), true));
+    
+            // Ensure role is valid (no spaces or unexpected characters)
+            $userRole = strtolower(trim($session->get('role')));
             if (!in_array($userRole, ['admin', 'staff'])) {
-                // If the user is not an admin or staff, redirect them to the login page
-                return redirect()->to('/LogIn')->with('error', 'You do not have access to this page.');
+                return redirect()->to('/LogIsn')->with('error', 'You do not have access to this page.');
             }
-
+    
             return redirect()->to('/dashboard');
         } else {
             return view('LogIn', [
@@ -74,6 +67,7 @@ class Auth extends Controller
             ]);
         }
     }
+    
 
     public function forgotPassword()
     {
