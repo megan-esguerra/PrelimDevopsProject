@@ -14,14 +14,14 @@
             <!-- Toolbar -->
             <div class="d-flex justify-content-between mb-3">
                 <button class="btn btn-primary" onclick="window.location.href='<?= base_url('orders/newOrder'); ?>'">+ New Order</button>
-                <div>
+                <!-- <div>
                     <button class="btn btn-outline-success" onclick="window.location.href='/orders/export';">Export to Excel</button>
                     <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#importModal">Import Orders</button>
-                </div>
+                </div> -->
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
+            <!-- <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <form action="<?= base_url('orders/import') ?>" method="POST" enctype="multipart/form-data">
@@ -39,7 +39,7 @@
                         </form>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Filter Form -->
             <form action="<?= base_url('orders/filter') ?>" method="GET" class="d-flex gap-3 mb-4">
