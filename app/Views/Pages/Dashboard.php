@@ -63,7 +63,7 @@
             <div class="card-body">
                 <h5>Stock Alert</h5>
                 <div class="table-responsive">
-                    <table class="table table-dark table-striped-columns">
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th>Product Name</th>
@@ -86,6 +86,7 @@
                                         <?php else : ?>
                                             <span class="text-success">OK</span>
                                         <?php endif; ?>
+                                        
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
