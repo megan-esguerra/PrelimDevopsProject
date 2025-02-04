@@ -108,5 +108,12 @@ class Filters extends BaseFilters
      *
      * @var array<string, array<string, list<string>>>
      */
-    public array $filters = [];
+    public array $filters = [
+                    // ✅ Secure all pages inside "pages" subfolder
+                    'auth' => ['before' => ['pages/*', 'Dashboard/*', 'in_stocks/*', 'orders/*', 'statistics/*', 'users/*']],
+        
+                    // ✅ Allow public access to authentication pages
+                    // 'noauth' => ['before' => ['login', 'register', 'forgot_password']],
+        
+    ];
 }
