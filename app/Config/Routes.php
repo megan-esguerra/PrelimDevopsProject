@@ -21,8 +21,7 @@ $routes->post('/reset_password/(:segment)', 'Auth::updatePassword/$1');
 
 $routes->get('dashboard', 'DashboardController::index');
 $routes->get('statistics', 'StatisticsController::index');
-$routes->get('/orders', 'Orders::index');
-$routes->get('/orders/new', 'Orders::newOrder');
+$routes->get('orders', 'Orders::index');
 $routes->get('/orders/filter', 'Orders::filterOrders');
 $routes->get('/users', 'UsersController::index');
 $routes->post('/orders/create', 'Orders::create');
