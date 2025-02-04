@@ -54,11 +54,12 @@ class Auth extends Controller
             // Debugging: Check the session data
             log_message('info', 'Session Data: ' . print_r(session()->get(), true));
     
-            // Ensure role is valid (no spaces or unexpected characters)
-            $userRole = strtolower(trim($session->get('role')));
-            if (!in_array($userRole, ['Admin', 'Staff'])) {
-                return redirect()->to('/LogIn')->with('error', 'You do not have access to this page.');
-            }
+            // // Ensure role is valid (no spaces or unexpected characters)
+            // $userRole = strtolower(trim($session->get('role')));
+            
+            // if (!in_array($userRole, ['Admin', 'Staff'])) {
+            //     return redirect()->to('/LogIn')->with('error', 'You do not have access to this page.');
+            // }
     
             return redirect()->to('/dashboard');
         } else {
