@@ -70,7 +70,7 @@
 
                         <button type="submit" class="btn login-btn">Login</button>
                     </form>
-                    <p class="mt-3">Not registered yet? <a href="<?= site_url('/LogIn') ?>">Cancel</a></p>
+                    <p class="mt-3"><a href="<?= site_url('/LogIn') ?>">Cancel</a></p>
                 </div>
 
                     <div class="col-md-6 text-center">
