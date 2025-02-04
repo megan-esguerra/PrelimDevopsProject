@@ -29,7 +29,7 @@ class Orders extends BaseController
     ");
     $orders = $query->getResultArray();
 
-    return view('orders/index', ['orders' => $orders]);
+    return view('Pages/orders', ['orders' => $orders]);
 }
 
 
