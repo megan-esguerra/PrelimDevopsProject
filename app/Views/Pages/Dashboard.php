@@ -160,12 +160,12 @@ new Chart(ctx, {
             {
                 label: 'Revenue',
                 data: revenueData,
-                borderColor: '#A59D84', // Updated color
+                borderColor: '#D4A373', // Updated color
                 backgroundColor: gradientRevenue,
                 fill: true,
                 tension: 0.4,
                 pointRadius: 3,
-                pointBackgroundColor: '#A59D84',
+                pointBackgroundColor: '#D4A373',
                 pointHoverRadius: 5
             },
             {

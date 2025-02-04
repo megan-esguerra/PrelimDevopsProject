@@ -68,14 +68,14 @@ h6 {
 
 /* Scrollbar Track */
 ::-webkit-scrollbar-track {
-    background: #D4A373;
+    background: #d4ccb6;
     border-radius: 10px;
 }
 
 /* Default Scrollbar Handle (Thumb) */
 ::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background: linear-gradient(180deg, #5A4E3C, #A6CDC6); /* Default (scroll up) */
+    background: linear-gradient(180deg, #5A4E3C, #D4A373); /* Default (scroll up) */
     transition: background 0.3s ease-in-out;
 }
 a{

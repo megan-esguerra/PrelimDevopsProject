@@ -12,7 +12,7 @@
 
         <!-- User Profile Dropdown -->
         <div class="dropdown">
-        <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <a href="#" class="d-flex align-items-center text-light text-decoration-none dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
     <img src="<?= base_url('img/bgimg.png'); ?>" alt="User" class="rounded-circle me-2" width="40" height="40">
     <span><?= session()->get('name') ?? 'Guest'; ?></span> 
 </a>
