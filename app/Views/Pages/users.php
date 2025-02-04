@@ -1,4 +1,39 @@
 <?php include(APPPATH . 'Views/layout/Header.php'); ?>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Karla', sans-serif;
+        }
+        .container {
+            margin-top: 3rem;
+        }
+        h2 {
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+        .table {
+            border-collapse: separate;
+            border-spacing: 0 1rem;
+        }
+        .table thead th {
+            background-color: #f8f9fa;
+            border: none;
+            font-weight: 700;
+        }
+        .table tbody tr {
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .table tbody td {
+            border: none;
+            padding: 1rem;
+        }
+        .table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
 <body>
     <!-- Sidebar -->
     <?php include(APPPATH . 'Views/layout/sidebar.php'); ?>
@@ -6,7 +41,7 @@
     <div class="main-content">
         <!-- Navbar -->
         <?php include(APPPATH . 'Views/layout/navbar.php'); ?>
-        <div class="container mt-3">
+        <div class="container">
             <h2>Users</h2>
             <table class="table table-striped">
                 <thead>
