@@ -87,20 +87,6 @@ class Orders extends BaseController
         }
     }
 
-    public function deleteOrder()
-{
-    $orderId = $this->request->getPost('order_id');
-    $ordersModel = new OrderModel();
-
-    if ($ordersModel->delete($orderId)) { // Soft delete
-        return redirect()->to('/orders')->with('success', 'Order archived successfully.');
-    } else {
-        return redirect()->to('/orders')->with('error', 'Failed to archive order.');
-    }
-}
-
-
-
     public function get_archived()
 {
     $orders = $this->orderModel->onlyDeleted()
@@ -122,19 +108,26 @@ public function getArchivedOrders()
 }
 
 
+public function deleteOrder()
+{
+    $orderId = $this->request->getPost('order_id');
+
+    if ($this->orderModel->update($orderId, ['deleted_at' => date('Y-m-d H:i:s')])) {
+        return redirect()->to('/orders')->with('success', 'Order archived successfully.');
+    } else {
+        return redirect()->to('/orders')->with('error', 'Failed to archive order.');
+    }
+}
 
 public function restoreOrder()
 {
     $orderId = $this->request->getPost('order_id');
-    $ordersModel = new OrderModel();
 
-    // Restore by setting deleted_at = NULL
-    if ($ordersModel->update($orderId, ['deleted_at' => NULL])) {
+    if ($this->orderModel->update($orderId, ['deleted_at' => null])) {
         return redirect()->to('/orders')->with('success', 'Order restored successfully.');
     } else {
         return redirect()->to('/orders')->with('error', 'Failed to restore order.');
     }
 }
-
 
 }
