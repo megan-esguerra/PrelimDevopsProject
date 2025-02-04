@@ -70,7 +70,7 @@
                                         <?= htmlspecialchars($order['status']) ?>
                                     </span>
                                 </td>
-                                <td class="text-truncate" style="max-width: 100px;">
+                                <td class="text-truncate" style="max-width: 80px;">
                                     <div class="d-flex flex-row gap-2">
                                         <button class="btn btn-sm btn-secondary" 
                                             data-bs-toggle="modal" 
