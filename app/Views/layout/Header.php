@@ -253,9 +253,13 @@ a{
             background-color: #8e846c;
             border-color: #8e846c;
         }
-
+.Captcha{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-<div class="g-recaptcha" data-sitekey="6LesE8wqAAAAAFGQb8owvb9VoWoM7tSeaFbcv296"></div>
+<div class="Captcha"><div class="g-recaptcha" data-sitekey="6LesE8wqAAAAAFGQb8owvb9VoWoM7tSeaFbcv296"></div></div>
