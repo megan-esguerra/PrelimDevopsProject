@@ -4,20 +4,21 @@ namespace App\Controllers;
 use App\Models\OrderModel;
 use App\Models\CustomerModel;
 use App\Models\ProductModel;
-use App\Models\PurchaseOrderModel;
+use App\Models\PurchaseOrdersModel;
 use CodeIgniter\Controller;
 
 class Orders extends Controller {
+    // Update routes
     public function index() {
         $orderModel = new OrderModel();
         $data['orders'] = $orderModel->getOrders();
-        return view('orders/index', $data);
+        return view('Pages/orders', $data);
     }
 
     public function newOrder() {
         $customerModel = new CustomerModel();
         $productModel = new ProductModel();
-        $purchaseOrderModel = new PurchaseOrderModel();
+        $purchaseOrderModel = new PurchaseOrdersModel();
 
         $data['customers'] = $customerModel->findAll();
         $data['products'] = $productModel->findAll();
