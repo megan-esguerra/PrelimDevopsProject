@@ -52,23 +52,15 @@
                                     <?= htmlspecialchars($order['status']) ?>
                                 </span>
                             </td>
-                            <td class="d-flex gap-2 align-items-center">
-                                <!-- Edit Button -->
-                                <button class="btn btn-sm btn-secondary" 
-                                        data-bs-toggle="modal" 
-                                        data-bs-target="#editStatusModal" 
-                                        data-id="<?= htmlspecialchars($order['id']) ?>" 
-                                        data-status="<?= htmlspecialchars($order['status']) ?>">
-                                    Edit
-                                </button>
+                            <td>
+                                <button class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#editStatusModal" data-id="<?= htmlspecialchars($order['id']) ?>" data-status="<?= htmlspecialchars($order['status']) ?>">Edit</button>
 
-                                <!-- Archive Button -->
-                                <form id="deleteOrderForm" action="<?= base_url('orders/delete') ?>" method="post" class="m-0 p-0">
+                                <form id="deleteOrderForm" action="<?= base_url('orders/delete') ?>" method="post">
                                     <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
-                                    <button type="submit" class="btn btn-sm btn-danger">Archive</button>
+                                    <button type="submit" class="btn btn-danger">Archive</button>
                                 </form>
-                            </td>
 
+                            </td>
 
                         </tr>
                     <?php endforeach; ?>
