@@ -258,3 +258,4 @@ a{
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<div class="g-recaptcha" data-sitekey="6LesE8wqAAAAAFGQb8owvb9VoWoM7tSeaFbcv296"></div>
