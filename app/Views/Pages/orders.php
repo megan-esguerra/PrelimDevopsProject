@@ -57,6 +57,7 @@
 
                                 <form action="<?= site_url('orders/delete') ?>" method="post" class="d-inline">
                                     <?= csrf_field() ?>
+                                    <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="order_id" value="<?= htmlspecialchars($order['id']) ?>">
                                     <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to archive this order?')">Archive</button>
                                 </form>
@@ -244,6 +245,30 @@
 }
 
 });
+
+function confirmArchive(orderId) {
+    if (confirm('Are you sure you want to archive this order?')) {
+        fetch("<?= site_url('orders/delete') ?>", {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '<?= csrf_hash() ?>',
+            },
+            body: JSON.stringify({ order_id: orderId }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Order archived successfully!');
+                location.reload();
+            } else {
+                alert('Failed to archive order.');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+}
+
     </script>
 
     <!-- Bootstrap JS (Ensure Bootstrap is included in your layout/Header.php) -->
