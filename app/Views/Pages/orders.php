@@ -70,7 +70,7 @@
                                         <?= htmlspecialchars($order['status']) ?>
                                     </span>
                                 </td>
-                                <td class="w-25">
+                                <td class="w-10">
                                     <div class="d-flex flex-row gap-2">
                                         <button class="btn btn-sm btn-secondary" 
                                             data-bs-toggle="modal" 
