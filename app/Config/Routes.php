@@ -26,6 +26,8 @@ $routes->get('/orders/new', 'Orders::newOrder');
 $routes->get('/orders/export', 'Orders::exportOrders');
 $routes->post('/orders/import', 'Orders::importOrders');
 $routes->get('/orders/filter', 'Orders::filterOrders');
+$routes->post('orders/create', 'Orders::create');
+
 
 
 

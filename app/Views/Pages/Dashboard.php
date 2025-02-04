@@ -149,8 +149,8 @@ gradientRevenue.addColorStop(1, 'rgba(165, 157, 132, 0.42)'); // Fully transpare
 
 // Create a gradient for sales
 const gradientSales = ctx.createLinearGradient(0, 0, 0, 400);
-gradientSales.addColorStop(0, 'rgba(215, 211, 191, 0.77)'); // #D7D3BF (semi-transparent)
-gradientSales.addColorStop(1, 'rgba(215, 211, 191, 0.48)'); // Fully transparent
+gradientSales.addColorStop(0, 'rgba(212, 163, 115, 0.76)'); // #D7D3BF (semi-transparent)
+gradientSales.addColorStop(1, 'rgba(212, 163, 115, 0.4)'); // Fully transparent
 
 new Chart(ctx, {
     type: 'line',
@@ -171,12 +171,12 @@ new Chart(ctx, {
             {
                 label: 'Sales',
                 data: salesData,
-                borderColor: '#D7D3BF', // Updated color
+                borderColor: '#D4A373', // Updated color
                 backgroundColor: gradientSales,
                 fill: true,
                 tension: 0.4,
                 pointRadius: 3,
-                pointBackgroundColor: '#D7D3BF',
+                pointBackgroundColor: '#D4A373',
                 pointHoverRadius: 5
             }
         ]
@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 label: 'Product Prices Layer 3',
                 data: productPrices, // Outermost layer (Full value)
                 backgroundColor: [
-                    'rgba(165, 157, 132, 1)', // Full opacity Light #A59D84
+                    'rgba(165, 157, 132, 0.87)', // Full opacity Light #A59D84
                     'rgba(133, 123, 98, 1)',  // Full opacity Darker #857B62
                     'rgba(165, 157, 132, 1)',
                     'rgba(133, 123, 98, 1)',
