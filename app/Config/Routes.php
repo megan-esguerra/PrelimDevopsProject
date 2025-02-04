@@ -29,6 +29,11 @@ $routes->get('orders/newOrder', 'Orders::newOrder');
 $routes->post('orders/create', 'Orders::create');
 
 
+$routes->get('/in-stock', 'InStockController::index');         
+$routes->get('/new-stock', 'InStockController::addStock');   
+$routes->post('/save-stock', 'InStockController::saveStock');
+
+
 
 
 
