@@ -65,7 +65,7 @@
                         </div>
                         <button type="submit" class="btn login-btn">Reset Password</button>
                     </form>
-                    p class="mt-3">Not registered yet? <a href="<?= site_url('/LogIn') ?>">Cancel</a></p>
+                    <p class="mt-3">Not registered yet? <a href="<?= site_url('/LogIn') ?>">Cancel</a></p>
                     
                 </div>
 
