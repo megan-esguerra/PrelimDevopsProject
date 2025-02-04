@@ -70,22 +70,22 @@
                                         <?= htmlspecialchars($order['status']) ?>
                                     </span>
                                 </td>
-                                <td class="w-25" style="width: 120px;">
-    <div class="d-flex flex-column gap-2">
-        <button class="btn btn-sm btn-secondary" 
-            data-bs-toggle="modal" 
-            data-bs-target="#editStatusModal" 
-            data-id="<?= htmlspecialchars($order['id']) ?>" 
-            data-status="<?= htmlspecialchars($order['status']) ?>">
-            Edit
-        </button>
+                                <td class="w-25">
+                                    <div class="d-flex flex-column gap-2">
+                                        <button class="btn btn-sm btn-secondary" 
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#editStatusModal" 
+                                            data-id="<?= htmlspecialchars($order['id']) ?>" 
+                                            data-status="<?= htmlspecialchars($order['status']) ?>">
+                                            Edit
+                                        </button>
 
-        <form action="<?= base_url('orders/delete') ?>" method="post">
-            <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
-            <button type="submit" class="btn btn-sm btn-danger">Archive</button>
-        </form>
-    </div>
-</td>
+                                        <form action="<?= base_url('orders/delete') ?>" method="post">
+                                            <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
+                                            <button type="submit" class="btn btn-sm btn-danger">Archive</button>
+                                        </form>
+                                    </div>
+                                </td>
 
                             </tr>
                         <?php endforeach; ?>
