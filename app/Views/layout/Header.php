@@ -243,6 +243,16 @@ canvas#polarChart {
 .table {
     background: transparent !important;
 }
+
+.table thead th,
+.table tbody tr {
+    background: transparent !important;
+}
+
+.dropdown-menu {
+    background: #5A4E3C;
+    border-radius: 10px;
+}
 .active {
     font-weight: bold;
     color: #007bff;
