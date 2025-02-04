@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Models\OrderModel;
 use App\Models\CustomerModel;
 use App\Models\SupplierModel;
+use CodeIgniter\Controller;
 
 class Orders extends BaseController {
     public function index() {
@@ -18,6 +19,28 @@ class Orders extends BaseController {
     }
 
     public function newOrder() {
-        return view('new_order');
+        $customerModel = new CustomerModel();
+        $supplierModel = new SupplierModel();
+
+        $data['customers'] = $customerModel->findAll();
+        $data['suppliers'] = $supplierModel->findAll();
+
+        return view('orders/new_order', $data);
+    }
+
+    public function create() {
+        $orderModel = new OrderModel();
+        
+        $data = [
+            'customer_id' => $this->request->getPost('customer_id'),
+            'supplier_id' => $this->request->getPost('supplier_id'),
+            'items' => $this->request->getPost('items'),
+            'status' => $this->request->getPost('status'),
+            'date' => date('Y-m-d')
+        ];
+
+        $orderModel->insert($data);
+
+        return redirect()->to('/orders')->with('success', 'Order created successfully');
     }
 }
