@@ -81,7 +81,7 @@ class Auth extends Controller
         // Send reset link to email
         $emailService = Services::email();
         $emailService->setTo($email);
-        $emailService->setFrom('0906megan64@mgmail.com', 'Cat Cafes Inventory Management System');
+        $emailService->setFrom('0906megan64@gmail.com', 'Cat Cafes Inventory Management System');
         $emailService->setSubject('Password Reset Request');
         $resetLink = site_url("Auth/resetPassword/{$token}");
         $emailService->setMessage("Click here to reset your password: <a href='{$resetLink}'>Reset Password</a>");
