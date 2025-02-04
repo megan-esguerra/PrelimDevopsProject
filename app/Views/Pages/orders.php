@@ -154,6 +154,53 @@
         </div>
     </div>
 
+    <!-- Archive Orders Modal -->
+<div class="modal fade" id="archiveModal" tabindex="-1" aria-labelledby="archiveModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="archiveModalLabel">Archived Orders</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Supplier</th>
+                            <th>Items</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($archivedOrders as $order): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($order['id']) ?></td>
+                                <td><?= htmlspecialchars($order['customer_name']) ?></td>
+                                <td><?= htmlspecialchars($order['supplier_name']) ?></td>
+                                <td><?= htmlspecialchars($order['items']) ?></td>
+                                <td><?= htmlspecialchars($order['status']) ?></td>
+                                <td>
+                                    <form action="<?= base_url('orders/restore') ?>" method="post">
+                                        <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
+                                        <button type="submit" class="btn btn-sm btn-success">Restore</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Button to Open Archive Modal -->
+<button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#archiveModal">View Archived Orders</button>
+
+
     <script>
     document.addEventListener('DOMContentLoaded', function () {
         const editStatusModal = document.getElementById('editStatusModal');
