@@ -14,7 +14,7 @@ class Orders extends BaseController {
             ->join('suppliers', 'suppliers.supplier_id = orders.supplier_id')
             ->findAll();
 
-        return view('orders', ['orders' => $orders]);
+        return view('Pages/orders', ['orders' => $orders]);
     }
 
     public function newOrder() {
