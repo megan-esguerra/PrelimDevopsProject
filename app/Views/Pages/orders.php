@@ -62,7 +62,7 @@
                                 <td class="text-truncate" style="max-width: 80px;"><?= htmlspecialchars($order['customer_name']) ?></td>
                                 <td class="text-truncate" style="max-width: 80px;"><?= htmlspecialchars($order['supplier_name']) ?></td>
                                 <td class="text-truncate" style="max-width: 50px;"><?= htmlspecialchars($order['items']) ?></td>
-                                <td class="text-truncate" style="max-width: 50px;"></td>>
+                                <td class="text-truncate" style="max-width: 50px;">
                                     <span class="badge 
                                         <?= $order['status'] == 'Completed' ? 'bg-success' : 
                                         ($order['status'] == 'Pending' ? 'bg-warning' : 
