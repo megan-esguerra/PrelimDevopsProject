@@ -144,28 +144,10 @@ public function getArchivedOrders()
 {
     $ordersModel = new OrderModel();
 
-    try {
-        // Fetch only soft-deleted (archived) orders
-        $archivedOrders = $ordersModel->onlyDeleted()->findAll();
+    // Fetch only soft-deleted orders
+    $archivedOrders = $ordersModel->onlyDeleted()->findAll();
 
-        if (empty($archivedOrders)) {
-            return $this->response->setJSON([
-                'status' => 'success',
-                'message' => 'No archived orders found.',
-                'data' => []
-            ]);
-        }
-
-        return $this->response->setJSON([
-            'status' => 'success',
-            'data' => $archivedOrders
-        ]);
-    } catch (\Exception $e) {
-        return $this->response->setJSON([
-            'status' => 'error',
-            'message' => 'Failed to fetch archived orders: ' . $e->getMessage()
-        ]);
-    }
+    return $this->response->setJSON($archivedOrders);
 }
 
 
