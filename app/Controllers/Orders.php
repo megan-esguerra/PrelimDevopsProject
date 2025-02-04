@@ -16,7 +16,7 @@ class OrdersController extends Controller
         $data['orders'] = $orderModel->getOrders();
         $data['suppliers'] = $supplierModel->findAll(); // Fetch suppliers for dropdown
 
-        return view('Pages/orders', $data);
+        return view('orders/index', $data);
     }
 
     public function create()
