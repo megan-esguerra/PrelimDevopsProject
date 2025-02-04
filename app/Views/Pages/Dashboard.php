@@ -62,7 +62,7 @@
             <div class="card-body">
                 <h5>Stock Alert</h5>
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-dark table-striped-columns">
                         <thead>
                             <tr>
                                 <th>Order ID</th>
@@ -99,7 +99,7 @@
             <div class="card-body">
                 <h5>Top Selling Products</h5>
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-dark table-striped-columns">
                         <thead>
                             <tr>
                                 <th>Order ID</th>
@@ -191,12 +191,12 @@ new Chart(ctx, {
         scales: {
             x: {
                 grid: {
-                    display: false
+                    display: true
                 }
             },
             y: {
                 grid: {
-                    display: false
+                    display: true
                 },
                 ticks: {
                     display: false
