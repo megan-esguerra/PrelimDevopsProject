@@ -3,9 +3,9 @@
 namespace App\Controllers;
 
 use App\Models\StockModel;
-use CodeIgniter\Controller;
 
-class StockController extends Controller
+
+class StockController extends BaseController
 {
     public function index()
     {
