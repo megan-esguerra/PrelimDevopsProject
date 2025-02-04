@@ -55,7 +55,7 @@
 
                     <!-- Display error flash data -->
                     <?php if (session()->getFlashdata('error')): ?>
-                        <p style="color:red"><?= session()->getFlashdata('error') ?></p>
+                        <p class="alert alert-danger"><?= session()->getFlashdata('error') ?></p>
                     <?php endif; ?>
 
                     <form action="<?= site_url('forgot_password')?>" method="post">

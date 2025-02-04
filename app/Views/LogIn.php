@@ -59,7 +59,7 @@
 
                     <!-- Display error flash data -->
                     <?php if (session()->getFlashdata('error')) : ?>
-                        <div style="color:red">
+                        <div class="alert alert-danger">
                             <?= session()->getFlashdata('error') ?>
                         </div>
                     <?php endif; ?>

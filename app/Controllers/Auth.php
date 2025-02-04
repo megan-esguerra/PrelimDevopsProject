@@ -56,8 +56,8 @@ class Auth extends Controller
     
             // Ensure role is valid (no spaces or unexpected characters)
             $userRole = strtolower(trim($session->get('role')));
-            if (!in_array($userRole, ['admin', 'staff'])) {
-                return redirect()->to('/LogIsn')->with('error', 'You do not have access to this page.');
+            if (!in_array($userRole, ['Admin', 'Staff'])) {
+                return redirect()->to('/LogIn')->with('error', 'You do not have access to this page.');
             }
     
             return redirect()->to('/dashboard');

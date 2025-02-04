@@ -54,7 +54,7 @@
                    
                     <!-- Display error flash data -->
                     <?php if (isset($validation)): ?>
-                        <p style="color:red"><?= $validation->listErrors() ?></p>
+                        <p class="alert alert-danger"><?= $validation->listErrors() ?></p>
                     <?php endif; ?>
 
                     <form action="<?= site_url('/reset_password/' . $token) ?>" method="post">
