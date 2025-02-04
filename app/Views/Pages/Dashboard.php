@@ -207,69 +207,68 @@ new Chart(ctx, {
 });
         
 
-document.addEventListener('DOMContentLoaded', function () {
-        const ctx = document.getElementById('radialBarChart').getContext('2d');
-
-        const productLabels = <?= $productLabels ?>; // Fetch labels from PHP
-        const productPrices = <?= $productPrices ?>; // Fetch prices from PHP
-
-        new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: productLabels,
-                datasets: [
-                    {
-                        label: 'Product Prices Layer 1',
-                        data: productPrices.map(value => value * 0.5), // First layer (50%)
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.5)',
-                            'rgba(54, 162, 235, 0.5)',
-                            'rgba(255, 206, 86, 0.5)',
-                            'rgba(75, 192, 192, 0.5)',
-                            'rgba(153, 102, 255, 0.5)',
-                            'rgba(255, 159, 64, 0.5)'
-                        ],
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Product Prices Layer 2',
-                        data: productPrices.map(value => value * 0.8), // Second layer (80%)
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.7)',
-                            'rgba(54, 162, 235, 0.7)',
-                            'rgba(255, 206, 86, 0.7)',
-                            'rgba(75, 192, 192, 0.7)',
-                            'rgba(153, 102, 255, 0.7)',
-                            'rgba(255, 159, 64, 0.7)'
-                        ],
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Product Prices Layer 3',
-                        data: productPrices, // Outermost layer (Full value)
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }
-                ]
+const productChart = new Chart(polarCtx, {
+    type: 'polarArea',
+    data: {
+        labels: productLabels,
+        datasets: [
+            {
+                label: 'Product Prices Layer 1',
+                data: productPrices.map(value => value * 0.5), // First layer (50%)
+                backgroundColor: [
+                    'rgba(165, 157, 132, 0.3)', // Light #A59D84 (30% opacity)
+                    'rgba(133, 123, 98, 0.3)',  // Darker #857B62
+                    'rgba(165, 157, 132, 0.3)',
+                    'rgba(133, 123, 98, 0.3)',
+                    'rgba(165, 157, 132, 0.3)',
+                    'rgba(133, 123, 98, 0.3)'
+                ],
+                borderWidth: 1
             },
-            options: {
-                responsive: true,
-                cutout: '50%', // Adjusts the inner cutout to make it a radial bar chart
-                plugins: {
-                    legend: {
-                        position: 'top'
-                    }
+            {
+                label: 'Product Prices Layer 2',
+                data: productPrices.map(value => value * 0.8), // Second layer (80%)
+                backgroundColor: [
+                    'rgba(165, 157, 132, 0.6)', // Light #A59D84 (60% opacity)
+                    'rgba(133, 123, 98, 0.6)',  // Darker #857B62
+                    'rgba(165, 157, 132, 0.6)',
+                    'rgba(133, 123, 98, 0.6)',
+                    'rgba(165, 157, 132, 0.6)',
+                    'rgba(133, 123, 98, 0.6)'
+                ],
+                borderWidth: 1
+            },
+            {
+                label: 'Product Prices Layer 3',
+                data: productPrices, // Outermost layer (Full value)
+                backgroundColor: [
+                    'rgba(165, 157, 132, 1)', // Full opacity Light #A59D84
+                    'rgba(133, 123, 98, 1)',  // Full opacity Darker #857B62
+                    'rgba(165, 157, 132, 1)',
+                    'rgba(133, 123, 98, 1)',
+                    'rgba(165, 157, 132, 1)',
+                    'rgba(133, 123, 98, 1)'
+                ],
+                borderWidth: 1
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        cutout: '50%', // Adjust for donut-like effect
+        plugins: {
+            legend: {
+                position: 'top',
+                labels: {
+                    boxWidth: 15,
+                    padding: 10,
+                    usePointStyle: true
                 }
             }
-        });
-    });
+        }
+    }
+});
+
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
