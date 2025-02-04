@@ -53,14 +53,24 @@
                                 </span>
                             </td>
                             <td>
-                                <button class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#editStatusModal" data-id="<?= htmlspecialchars($order['id']) ?>" data-status="<?= htmlspecialchars($order['status']) ?>">Edit</button>
+                                <div class="d-flex justify-content-start gap-2">
+                                    <!-- Edit Button -->
+                                    <button class="btn btn-sm btn-secondary" 
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#editStatusModal" 
+                                            data-id="<?= htmlspecialchars($order['id']) ?>" 
+                                            data-status="<?= htmlspecialchars($order['status']) ?>">
+                                        Edit
+                                    </button>
 
-                                <form id="deleteOrderForm" action="<?= base_url('orders/delete') ?>" method="post">
-                                    <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
-                                    <button type="submit" class="btn btn-danger">Archive</button>
-                                </form>
-
+                                    <!-- Archive Button -->
+                                    <form id="deleteOrderForm" action="<?= base_url('orders/delete') ?>" method="post" class="m-0">
+                                        <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
+                                        <button type="submit" class="btn btn-sm btn-danger">Archive</button>
+                                    </form>
+                                </div>
                             </td>
+
 
                         </tr>
                     <?php endforeach; ?>
