@@ -261,5 +261,16 @@ a{
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
-<div class="Captcha"><div class="g-recaptcha" data-sitekey="6LesE8wqAAAAAFGQb8owvb9VoWoM7tSeaFbcv296"></div></div>
+
+<div class="Captcha">
+<input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
+<script src="https://www.google.com/recaptcha/api.js?render=YOUR_SITE_KEY"></script>
+<script>
+    grecaptcha.ready(function() {
+        grecaptcha.execute('YOUR_SITE_KEY', {action: 'submit'}).then(function(token) {
+            document.getElementById('g-recaptcha-response').value = token;
+        });
+    });
+</script>
+
+</div>
