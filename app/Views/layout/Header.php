@@ -110,7 +110,7 @@ a{
     background: #A59D84;
     padding: 10px;
     border-radius: 10px;
-    box-shadow: #5A4E3C -3px 2px 15px 0px;
+    box-shadow: #5A4E3C -3px 2px 2px 0px;
 }
 
 .search-bar {
