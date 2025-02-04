@@ -44,7 +44,7 @@
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th class="text-truncate" style="max-width: 30px;">Order ID</th>
+                        <th class="text-truncate" style="max-width: 50px;">Order ID</th>
                         <th class="text-truncate" style="max-width: 30px;">Date</th>
                         <th class="text-truncate" style="max-width: 150px;">Customer</th>
                         <th class="text-truncate" style="max-width: 150px;">Supplier</th>
