@@ -18,10 +18,28 @@ class Orders extends BaseController
 
     // Main page to list orders
     public function index()
-    {
-        $orders = $this->orderModel->getOrders(); // Replace with your actual query logic
-        return view('Pages/orders', ['orders' => $orders]);
-    }
+{
+    $db = \Config\Database::connect();
+
+    $customers = $db->query("SELECT id, customer_name FROM customers")->getResultArray();
+    $suppliers = $db->query("SELECT id, supplier_name FROM suppliers")->getResultArray();
+
+    $query = $db->query("
+        SELECT o.id, o.date, c.customer_name, s.supplier_name, o.items, o.status
+        FROM orders o
+        JOIN customers c ON o.customer_id = c.id
+        JOIN suppliers s ON o.supplier_id = s.id
+    ");
+    $orders = $query->getResultArray();
+
+    return view('orders/index', [
+        'orders' => $orders,
+        'customers' => $customers,
+        'suppliers' => $suppliers
+    ]);
+}
+
+
 
     // Filter orders based on criteria
     public function filterOrders()
@@ -121,8 +139,26 @@ class Orders extends BaseController
     // }
 
     // Load the form for creating a new order
-    public function newOrder()
-    {
-        return view('orders/new_order_form');
-    }
+    // public function newOrder()
+    // {
+    //     return view('orders/new_order_form');
+    // }
+    public function create()
+{
+    $db = \Config\Database::connect();
+    $builder = $db->table('orders');
+
+    $data = [
+        'date' => $this->request->getPost('date'),
+        'customer_id' => $this->request->getPost('customer_id'),
+        'supplier_id' => $this->request->getPost('supplier_id'),
+        'items' => $this->request->getPost('items'),
+        'status' => $this->request->getPost('status')
+    ];
+
+    $builder->insert($data);
+
+    return redirect()->to(base_url('orders'))->with('success', 'Order created successfully.');
+}
+
 }
