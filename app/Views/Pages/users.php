@@ -14,9 +14,12 @@
         }
         .table {
             border-spacing: 0 1rem;
+            background-color:rgb(233, 228, 214);
+            border-radius: 10px;
+            overflow: hidden;
         }
         .table thead th {
-            background-color: #a59d84;
+            background-color: #7a6e4f; 
             border: none;
             font-weight: 700;
             font-family: 'Karla', sans-serif;
