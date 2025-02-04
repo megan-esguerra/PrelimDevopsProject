@@ -57,7 +57,7 @@
     </div>
 
     <!-- New Order Modal -->
-    <div class="modal fade" id="newOrderModal" tabindex="-1" aria-labelledby="newOrderModalLabel" aria-hidden="true">
+<div class="modal fade" id="newOrderModal" tabindex="-1" aria-labelledby="newOrderModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -69,11 +69,11 @@
                     <!-- Customer Dropdown -->
                     <div class="mb-3">
                         <label for="customerName" class="form-label">Customer Name</label>
-                        <select class="form-select" id="customerName" name="customer_name" required>
+                        <select class="form-select" id="customerName" name="customer_id" required>
                             <option value="" selected disabled>Select Customer</option>
                             <?php foreach ($customers as $customer): ?>
-                                <option value="<?= htmlspecialchars($customer['id']) ?>">
-                                    <?= htmlspecialchars($customer['name']) ?>
+                                <option value="<?= htmlspecialchars($customer['customer_id']) ?>">
+                                    <?= htmlspecialchars($customer['customer_name']) ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>
@@ -82,11 +82,11 @@
                     <!-- Supplier Dropdown -->
                     <div class="mb-3">
                         <label for="supplierName" class="form-label">Supplier Name</label>
-                        <select class="form-select" id="supplierName" name="supplier_name" required>
+                        <select class="form-select" id="supplierName" name="supplier_id" required>
                             <option value="" selected disabled>Select Supplier</option>
                             <?php foreach ($suppliers as $supplier): ?>
-                                <option value="<?= htmlspecialchars($supplier['id']) ?>">
-                                    <?= htmlspecialchars($supplier['name']) ?>
+                                <option value="<?= htmlspecialchars($supplier['supplier_id']) ?>">
+                                    <?= htmlspecialchars($supplier['supplier_name']) ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>
@@ -114,6 +114,7 @@
         </div>
     </div>
 </div>
+
 
 
     <!-- Bootstrap JS (Ensure Bootstrap is included in your layout/Header.php) -->
