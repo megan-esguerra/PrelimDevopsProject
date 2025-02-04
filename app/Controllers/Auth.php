@@ -43,7 +43,7 @@ class Auth extends Controller
 
         // Check login attempts (Rate Limiting)
         $throttler = \Config\Services::throttler();
-        if ($throttler->check(md5($this->request->getIPAddress()), 5, MINUTE) === false) {
+        if ($throttler->check(md5($this->request->getIPAddress()), 1, MINUTE) === false) {
             return redirect()->back()->with('error', 'Too many login attempts. Try again later.');
         }
 

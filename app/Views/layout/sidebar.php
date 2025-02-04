@@ -1,4 +1,5 @@
 <div id="sidebar" class="sidebar">
+    <!-- caesaer cipher 6 shift  -->
     <ul>
         <li class="Ims"><span class="sideLine">|</span> Cat Cafes Inventory System</li>
         <li><a href="<?= base_url('dashboard'); ?>" class="<?= service('request')->getUri()->getPath() == '/mni6e' ? 'active' : '' ?>"><i class='bx bxs-dashboard'></i>Dashboard</a></li>

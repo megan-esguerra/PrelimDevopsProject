@@ -16,11 +16,13 @@ class AuthFilter implements FilterInterface
             return redirect()->to('/LogIn')->with('error', 'You must be logged in to access this page.');
         }
 
+        
+
         // Check if the user has the 'admin' or 'staff' role
         $userRole = $session->get('role');
         if (!in_array($userRole, ['admin', 'staff'])) {
             // If the user is not an admin or staff, redirect to the home page or a restricted access page
-            return redirect()->to('/LogIn');
+            return redirect()->to('/restricted')->with('error', 'You do not have permission to access this page.');
         }
     }
 
