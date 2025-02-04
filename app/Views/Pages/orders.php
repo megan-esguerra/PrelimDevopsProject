@@ -28,14 +28,17 @@
             <!-- Search and Filters -->
             <form class="d-flex mb-3" action="<?= base_url('orders') ?>" method="get">
                 <input type="text" class="form-control me-2" name="search" placeholder="Search orders..." value="<?= htmlspecialchars($search ?? '') ?>">
+                
                 <select class="form-select me-2" name="status">
-                    <option value="" selected>All Statuses</option>
+                    <option value="" <?= empty($statusFilter) ? 'selected' : '' ?>>All Status</option>
                     <option value="Pending" <?= ($statusFilter ?? '') == 'Pending' ? 'selected' : '' ?>>Pending</option>
                     <option value="Completed" <?= ($statusFilter ?? '') == 'Completed' ? 'selected' : '' ?>>Completed</option>
                     <option value="Cancelled" <?= ($statusFilter ?? '') == 'Cancelled' ? 'selected' : '' ?>>Cancelled</option>
                 </select>
+
                 <button type="submit" class="btn btn-primary">Filter</button>
             </form>
+
 
             <!-- Orders Table -->
             <table class="table table-striped table-hover">
@@ -51,47 +54,41 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($orders as $order): ?>
-                        <tr>
-                            <td><?= htmlspecialchars($order['id']) ?></td>
-                            <td><?= htmlspecialchars($order['date']) ?></td>
-                            <td><?= htmlspecialchars($order['customer_name']) ?></td>
-                            <td><?= htmlspecialchars($order['supplier_name']) ?></td>
-                            <td><?= htmlspecialchars($order['items']) ?></td>
-                            <td>
-                                <span class="badge 
-                                    <?php 
-                                        if ($order['status'] == 'Completed') {
-                                            echo 'bg-success';
-                                        } elseif ($order['status'] == 'Pending') {
-                                            echo 'bg-warning';
-                                        } elseif ($order['status'] == 'Cancelled') {
-                                            echo 'bg-danger';
-                                        } else {
-                                            echo 'bg-secondary';
-                                        }
-                                    ?>">
-                                    <?= htmlspecialchars($order['status']) ?>
-                                </span>
-                            </td>
-                            <td>
-                                <div class="d-flex justify-content-start gap-2">
+                    <?php if (!empty($orders)): ?>
+                        <?php foreach ($orders as $order): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($order['id']) ?></td>
+                                <td><?= htmlspecialchars($order['date']) ?></td>
+                                <td><?= htmlspecialchars($order['customer_name']) ?></td>
+                                <td><?= htmlspecialchars($order['supplier_name']) ?></td>
+                                <td><?= htmlspecialchars($order['items']) ?></td>
+                                <td>
+                                    <span class="badge 
+                                        <?= $order['status'] == 'Completed' ? 'bg-success' : 
+                                        ($order['status'] == 'Pending' ? 'bg-warning' : 
+                                        ($order['status'] == 'Cancelled' ? 'bg-danger' : 'bg-secondary')) ?>">
+                                        <?= htmlspecialchars($order['status']) ?>
+                                    </span>
+                                </td>
+                                <td>
                                     <button class="btn btn-sm btn-secondary" 
-                                            data-bs-toggle="modal" 
-                                            data-bs-target="#editStatusModal" 
-                                            data-id="<?= htmlspecialchars($order['id']) ?>" 
-                                            data-status="<?= htmlspecialchars($order['status']) ?>">
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#editStatusModal" 
+                                        data-id="<?= htmlspecialchars($order['id']) ?>" 
+                                        data-status="<?= htmlspecialchars($order['status']) ?>">
                                         Edit
                                     </button>
 
-                                    <form id="deleteOrderForm" action="<?= base_url('orders/delete') ?>" method="post" class="m-0">
+                                    <form action="<?= base_url('orders/delete') ?>" method="post">
                                         <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
                                         <button type="submit" class="btn btn-sm btn-danger">Archive</button>
                                     </form>
-                                </div>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr><td colspan="7" class="text-center">No orders found.</td></tr>
+                    <?php endif; ?>
                 </tbody>
             </table>
 
@@ -100,15 +97,14 @@
                 <ul class="pagination">
                     <?php for ($i = 1; $i <= $totalPages; $i++): ?>
                         <li class="page-item <?= $i == $page ? 'active' : '' ?>">
-                            <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                            <a class="page-link" href="?search=<?= urlencode($search) ?>&status=<?= urlencode($statusFilter) ?>&page=<?= $i ?>">
+                                <?= $i ?>
+                            </a>
                         </li>
                     <?php endfor; ?>
                 </ul>
             </nav>
-        </div>
-    </div>
 
-    <!-- Modals (New Order, Edit Status, Archived Orders) -->
     <!-- New Order Modal -->
 <div class="modal fade" id="newOrderModal" tabindex="-1" aria-labelledby="newOrderModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -230,20 +226,18 @@
 
     <script>
         // Edit Order Modal
-        document.addEventListener('DOMContentLoaded', function () {
-            const editStatusModal = document.getElementById('editStatusModal');
-            editStatusModal.addEventListener('show.bs.modal', function (event) {
-                const button = event.relatedTarget;
-                const orderId = button.getAttribute('data-id');
-                const status = button.getAttribute('data-status');
+            document.addEventListener('DOMContentLoaded', function () {
+        const editStatusModal = document.getElementById('editStatusModal');
 
-                const orderIdInput = editStatusModal.querySelector('#orderId');
-                const statusSelect = editStatusModal.querySelector('#orderStatusEdit');
+        editStatusModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            const orderId = button.getAttribute('data-id');
+            const status = button.getAttribute('data-status');
 
-                orderIdInput.value = orderId;
-                statusSelect.value = status;
-            });
+            document.getElementById('orderId').value = orderId;
+            document.getElementById('orderStatusEdit').value = status;
         });
+    });
 
         // Archive Orders Modal
         document.addEventListener('DOMContentLoaded', function () {

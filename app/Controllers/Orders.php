@@ -27,26 +27,43 @@ class Orders extends BaseController
     
         // Get the current page from the request, default to 1
         $currentPage = $this->request->getVar('page') ?? 1;
-    
-        // Calculate the offset for the query
         $offset = ($currentPage - 1) * $rowsPerPage;
     
-        // Fetch total count of active (non-archived) orders
-        $totalOrders = $this->orderModel
-            ->where('orders.deleted_at', null)
-            ->countAllResults();
+        // Get search and filter inputs
+        $search = $this->request->getVar('search');
+        $statusFilter = $this->request->getVar('status');
     
-        // Calculate total pages
-        $totalPages = ceil($totalOrders / $rowsPerPage);
-    
-        // Fetch paginated orders with customer and supplier names
-        $orders = $this->orderModel
+        // Start building the query
+        $orderQuery = $this->orderModel
             ->select('orders.*, customers.customer_name, suppliers.supplier_name')
             ->join('customers', 'customers.customer_id = orders.customer_id')
             ->join('suppliers', 'suppliers.supplier_id = orders.supplier_id')
-            ->where('orders.deleted_at', null)
+            ->where('orders.deleted_at', null);
+    
+        // Apply search filter
+        if (!empty($search)) {
+            $orderQuery->groupStart()
+                ->like('orders.id', $search)
+                ->orLike('customers.customer_name', $search)
+                ->orLike('suppliers.supplier_name', $search)
+            ->groupEnd();
+        }
+    
+        // Apply status filter
+        if (!empty($statusFilter)) {
+            $orderQuery->where('orders.status', $statusFilter);
+        }
+    
+        // Get total orders count after applying filters
+        $totalOrders = $orderQuery->countAllResults(false);
+    
+        // Fetch paginated orders
+        $orders = $orderQuery
             ->limit($rowsPerPage, $offset)
             ->findAll();
+    
+        // Calculate total pages
+        $totalPages = ceil($totalOrders / $rowsPerPage);
     
         // Fetch customers and suppliers for dropdowns
         $customers = $this->customerModel->findAll();
@@ -59,8 +76,11 @@ class Orders extends BaseController
             'suppliers' => $suppliers,
             'page' => $currentPage,
             'totalPages' => $totalPages,
+            'search' => $search,
+            'statusFilter' => $statusFilter
         ]);
     }
+    
     
 
     public function create()
