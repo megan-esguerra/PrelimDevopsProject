@@ -137,74 +137,74 @@
     <script>
         // Line Chart
         const revenueData = <?= json_encode(array_column($monthlyRevenue, 'revenue')) ?>;
-const salesData = <?= json_encode(array_column($monthlySales, 'sales')) ?>;
-const months = <?= json_encode(array_column($monthlyRevenue, 'month')) ?>;
+        const salesData = <?= json_encode(array_column($monthlySales, 'sales')) ?>;
+        const months = <?= json_encode(array_column($monthlyRevenue, 'month')) ?>;
 
-const ctx = document.getElementById('lineChart').getContext('2d');
+        const ctx = document.getElementById('lineChart').getContext('2d');
 
-// Create a gradient for revenue
-const gradientRevenue = ctx.createLinearGradient(0, 0, 0, 400);
-gradientRevenue.addColorStop(0, 'rgba(165, 157, 132, 0.87)'); 
-gradientRevenue.addColorStop(1, 'rgba(165, 157, 132, 0.42)'); // Fully transparent
+        // Create a gradient for revenue
+        const gradientRevenue = ctx.createLinearGradient(0, 0, 0, 400);
+        gradientRevenue.addColorStop(0, 'rgba(165, 157, 132, 0.87)'); 
+        gradientRevenue.addColorStop(1, 'rgba(165, 157, 132, 0.42)'); // Fully transparent
 
-// Create a gradient for sales
-const gradientSales = ctx.createLinearGradient(0, 0, 0, 400);
-gradientSales.addColorStop(0, 'rgba(212, 163, 115, 0.76)'); // #D7D3BF (semi-transparent)
-gradientSales.addColorStop(1, 'rgba(212, 163, 115, 0.4)'); // Fully transparent
+        // Create a gradient for sales
+        const gradientSales = ctx.createLinearGradient(0, 0, 0, 400);
+        gradientSales.addColorStop(0, 'rgba(212, 163, 115, 0.76)'); // #D7D3BF (semi-transparent)
+        gradientSales.addColorStop(1, 'rgba(212, 163, 115, 0.4)'); // Fully transparent
 
-new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: months,
-        datasets: [
-            {
-                label: 'Revenue',
-                data: revenueData,
-                borderColor: '#A59D84', // Updated color
-                backgroundColor: gradientRevenue,
-                fill: true,
-                tension: 0.4,
-                pointRadius: 3,
-                pointBackgroundColor: '#A59D84',
-                pointHoverRadius: 5
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: months,
+                datasets: [
+                    {
+                        label: 'Revenue',
+                        data: revenueData,
+                        borderColor: '#A59D84', // Updated color
+                        backgroundColor: gradientRevenue,
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 3,
+                        pointBackgroundColor: '#A59D84',
+                        pointHoverRadius: 5
+                    },
+                    {
+                        label: 'Sales',
+                        data: salesData,
+                        borderColor: '#D4A373', // Updated color
+                        backgroundColor: gradientSales,
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 3,
+                        pointBackgroundColor: '#D4A373',
+                        pointHoverRadius: 5
+                    }
+                ]
             },
-            {
-                label: 'Sales',
-                data: salesData,
-                borderColor: '#D4A373', // Updated color
-                backgroundColor: gradientSales,
-                fill: true,
-                tension: 0.4,
-                pointRadius: 3,
-                pointBackgroundColor: '#D4A373',
-                pointHoverRadius: 5
-            }
-        ]
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                display: false
-            }
-        },
-        scales: {
-            x: {
-                grid: {
-                    display: true
-                }
-            },
-            y: {
-                grid: {
-                    display: true
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
                 },
-                ticks: {
-                    display: false
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            display: false
+                        }
+                    }
                 }
             }
-        }
-    }
-});
+        });
         
 //doughnut chart
 document.addEventListener('DOMContentLoaded', function () {

@@ -241,7 +241,7 @@ canvas#polarChart {
 }
 
 .table {
-    background: transparent;
+    background: transparent !important;
 }
 .active {
     font-weight: bold;
