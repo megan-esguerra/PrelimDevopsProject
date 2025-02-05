@@ -53,10 +53,7 @@
                 <div class="col-md-6">
                     <h4>Login</h4>
                     <p>See your growth and get support</p>
-                    <div class="google-btn mb-3">
-                        <img src="<?= base_url('img/google.svg'); ?>" alt="Logo" width="100">
-                        Sign in with Google
-                    </div>
+               
 
                     <!-- Display error flash data -->
                     <?php if (session()->getFlashdata('error')) : ?>
