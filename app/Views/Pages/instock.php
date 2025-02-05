@@ -19,30 +19,36 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Item Name</th>
+                    <th>orderID</th>
+                    <th>Product</th>
                     <th>Category</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
+                    <th>Sales Channel</th>
+                    <th>Instruction</th>
+                    <th>Items</th>
+                    <th>Status</th>
                 </tr>
             </thead>
+           
             <tbody>
-                <?php if (!empty($products)): ?>
-                    <?php foreach ($products as $products): ?>
-                        <tr>
-                            <td><?= $products['product_id']; ?></td>
-                            <td><?= $products['product_name']; ?></td>
-                            <td><?= $products['category_id']; ?></td>
-                            <td><?= $products['stock_quantity']; ?></td>
-                            <td><?= number_format($products['price'], 2); ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <tr>
-                        <td colspan="5" class="text-center">No items in stock</td>
-                    </tr>
-                <?php endif; ?>
-            </tbody>
+    <?php if (!empty($products)): ?>
+        <?php foreach ($products as $product): ?>
+            <tr>
+                <td><?= $product['order_id']; ?></td>
+                <td><?= $product['product']; ?></td>
+                <td><?= $product['category']; ?></td>
+                <td><?= $product['sales_channel']; ?></td>
+                <td><?= $product['instruction']; ?></td>
+                <td><?= $product['items']; ?></td>
+                <td><?= $product['status']; ?></td>
+            </tr>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <tr>
+            <td colspan="7" class="text-center">No items in stock</td>
+        </tr>
+    <?php endif; ?>
+</tbody>
+
         </table>
     </div>
 
