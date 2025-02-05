@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class StockModel extends Model
 {
-    protected $table = 'stocks'; // Your database table name
+    protected $table = 'stocks';
     protected $primaryKey = 'id';
     protected $allowedFields = [
         'order_id', 
@@ -20,6 +20,8 @@ class StockModel extends Model
 
     public function getInStockItems()
     {
-        return $this->where('status', 'In Stock')->findAll(); // Fetch only in-stock items
+        return $this->select('order_id, product, category, sales_channel, instruction, items, status')
+                    ->where('status', 'In Stock')
+                    ->findAll();
     }
 }
