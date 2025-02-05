@@ -43,7 +43,8 @@ $routes->get('orders/get_archived', 'Orders::getArchivedOrders'); // Get archive
 $routes->get('/in_stocks', 'StockController::index');
 $routes->get('add-stock', 'StockController::create');
 $routes->post('store-stock', 'StockController::store');
-    
+$routes->post('StockController/store', 'StockController::store');
+
 
 
 
