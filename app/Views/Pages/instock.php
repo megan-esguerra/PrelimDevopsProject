@@ -1,19 +1,13 @@
-<?php include(APPPATH . 'Views/layout/Header.php'); ?>
+  
+    <?php include(APPPATH . 'Views/layout/Header.php'); ?>
 <body>
+    <!-- Sidebar -->
     <?php include(APPPATH . 'Views/layout/sidebar.php'); ?>
-
+    <!-- Main Content -->
     <div class="main-content">
+        <!-- Navbar -->
         <?php include(APPPATH . 'Views/layout/navbar.php'); ?>
-
-        <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>In-Stock Items - Cat's Cafe</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-</head>
-<body>
+        <!-- Cards -->
     <div class="container mt-5">
         <h2 class="text-center">In-Stock Items - Cat's Cafe</h2>
         <table class="table table-striped">
